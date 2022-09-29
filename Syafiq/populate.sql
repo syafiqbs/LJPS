@@ -69,7 +69,7 @@ create table learningjourney(
 );
 
 insert into user (user_id, user_name, control) values
-    (1, "Staff", 3);
+    (1, "HR", 3);
 
 insert into staff (staff_id, staff_name, dept, email, user) values 
     (100, "John", "Operation", "abc@hotmail.com", 1);

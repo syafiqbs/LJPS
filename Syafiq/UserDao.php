@@ -1,6 +1,6 @@
 <?php
 
-class RoleDAO{
+class UserDAO{
     
     public function loadAll(){
         // Establish connection
@@ -8,7 +8,7 @@ class RoleDAO{
         $conn = $connMgr->connect();
 
         // SQL query
-        $sql = 'SELECT * FROM role';
+        $sql = 'SELECT * FROM user';
         $stmt = $conn->prepare($sql);
 
         // Execeute query
@@ -18,7 +18,7 @@ class RoleDAO{
         // Display
         $result = [];
         while ($row = $stmt->fetch()){
-            $result[] = new Role($row['role_id'], $row['role_name']);
+            $result[] = new User($row['user_id'], $row['user_name'], $row['control']);
         }
 
         // Close connection
