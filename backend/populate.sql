@@ -49,6 +49,7 @@ create table job_skill(
 create table course_skill(
     course_id varchar(20),
     skill_id integer,
+    primary key (course_id, skill_id),
     constraint course_skill_fk1 foreign key(course_id) references course(course_id),
     constraint course_skill_fk2 foreign key(skill_id) references skill(skill_id)
 );
@@ -101,12 +102,7 @@ insert into job_skill values
 
 insert into course_skill values
     ("COR002", 60000),
-    ("COR002", 60001),
-    ("tch015", 80000),
-    ("tch015", 50000),
-    ("tch013", 40000);
+    ("COR002", 60001);
 
 insert into learningjourney values
-    (420, "Road to 420", "lorem ipsum", 140004, "SAL003"),
-    (421, "Road to 421", "lorem ipsum", 140004, "COR002"),
-    (422, "Road to 422", "lorem ipsum", 140004, "FIN003");
+    (420, "Road to 420", "lorem ipsum", 130001, "COR001");
