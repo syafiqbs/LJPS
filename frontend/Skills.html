@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <title>Bootstrap 5 Website Example</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js"></script>
+</head>
+
+<body>
+  <div class="p-5 bg-primary text-white text-center">
+    <h1>Learning Journey System</h1>
+  </div>
+
+  <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+    <div class="container-fluid">
+      <ul class="navbar-nav">
+        <li class="nav-item">
+          <a class="nav-link" href="homepage.html">My Learning Journey</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link active" href="HR.html">HR</a>
+        </li>
+      </ul>
+      <span class="navbar-text">
+        HR 
+      </span>
+    </div>
+  </nav>
+  
+  <div class="container mt-5">
+    <H1>Progress</H1>
+    <div class="progress">
+      <div class="progress-bar progress-bar-success progress-bar-striped" role="progressbar" aria-valuenow="40"
+        aria-valuemin="0" aria-valuemax="100" style="width:40%">
+        40% Complete
+      </div>
+    </div>
+  </div>
+
+  <div class="container mt-5">
+    <H1>List of skills</H1>
+    <input class="form-control" id="myInput" type="text" placeholder="Search..">
+    <br>
+    <table class="table">
+      <thead class="thead-dark">
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Skill Name</th>
+          <th scope="col">Courses Associated</th>
+          <th scope="col">Roles Associated</th>
+          <th scope="col">Finished Course</th>
+        </tr>
+      </thead>
+      <tbody id="myTable">
+        <tr>
+          <th scope="row">1</th>
+          <td>Python</td>
+          <td>IS111, COR-IS-1307, IS217</td>
+          <td>HR staff, HR manager, Managing Director</td>
+          <td><input type="checkbox" class="form-check-input"></input></td>
+        </tr>
+        <tr>
+          <th scope="row">2</th>
+          <td>HTML</td>
+          <td>IS212, IS213</td>
+          <td>HR staff, Engineering Manager, Managing Director</td>
+          <td><input type="checkbox" class="form-check-input"></input></td>
+        </tr>
+        <tr>
+          <th scope="row">3</th>
+          <td>JavaScript</td>
+          <td>IS212, IS213, IS616</td>
+          <td>HR staff, Managing Director</td>
+          <td><input type="checkbox" class="form-check-input"></input></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="mt-5 p-4 bg-dark text-white text-center">
+    <p>Footer</p>
+  </div>
+
+  <script>
+    $(document).ready(function () {
+      $("#myInput").on("keyup", function () {
+        var value = $(this).val().toLowerCase();
+        $("#myTable tr").filter(function () {
+          $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+        });
+      });
+    });
+  </script>
+
+</body>
+
+</html>
