@@ -94,7 +94,7 @@ insert into job_skill values
     (999, "Frontend developer", 70000),
     (999, "Frontend developer", 70001),
     (777, "Cloud Specialist", 80000),
-    (777, "Cloud Specialist", 60001);
+    (777, "Cloud Specialist", 60001),
     (666, "Security Engineer", 50000),
     (666, "Security Engineer", 80000),
     (666, "Security Engineer", 40000);
@@ -108,5 +108,5 @@ insert into course_skill values
 
 insert into learningjourney values
     (420, "Road to 420", "lorem ipsum", 140004, "SAL003"),
-    (420, "Road to 420", "lorem ipsum", 140004, "COR002"),
-    (420, "Road to 420", "lorem ipsum", 140004, "FIN003");
+    (421, "Road to 421", "lorem ipsum", 140004, "COR002"),
+    (422, "Road to 422", "lorem ipsum", 140004, "FIN003");
