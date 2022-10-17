@@ -11,7 +11,10 @@ $course_id = $_POST['courseid'];
 $skill_id = $_POST['skillid'];
 
 if (strlen($course_id) > 20){
-    $errors[] = "Max length is 20";
+    $errors[] = "Max course id length is 20";
+}
+if (strlen($course_id) < 4){
+    $errors[] = "Min course id length is 4";
 }
 if (empty($course_id)){
     $errors[] = "Course id cannot be empty";
@@ -34,6 +37,7 @@ $dao = new SkillCourseDAO();
 $status = $dao->create($new_skillCourse);
 
 if ($status){
+    $_SESSION['addSuccess'] = "Add operation success";
     header("Location: ../frontend/HR/displaySkillCourse.php");
     exit();
 }
@@ -41,6 +45,7 @@ else{
     $_SESSION["addSkillCourseFail_courseid"] = $course_id;
     $_SESSION['addSkillCourseFail_skillid'] = $skill_id;
     $errors[] = "Error in adding skill to course";
+    $_SESSION['errors'] = $errors;
     header("Location: ../frontend/HR/addSkillCourse.php");
     return;
 }

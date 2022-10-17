@@ -22,4 +22,18 @@ function printErrors() {
     }    
 }
 
+function addSuccess() {
+    if(isset($_SESSION['addSuccess'])){
+        echo "<p style='color:green;'>" . $_SESSION['addSuccess'] . "</p>";
+        unset($_SESSION['addSuccess']);
+    }    
+}
+
+function deleteSuccess() {
+    if(isset($_SESSION['deleteSuccess'])){
+        echo "<p style='color:green;'>" . $_SESSION['deleteSuccess'] . "</p>";
+        unset($_SESSION['deleteSuccess']);
+    }    
+}
+
 ?>

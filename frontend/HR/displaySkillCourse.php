@@ -1,5 +1,6 @@
 <?php
   require_once "../../backend/SkillCourseDAO.php";
+  require_once "../../backend/common.php";
 ?>
 
 <!DOCTYPE html>
@@ -40,13 +41,15 @@
     </nav>
 
     <div class="container mt-5">
-      <H1>Roles and the skills required</H1>
+      <H1>Course and the skills required</H1>
+      <?php addSuccess(); /*defined in common.php*/ ?>
+      <?php deleteSuccess(); /*defined in common.php*/ ?>
       <!-- <input class="form-control" id="RoleInput" type="text" placeholder="Search.."> -->
       <table class="table table-bordered">
         <thead>
           <th>Index</th>
           <th>Course ID</th>
-          <th>Skill required<th>
+          <th>Skill required</th>
           <th>Action</th>
         </thead>
 
@@ -56,11 +59,17 @@
             foreach($skillsCourses as $skillCourse){
               $course_id = $skillCourse->getCourseId();
               $skill_id = $skillCourse->getSkillId();
+              $id = strval($course_id) . ":" . strval($skill_id);
               echo "<tr>
                 <td>$index</td>
                 <td>$course_id</td>
                 <td>$skill_id</td>
-                <td><a href='student-edit.php?id=${course_id}' class='btn btn-success btn-sm'>Edit</a></td>
+                <td>
+                  <a href='student-edit.php?id=${course_id}' class='btn btn-success btn-sm'>Edit</a>
+                  <form action='../../backend/handleDeleteSkillCourse.php' method='POST' class='d-inline'>
+                                                        <button type='submit' name='deleteSkillCourse' value=${id} class='btn btn-danger btn-sm'>Delete</button>
+                                                    </form>
+                </td>
               </tr>";
               $index = $index + 1;
             }
