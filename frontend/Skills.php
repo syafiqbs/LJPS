@@ -1,3 +1,6 @@
+<!-- Accepts user type and role input from homepage, filters by default the skills that user can train in -->
+<!-- add search filtering, copy from depreciated html base -->
+<!-- selecting skill should add skills to learning journey? + post to courses page -->
 <!DOCTYPE html>
 <html lang="en">
 

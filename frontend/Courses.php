@@ -1,3 +1,6 @@
+<!-- Accepts user type, role, courses input from homepage, filters by default the courses that user can train in -->
+<!-- add search filtering, copy from depreciated html base -->
+<!-- selecting course should add course to learning journey, have success pop-up-->
 <!DOCTYPE html>
 <html lang="en">
 
