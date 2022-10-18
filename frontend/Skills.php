@@ -23,10 +23,11 @@
     $conn = new mysqli($servername, $username, $password, $dbname);
 
     if ($conn->connect_error) {
-      die("Connection failed: " . $conn->connect_error);
+        die("Connection failed: " . $conn->connect_error);
     }
-
-    $sql = "SELECT skill_id, skill_name FROM skill";
+    // get session variables 
+    // get skills role 
+    $sql = "SELECT skill_id, skill_name FROM skill WHERE role = $role";
     $result = $conn->query($sql);
     ?>
 

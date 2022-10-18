@@ -16,6 +16,34 @@
 </head>
 
 <body>
+  <?php
+    var_dump($_POST);
+  // perform SQL query here to get user info row
+
+  $servername = 'localhost';
+  $username = 'root';
+  $password = '';
+  $dbname = 'ljps';
+
+  $conn = new mysqli($servername, $username, $password, $dbname);
+  if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
+  }
+
+  $username = $_POST['username'];
+
+  $sql = "SELECT * FROM Users WHERE user_name = '$username'";
+  $result = $conn->query($sql);
+  $num_results = $prep_stmt->rowCount();
+  if ($num_results > 0){
+      // then search for column to get role
+      // display role on nav bar 
+      // $_SESSION['varname'] = $var_value;
+      // $var_value = $_SESSION['varname'];
+  } else{
+    
+  }
+  ?>
 
   <div class="p-5 bg-primary text-white text-center">
     <h1>Learning Journey System</h1>
@@ -28,7 +56,7 @@
           <a class="nav-link active" href="homepage.html">My Learning Journey</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="HR.html">HR</a>
+          <?php echo "<a class='nav-link' href='$user_role.html'>$user_role</a> "?>
         </li>
       </ul>
       <span class="navbar-text">
@@ -38,7 +66,7 @@
   </nav>
 
   <div class="container mt-5">
-
+    <h1>Change Table to soft-coded</h1>
     <div class="row">
       <div class="col-sm-6">
         <h2>My Learning Journey</h2>
@@ -104,7 +132,11 @@
       <div class="col-sm-6">
         <h2>Start New Learning Journey</h2>
         <h5>Click to Start a New Learning Journey</h5>
-        <a href="Roles.php" class="btn btn-primary" role="button">START</a>
+        <form action="homepage.html" method="post">
+        <a href="Roles.php" class="btn btn-primary" role="button" method="post">START</a>
+        <button type="submit">Login</button>
+        <!-- <input type="hidden" name="varname" value="var_value"> -->
+        </form>
         <br></br>
         <br></br>
         <br></br>

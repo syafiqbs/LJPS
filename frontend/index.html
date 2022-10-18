@@ -17,14 +17,13 @@
     </div>
   
     <div class="container">
-      <label for="uname"><b>Username</b></label>
-      <input type="text" placeholder="Enter Username" name="uname" required>
-  
-      <label for="psw"><b>Password</b></label>
-      <input type="password" placeholder="Enter Password" name="psw" required>
+      <label for="username"><b>Username</b></label>
+      <input type="text" placeholder="Enter Username" name="username" required>
+      <!-- Must POST the info to the next page so that page can get user role -->
+      <label for="password"><b>Password</b></label>
+      <input type="password" placeholder="Enter Password" name="password" required>
   
       <button type="submit">Login</button>
-      <!-- implement login check function -->
       <label>
         <input type="checkbox" checked="checked" name="remember"> Remember me
       </label>
@@ -32,7 +31,6 @@
   
     <div class="container" style="background-color:#f1f1f1">
       <button type="button" class="successbtn">Register</button>
-            <!-- implement registration function, on another page? -->
 
       <span class="psw">Forgot <a href="#">Password?</a></span>
     </div>

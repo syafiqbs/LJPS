@@ -26,7 +26,10 @@
       die("Connection failed: " . $conn->connect_error);
     }
 
-    $sql = "SELECT job_role_id, job_name, skill_id FROM job_skill GROUP BY job_name";
+    $user_role = $_SESSION('user_role');
+    $new_learning_journey = $_SESSION('LJ');
+
+    $sql = "SELECT job_role_id, job_name, skill_id FROM job_skill WHERE user_role EQUALS $user_role GROUP BY job_name";
     $result = $conn->query($sql);
     ?>
 
@@ -66,13 +69,14 @@
             <tbody>
                 <?php
             while ($row = $result->fetch_assoc()) {
-              echo "<tr>" .
-                      "<td>" . $row['job_role_id'] . "</td>" .
-                      "<td>" . $row['job_name'] . "</td>" .
-                      "<td>" . "<a href='Skills.php' class='btn btn-dark' role='button'>Start</a>" . "</td>" .
-                      "</tr>";
+                echo "<tr>" .
+                        "<td>" . $row['job_role_id'] . "</td>" .
+                        "<td>" . $row['job_name'] . "</td>" .
+                        // POST or SESSION to skills page
+                        "<td>" . "<a href='Skills.php' class='btn btn-dark' role='button'>Start</a>" . "</td>" .
+                        "</tr>";
             }
-          ?>
+            ?>
             </tbody>
 
         </table>

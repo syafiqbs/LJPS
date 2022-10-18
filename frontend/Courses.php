@@ -25,8 +25,9 @@
     if ($conn->connect_error) {
       die("Connection failed: " . $conn->connect_error);
     }
-
-    $sql = "SELECT course_id, course_name, course_desc, course_status, course_type, course_category FROM course";
+    // get session variables 
+    
+    $sql = "SELECT course_id, course_name, course_desc, course_status, course_type, course_category FROM course WHERE skill == $skill";
     $result = $conn->query($sql);
     ?>
 
@@ -93,7 +94,8 @@
 
     <script>
         function addtoLJ() {
-            window.location.href = "homepage.html";
+            // add course into LJ with associated skill and LJ 
+            // create popup 
         }
     </script>
 </body>
