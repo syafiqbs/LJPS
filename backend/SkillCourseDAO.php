@@ -6,7 +6,7 @@ require_once "ConnectionManager.php";
 class SkillCourseDAO{
     
     function create($skillCourse) {
-        $result = true;
+        $result = false;
 
         // connect to database
         $connMgr = new ConnectionManager();
@@ -86,7 +86,7 @@ class SkillCourseDAO{
     }
     
     function delete($skillCourse) {
-        $result = true;
+        $result = false;
 
         // connect to database
         $connMgr = new ConnectionManager();
@@ -109,5 +109,31 @@ class SkillCourseDAO{
         
         return $result;
     }
+
+    // function edit($skillCourse,$newSkill_id){
+    //     $result = false;
+
+    //     // connect to database
+    //     $connMgr = new ConnectionManager();
+    //     $conn = $connMgr->connect();
+        
+    //     // prepare insert
+    //     $sql = "UPDATE course_skill SET (skill_id = :newSkill_id) WHERE course_id = :course_id AND skill_id = :oldSkill_id";
+    //     $stmt = $conn->prepare($sql);
+    //     $course_id = $skillCourse->getCourseId();
+    //     $oldSkill_id = $skillCourse->getSkillId();
+    //     $stmt->bindParam(":course_id", $course_id, PDO::PARAM_STR);
+    //     $stmt->bindParam(":oldSkill_id", $oldSkill_id, PDO::PARAM_STR);
+    //     $stmt->bindParam(":newSkill_id", $newSkill_id, PDO::PARAM_STR);
+        
+
+    //     $result = $stmt->execute();
+                
+    //     // close connections
+    //     $stmt = null;
+    //     $conn = null;        
+        
+    //     return $result;
+    // }
 }
 ?>

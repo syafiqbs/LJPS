@@ -42,8 +42,10 @@
 
     <div class="container mt-5">
       <H1>Course and the skills required</H1>
-      <?php addSuccess(); /*defined in common.php*/ ?>
-      <?php deleteSuccess(); /*defined in common.php*/ ?>
+      <?php 
+        addSuccess(); 
+        deleteSuccess();
+      ?>
       <!-- <input class="form-control" id="RoleInput" type="text" placeholder="Search.."> -->
       <table class="table table-bordered">
         <thead>
@@ -65,7 +67,6 @@
                 <td>$course_id</td>
                 <td>$skill_id</td>
                 <td>
-                  <a href='student-edit.php?id=${course_id}' class='btn btn-success btn-sm'>Edit</a>
                   <form action='../../backend/handleDeleteSkillCourse.php' method='POST' class='d-inline'>
                                                         <button type='submit' name='deleteSkillCourse' value=${id} class='btn btn-danger btn-sm'>Delete</button>
                                                     </form>
