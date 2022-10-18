@@ -1,3 +1,4 @@
+<?php session_start(); ?>
 <!-- Accepts user type, role, courses input from homepage, filters by default the courses that user can train in -->
 <!-- add search filtering, copy from depreciated html base -->
 <!-- selecting course should add course to learning journey, have success pop-up-->
@@ -23,11 +24,27 @@
     $conn = new mysqli($servername, $username, $password, $dbname);
 
     if ($conn->connect_error) {
-      die("Connection failed: " . $conn->connect_error);
+        die("Connection failed: " . $conn->connect_error);
     }
+
     // get session variables 
-    
-    $sql = "SELECT course_id, course_name, course_desc, course_status, course_type, course_category FROM course WHERE skill == $skill";
+    var_dump($_POST);
+    $username = $_SESSION['username'];
+    $namename = $_SESSION['namename'];
+    $role = $_SESSION['role'];
+    $skill_id = $_POST['course_skill'];
+    $sql = "SELECT course_id FROM course_skill WHERE skill_id = $skill_id";
+    $result = $conn->query($sql);
+    $ids = array();
+    while ($row = $result->fetch_assoc()) {
+        array_push($ids,$row['course_id']);
+    }
+    echo $ids;
+    $in = (implode(',',$ids));
+    echo $in;
+
+    // $sql = "SELECT course_id, course_name, course_desc, course_status, course_type, course_category FROM course WHERE course_id IN (". implode(',', $ids) .")";
+    $sql = "SELECT course_id, course_name, course_desc, course_status, course_type, course_category FROM course WHERE course_id IN ('". implode(',', $ids) ."')";
     $result = $conn->query($sql);
     ?>
 
@@ -43,11 +60,14 @@
                     <a class="nav-link active" href="homepage.html">My Learning Journey</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="HR.html">HR</a>
+                    <?php echo "<a class='nav-link' href='$role.html'>$role</a> " ?>
                 </li>
             </ul>
             <span class="navbar-text">
-                HR
+                <?php echo "<a class='nav-link'>$namename</a> " ?>
+            </span>
+            <span class="navbar-text">
+                <a class="nav-link" href="index.html">Logout</a>
             </span>
         </div>
     </nav>
@@ -71,18 +91,18 @@
 
             <tbody>
                 <?php
-            while ($row = $result->fetch_assoc()) {
-              echo "<tr>" .
-                      "<td>" . $row['course_id'] . "</td>" .
-                      "<td>" . $row['course_name'] . "</td>" .
-                      "<td>" . $row['course_desc'] . "</td>" .
-                      "<td>" . $row['course_status'] . "</td>" .
-                      "<td>" . $row['course_type'] . "</td>" .
-                      "<td>" . $row['course_category'] . "</td>" .
-                      "<td>" . "<input type='submit' onclick='addtoLJ()'>" . "</td>" .
-                      "</tr>";
-            }
-          ?>
+                while ($row = $result->fetch_assoc()) {
+                    echo "<tr>" .
+                        "<td>" . $row['course_id'] . "</td>" .
+                        "<td>" . $row['course_name'] . "</td>" .
+                        "<td>" . $row['course_desc'] . "</td>" .
+                        "<td>" . $row['course_status'] . "</td>" .
+                        "<td>" . $row['course_type'] . "</td>" .
+                        "<td>" . $row['course_category'] . "</td>" .
+                        "<td>" . "<input type='submit' onclick='addtoLJ()'>" . "</td>" .
+                        "</tr>";
+                }
+                ?>
             </tbody>
 
         </table>
@@ -99,5 +119,4 @@
         }
     </script>
 </body>
-
 </html>

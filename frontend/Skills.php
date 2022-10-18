@@ -1,3 +1,4 @@
+<?php session_start(); ?>
 <!-- Accepts user type and role input from homepage, filters by default the skills that user can train in -->
 <!-- add search filtering, copy from depreciated html base -->
 <!-- selecting skill should add skills to learning journey? + post to courses page -->
@@ -25,9 +26,13 @@
     if ($conn->connect_error) {
         die("Connection failed: " . $conn->connect_error);
     }
-    // get session variables 
-    // get skills role 
-    $sql = "SELECT skill_id, skill_name FROM skill WHERE role = $role";
+    var_dump($_POST);
+    $LJ_role = $_POST['learning_journey_role'];
+    $username = $_SESSION['username'];
+    $namename = $_SESSION['namename'];
+    $role = $_SESSION['role'];
+
+    $sql = "SELECT job_role_id, skill_id FROM job_skill WHERE job_role_id = $LJ_role";
     $result = $conn->query($sql);
     ?>
 
@@ -43,11 +48,14 @@
                     <a class="nav-link active" href="homepage.html">My Learning Journey</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="HR.html">HR</a>
+                    <?php echo "<a class='nav-link' href='$role.html'>$role</a> " ?>
                 </li>
             </ul>
             <span class="navbar-text">
-                HR
+                <?php echo "<a class='nav-link'>$namename</a> " ?>
+            </span>
+            <span class="navbar-text">
+                <a class="nav-link" href="index.html">Logout</a>
             </span>
         </div>
     </nav>
@@ -59,21 +67,26 @@
     <div class="table-responsive">
         <table class="table table-bordered">
             <thead>
-                <th>Skill Id</th>
-                <th>Skill Name</th>
-                <th>Add to Learning Journey</th>
+                <th>job_role_id</th>
+                <th>skill_id</th>
+                <th>Search for courses that give this skill</th>
             </thead>
 
             <tbody>
                 <?php
-            while ($row = $result->fetch_assoc()) {
-              echo "<tr>" .
-                      "<td>" . $row['skill_id'] . "</td>" .
-                      "<td>" . $row['skill_name'] . "</td>" .
-                      "<td>" . "<a href='Courses.php' class='btn btn-dark' role='button'>Start</a>" . "</td>" .
-                      "</tr>";
-            }
-          ?>
+                while ($row = $result->fetch_assoc()) {
+                    echo "<tr>" .
+                        "<td>" . $row['job_role_id'] . "</td>" .
+                        "<td>" . $row['skill_id'] . "</td>" .
+                        "<td>" .
+                        "<form action='Courses.php' method='post'>" .
+                        "<input type='hidden' id='course_skill' name='course_skill' value=" . $row['skill_id'] . ">" .
+                        "<button type='submit'>Start</button>" .
+                        "</form>" .
+                        "</td>" .
+                        "</tr>";
+                };
+                ?>
             </tbody>
 
         </table>

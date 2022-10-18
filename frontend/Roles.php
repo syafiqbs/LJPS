@@ -1,3 +1,4 @@
+<?php session_start(); ?>
 <!-- Accepts user type input from homepage, filters by default the roles that user can train in -->
 <!-- add search filtering, copy from depreciated html base -->
 <!-- Start should add role to learning journey? + post to skills page -->
@@ -23,13 +24,14 @@
     $conn = new mysqli($servername, $username, $password, $dbname);
 
     if ($conn->connect_error) {
-      die("Connection failed: " . $conn->connect_error);
+        die("Connection failed: " . $conn->connect_error);
     }
 
-    $user_role = $_SESSION('user_role');
-    $new_learning_journey = $_SESSION('LJ');
+    $username = $_SESSION['username'];
+    $namename = $_SESSION['namename'];
+    $role = $_SESSION['role'];
 
-    $sql = "SELECT job_role_id, job_name, skill_id FROM job_skill WHERE user_role EQUALS $user_role GROUP BY job_name";
+    $sql = "SELECT job_role_id, job_name, skill_id FROM job_skill GROUP BY job_name";
     $result = $conn->query($sql);
     ?>
 
@@ -45,11 +47,14 @@
                     <a class="nav-link active" href="homepage.html">My Learning Journey</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="HR.html">HR</a>
+                    <?php echo "<a class='nav-link' href='$role.html'>$role</a> " ?>
                 </li>
             </ul>
             <span class="navbar-text">
-                HR
+                <?php echo "<a class='nav-link'>$namename</a>" ?>
+            </span>
+            <span class="navbar-text">
+                <a class="nav-link" href="index.html">Logout</a>
             </span>
         </div>
     </nav>
@@ -68,24 +73,26 @@
 
             <tbody>
                 <?php
-            while ($row = $result->fetch_assoc()) {
-                echo "<tr>" .
+                while ($row = $result->fetch_assoc()) {
+                    echo "<tr>" .
                         "<td>" . $row['job_role_id'] . "</td>" .
                         "<td>" . $row['job_name'] . "</td>" .
                         // POST or SESSION to skills page
-                        "<td>" . "<a href='Skills.php' class='btn btn-dark' role='button'>Start</a>" . "</td>" .
+                        "<td>" .
+                        "<form action='Skills.php' method='post'>" .
+                        "<input type='hidden' id='learning_journey_role' name='learning_journey_role' value=" . $row['job_role_id'] . ">" .
+                        "<button type='submit'>Start</button>" .
+                        "</form>" .
+                        "</td>" .
                         "</tr>";
-            }
-            ?>
+                }
+                ?>
             </tbody>
-
         </table>
     </div>
 
     <div class="mt-5 p-4 bg-dark text-white text-center">
         <p>Footer</p>
     </div>
-
 </body>
-
 </html>

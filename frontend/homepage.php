@@ -1,3 +1,4 @@
+<?php session_start(); ?>
 <!-- TO BE CONVERTED TO PHP -->
 <!-- Displays user name whatever in header -->
 <!-- Shows Learning Journey if exists for user -->
@@ -17,9 +18,7 @@
 
 <body>
   <?php
-    var_dump($_POST);
   // perform SQL query here to get user info row
-
   $servername = 'localhost';
   $username = 'root';
   $password = '';
@@ -32,16 +31,29 @@
 
   $username = $_POST['username'];
 
-  $sql = "SELECT * FROM Users WHERE user_name = '$username'";
+  $sql = "SELECT * FROM staff WHERE email = '$username'";
   $result = $conn->query($sql);
-  $num_results = $prep_stmt->rowCount();
-  if ($num_results > 0){
-      // then search for column to get role
-      // display role on nav bar 
-      // $_SESSION['varname'] = $var_value;
-      // $var_value = $_SESSION['varname'];
-  } else{
-    
+  $len = $result->num_rows;
+  if ($len > 0) {
+    while ($row = $result->fetch_assoc()) {
+      $_SESSION['username'] = $username;
+      $_SESSION['namename'] = $row['staff_name'];
+      $namename = $row['staff_name'];
+      $role = $row['role'];
+      if ($role = '1'){
+        $role = 'HR';
+      }
+      if ($role = '2'){
+        $role = 'HR';
+      }
+      if ($role = '3'){
+        $role = 'HR';
+      }
+      if ($role = '4'){
+        $role = 'HR';
+      }
+      $_SESSION['role'] = $role;
+    }
   }
   ?>
 
@@ -56,9 +68,12 @@
           <a class="nav-link active" href="homepage.html">My Learning Journey</a>
         </li>
         <li class="nav-item">
-          <?php echo "<a class='nav-link' href='$user_role.html'>$user_role</a> "?>
+          <?php echo "<a class='nav-link' href='$role.html'>$role</a> " ?>
         </li>
       </ul>
+      <span class="navbar-text">
+          <?php echo "<a class='nav-link'>$namename</a> " ?>
+      </span>
       <span class="navbar-text">
         <a class="nav-link" href="index.html">Logout</a>
       </span>
@@ -67,6 +82,7 @@
 
   <div class="container mt-5">
     <h1>Change Table to soft-coded</h1>
+    <h1>Might need additional table to map between staff and LJs</h1>
     <div class="row">
       <div class="col-sm-6">
         <h2>My Learning Journey</h2>
@@ -76,7 +92,8 @@
             <h5>Progress: 36%</h5>
           </div>
           <div class="col-6">
-            <a href="Skills.php" class="btn btn-primary" role="button">Continue</a> </div>
+            <a href="Skills.php" class="btn btn-primary" role="button">Continue</a>
+          </div>
         </div>
         <table class="table table-striped">
           <thead>
@@ -133,9 +150,7 @@
         <h2>Start New Learning Journey</h2>
         <h5>Click to Start a New Learning Journey</h5>
         <form action="homepage.html" method="post">
-        <a href="Roles.php" class="btn btn-primary" role="button" method="post">START</a>
-        <button type="submit">Login</button>
-        <!-- <input type="hidden" name="varname" value="var_value"> -->
+          <a href="Roles.php" class="btn btn-primary" role="button" method="post">START</a>
         </form>
         <br></br>
         <br></br>
