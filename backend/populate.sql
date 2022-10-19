@@ -86,7 +86,7 @@ insert into skill values
     (71001, "Python"),
     (80000, "AWS"),
     (50000, "Security Protocols"),
-    (40000, "Role-based access control concept");
+    (40000, "Role-based control");
     
 
 insert into job_skill values
