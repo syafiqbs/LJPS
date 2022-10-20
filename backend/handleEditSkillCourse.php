@@ -22,29 +22,32 @@ if (empty($course_id)){
 if (empty($skill_id)){
     $errors[] = "Skill id cannot be empty";
 }
-
+if (!is_numeric($skill_id)){
+    $errors[] = "Skill id must be in numeric";
+}
 if (count($errors) > 0){
     $_SESSION['errors'] = $errors;
-    $_SESSION["addSkillCourseFail_courseid"] = $course_id;
-    $_SESSION['addSkillCourseFail_skillid'] = $skill_id;
-    header("Location: ../frontend/HR/addSkillCourse.php");
+    $_SESSION["editkillCourseFail_courseid"] = $course_id;
+    $_SESSION['editSkillCourseFail_skillid'] = $skill_id;
+    header("Location: ../frontend/HR/editSkillCourse.php");
+    exit();
 }
 
-$new_skillCourse = new SkillCourse($course_id, $skill_id);
+$skillCourse = new SkillCourse($course_id, $skill_id);
 $dao = new SkillCourseDAO();
-$status = $dao->create($new_skillCourse);
+$status = $dao->edit($skillCourse, $skill_id);
 
 if ($status){
-    $_SESSION['addSuccess'] = "Add operation success";
+    $_SESSION['editSuccess'] = "Edit operation success";
     header("Location: ../frontend/HR/displaySkillCourse.php");
     exit();
 }
 else{
-    $_SESSION["addSkillCourseFail_courseid"] = $course_id;
-    $_SESSION['addSkillCourseFail_skillid'] = $skill_id;
-    $errors[] = "Error in adding skill to course";
+    $_SESSION["editSkillCourseFail_courseid"] = $course_id;
+    $_SESSION['editSkillCourseFail_skillid'] = $skill_id;
+    $errors[] = "Error in editing skill to course";
     $_SESSION['errors'] = $errors;
-    header("Location: ../frontend/HR/addSkillCourse.php");
+    header("Location: ../frontend/HR/editSkillCourse.php");
     return;
 }
 

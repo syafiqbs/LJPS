@@ -49,7 +49,10 @@
           die("Connection failed: " . $conn->connect_error);
         }
 
-        $sql = "INSERT INTO skill (skill_id, skill_name) VALUES ($skillid, $skillname)";
+        $sql = "INSERT INTO skill (skill_id, skill_name) VALUES (:skillid, :skillname)";
+        $stmt = $conn->prepare($sql);
+        $stmt->bindParam(':skillid', $skillid, PDO::PARAM_STR);
+        $stmt->bindParam(':skillname', $skillname, PDO::PARAM_STR);
 
         if ($conn->query($sql) === TRUE) {
           echo "New record created successfully";

@@ -39,11 +39,19 @@ create table skill(
     skill_name varchar(20) not null
 );
 
+create table job(
+    job_id integer primary key,
+    job_name varchar(20) not null,
+    job_description varchar(255)
+);
+
 create table job_skill(
-    job_role_id integer,
+    job_id integer,
     job_name varchar(20) not null,
     skill_id integer,
-    constraint role_skill_fk1 foreign key (skill_id) references skill(skill_id)
+    primary key (job_id, skill_id),
+    constraint job_skill_fk1 foreign key(skill_id) references skill(skill_id),
+    constraint job_skill_fk2 foreign key(job_id) references job(job_id)
 );
 
 create table course_skill(
@@ -88,17 +96,22 @@ insert into skill values
     (50000, "Security Protocols"),
     (40000, "Role-based control");
     
+insert into job values
+    (300, "Dev Ops Engineer", "lorem"),
+    (301, "Frontend developer", "lorem"),
+    (302, "Cloud Specialist", "lorem"),
+    (303, "Security Engineer", "lorem");
 
 insert into job_skill values
-    (888, "Dev Ops Engineer", 60000),
-    (888, "Dev Ops Engineer", 60001),
-    (999, "Frontend developer", 70000),
-    (999, "Frontend developer", 70001),
-    (777, "Cloud Specialist", 80000),
-    (777, "Cloud Specialist", 60001),
-    (666, "Security Engineer", 50000),
-    (666, "Security Engineer", 80000),
-    (666, "Security Engineer", 40000);
+    (300, "Dev Ops Engineer", 60000),
+    (300, "Dev Ops Engineer", 60001),
+    (301, "Frontend developer", 70000),
+    (301, "Frontend developer", 70001),
+    (302, "Cloud Specialist", 80000),
+    (302, "Cloud Specialist", 60001),
+    (303, "Security Engineer", 50000),
+    (303, "Security Engineer", 80000),
+    (303, "Security Engineer", 40000);
 
 insert into course_skill values
     ("COR002", 60000),

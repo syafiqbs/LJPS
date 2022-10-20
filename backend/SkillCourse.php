@@ -16,10 +16,10 @@
             return $this->skill_id;
         }
 
-        function setCourseId(){
+        function setCourseId($course_id){
             $this->course_id = $course_id;
         }
-        function setSkillId(){
+        function setSkillId($skill_id){
             $this->skill_id = $skill_id;
         }
     }
