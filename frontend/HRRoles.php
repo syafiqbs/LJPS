@@ -22,7 +22,7 @@
         die("Connection failed: " . $conn->connect_error);
       }
 
-      $sql = "SELECT job_role_id, job_name, skill_id FROM job_skill";
+      $sql = "SELECT job_id, job_name, job_description FROM job";
       $result = $conn->query($sql);
     ?>
 
@@ -53,22 +53,23 @@
         <thead>
           <th>job id</th>
           <th>job name</th>
-          <th>skill required<th>
+          <th>job description<th>
         </thead>
 
         <tbody>
           <?php
             while ($row = $result->fetch_assoc()) {
               echo "<tr>" .
-                      "<td>" . $row['job_role_id'] . "</td>" .
+                      "<td>" . $row['job_id'] . "</td>" .
                       "<td>" . $row['job_name'] . "</td>" .
-                      "<td>" . $row['skill_id'] . "</td>" .
+                      "<td>" . $row['job_description'] . "</td>" .
                       "</tr>";
             }
           ?>
         </tbody>
         
       </table>  
+      <a class="btn btn-primary" href="CRUDroles.php" role="button">CRUD roles</a>
   </div>
     
   <div class="mt-5 p-4 bg-dark text-white text-center">

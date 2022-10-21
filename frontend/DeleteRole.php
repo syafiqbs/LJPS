@@ -13,15 +13,19 @@
 
 <?php
       require_once "../backend/common.php";
-      $tmp_skillid = '';
-      $tmp_skillname = '';
+      $tmp_jobid = '';
+      $tmp_jobname = '';
+      $tmp_jobdescription = '';
       if (isset($_SESSION['errors'])){
-        $tmp_skillid = $_SESSION['deleteskill_skillid'];
-        $tmp_skillname = $_SESSION['deleteskill_skillname'];
-        unset($_SESSION['deleteskill_skillid']);
-        unset($_SESSION['deleteskill_skillname']);
+        $tmp_jobid = $_SESSION['deletejob_jobid'];
+        $tmp_jobname = $_SESSION['deletejob_jobname'];
+        $tmp_jobdescription = $_SESSION['deletejob_jobdescription'];
+        unset($_SESSION['deletejob_jobid']);
+        unset($_SESSION['deletejob_jobname']);
+        unset($_SESSION['deletejob_jobdescription']);
       }
 ?>
+
 
 <div class="p-5 bg-primary text-white text-center">
         <h1>Learning Journey System</h1>
@@ -43,19 +47,21 @@
       </div>
     </nav>
 
-
     <div class="container mt-5">    
         <div class="row">
             <div class="col-1"></div>
             <div class="col-6 offset-md-3">
-                <h1>Delete Existing Skill</h1><br>
+                <h1>Delete Existing Job</h1><br>
                 <?php printErrors(); /*defined in common.php*/ ?>
-                <form action="handleDeleteSkill.php" method="post">
-                    <label for="skillid">Skill ID:</label><br>
-                    <input type="number" id="skillid" name="skillid" value='<?= $tmp_skillid?>'>
+                <form action="handleDeleteRole.php" method="post">
+                    <label for="jobid">Job ID:</label><br>
+                    <input type="number" id="jobid" name="jobid" value='<?= $tmp_jobid?>'>
                     <br><br>
-                    <label for="skillname">Skill Name:</label><br>
-                    <input type="text" id="skillname" name="skillname" value='<?= $tmp_skillname?>'>
+                    <label for="jobname">Job Name:</label><br>
+                    <input type="text" id="jobname" name="jobname" value='<?= $tmp_jobname?>'>
+                    <br><br>
+                    <label for="jobdescription">Job Description:</label><br>
+                    <input type="text" id="jobdescription" name="jobdescription" value='<?= $tmp_jobdescription?>'>
                     <br><br>
                     <button class="btn btn-primary" type="submit">Submit</button>
                 </form>
@@ -67,5 +73,5 @@
 
 
 
-
 </body>
+</html>

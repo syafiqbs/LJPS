@@ -11,6 +11,19 @@
 
 <body>
 
+<?php
+      require_once "../backend/common.php";
+      $tmp_skillid = '';
+      $tmp_skillname = '';
+      if (isset($_SESSION['errors'])){
+        $tmp_skillid = $_SESSION['createskill_skillid'];
+        $tmp_skillname = $_SESSION['createskill_skillname'];
+        unset($_SESSION['createskill_skillid']);
+        unset($_SESSION['createskill_skillname']);
+      }
+?>
+
+
 <div class="p-5 bg-primary text-white text-center">
         <h1>Learning Journey System</h1>
 </div>
@@ -31,18 +44,24 @@
       </div>
     </nav>
 
-    <div class="container mt-5">
-        <h1>CREATE NEW SKILL</h1>
-        <br>
-        <form action="CreateSkillBE.php" method="post">
-            <label for="skillid">New Skill id:</label><br>
-            <input type="number" id="skillid" name="skillid">
-            <br><br>
-            <label for="skillname">New Skill Name:</label><br>
-            <input type="text" id="skillname" name="skillname">
-            <br><br>
-            <button class="btn btn-primary" type="submit">Submit</button>
-        </form>
+    <div class="container mt-5">    
+        <div class="row">
+            <div class="col-1"></div>
+            <div class="col-6 offset-md-3">
+                <h1>Create New Skill</h1><br>
+                <?php printErrors(); /*defined in common.php*/ ?>
+                <form action="handleCreateSkill.php" method="post">
+                    <label for="skillid">New Skill ID:</label><br>
+                    <input type="number" id="skillid" name="skillid" value='<?= $tmp_skillid?>'>
+                    <br><br>
+                    <label for="skillname">New Skill Name:</label><br>
+                    <input type="text" id="skillname" name="skillname" value='<?= $tmp_skillname?>'>
+                    <br><br>
+                    <button class="btn btn-primary" type="submit">Submit</button>
+                </form>
+            </div>
+            <div class="col-1"></div>
+        </div>
 
     </div>
 
