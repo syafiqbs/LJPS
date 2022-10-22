@@ -2,6 +2,7 @@
 
 require_once "SkillCourse.php";
 require_once "ConnectionManager.php";
+require_once "Skill.php";
 
 class SkillDAO{
     
@@ -118,12 +119,10 @@ class SkillDAO{
         $conn = $connMgr->connect();
 
         // prepare update
-        $sql = "UPDATE skill SET (skill_name = :newSkill_name) WHERE skill_id = :skill_id AND skill_name = :oldSkill_name";
+        $sql = "UPDATE skill SET skill_name = :newSkill_name WHERE skill_id = :skill_id";
         $stmt = $conn->prepare($sql);
         $skill_id = $skill->getSkillId();
-        $oldSkill_name = $skill->getSkillName();
         $stmt->bindParam(":skill_id", $skill_id, PDO::PARAM_STR);
-        $stmt->bindParam(":oldSkill_name", $oldSkill_name, PDO::PARAM_STR);
         $stmt->bindParam(":newSkill_name", $newSkill_name, PDO::PARAM_STR);
 
         $result = $stmt->execute();

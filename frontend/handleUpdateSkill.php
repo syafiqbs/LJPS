@@ -42,7 +42,7 @@ $errors = [];
         $status = $dao->edit($old_skill, $newskill_name);
 
         if ($status) {
-          $_SESSION['addSuccess'] = "Add operation success";
+          $_SESSION['addSuccess'] = "Update operation success";
           header("Location: HRSkills.php");
           exit();
         }
@@ -50,7 +50,7 @@ $errors = [];
           $_SESSION['updateskill_skillid'] = $skill_id;
           $_SESSION['updateskill_oldskillname'] = $oldskill_name;
           $_SESSION['updateskill_newskillname'] = $newskill_name;
-          $errors[] = "Error in adding new skill";
+          $errors[] = "Error in updating new skill";
           $_SESSION['errors'] = $errors;
           header("Location: UpdateSkill.php");
           return;
