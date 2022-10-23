@@ -32,7 +32,7 @@ require_once "../backend/createElements.php";
 
     $username = $_SESSION['username'];
     $namename = $_SESSION['namename'];
-    $role = $_SESSION['role'];
+    $job = $_SESSION['role'];
 
     $sql = "SELECT * FROM job";
     $result = $conn->query($sql);
@@ -40,11 +40,11 @@ require_once "../backend/createElements.php";
 
     <?php
     create_header();
-    create_navbar($role, $namename)
+    create_navbar($job, $namename)
     ?>
 
     <div class="container mt-5">
-        <h1>Roles</h1>
+        <h1>Jobs</h1>
     </div>
 
     <div class="table-responsive">
@@ -53,7 +53,7 @@ require_once "../backend/createElements.php";
                 <th>Job Role Id</th>
                 <th>Job Name</th>
                 <th>Job Description</th>
-                <th>Start Role</th>
+                <th>Start Job</th>
             </thead>
             <tbody>
                 <?php
