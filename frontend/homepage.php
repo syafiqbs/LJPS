@@ -65,10 +65,10 @@
     <div class="container-fluid">
       <ul class="navbar-nav">
         <li class="nav-item">
-          <a class="nav-link active" href="homepage.html">My Learning Journey</a>
+          <a class="nav-link active" href="homepage.php">My Learning Journey</a>
         </li>
         <li class="nav-item">
-          <?php echo "<a class='nav-link' href='$role.html'>$role</a> " ?>
+          <?php echo "<a class='nav-link' href='./HR/$role.html'>$role</a> " ?>
         </li>
       </ul>
       <span class="navbar-text">
