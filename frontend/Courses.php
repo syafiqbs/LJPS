@@ -79,7 +79,7 @@ require_once "../backend/createElements.php";
                         "<td>" . $row['course_type'] . "</td>" .
                         "<td>" . $row['course_category'] . "</td>" .
                         "<td>"  .
-                        "<form action='addCourseToLJ.php' method='post'>" .
+                        "<form action='/frontend/Happy_Processing/addCourseToLJ.php' method='post'>" .
                         "<input type='hidden' id='course_id' name='course_id' value=" . $row['course_id'] . ">" .
                         "<button type='submit'>Add</button>" .
                         "</form>" .
