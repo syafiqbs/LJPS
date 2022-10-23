@@ -1,5 +1,5 @@
 <?php
-session_start();
+require_once "../backend/common.php";
 require_once "../backend/createElements.php";
 ?>
 <!-- Accepts user type input from homepage, filters by default the roles that user can train in -->
@@ -65,7 +65,7 @@ require_once "../backend/createElements.php";
                             "<td>" . $row['job_name'] . "</td>" .
                             "<td>" . $row['job_description'] . "</td>" .
                             "<td>" .
-                            "<form action ='../frontend/Happy_Processing/addJobToLJ.php' method='post'>" .
+                            "<form action ='../frontend/Skills.php' method='post'>" .
                             "<input type='hidden' id='job_id' name='job_id' value=" . $row['job_id'] . ">" .
                             "<button type='submit'>Start</button>" .
                             "</form>" .

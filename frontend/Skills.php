@@ -1,85 +1,84 @@
-<?php 
-session_start(); 
-require_once "../backend/createElements.php";
+<?php
+  require_once "../backend/Skill.php";
+  require_once "../backend/common.php";
 ?>
-<!-- Accepts user type and role input from homepage, filters by default the skills that user can train in -->
-<!-- add search filtering, copy from depreciated html base -->
-<!-- selecting skill should add skills to learning journey? + post to courses page -->
+
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-    <title>Bootstrap 5 Website Example</title>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js"></script>
+  <title>Bootstrap 5 Website Example</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js"></script>
 </head>
-
 <body>
 
     <?php
-    $servername = 'localhost';
-    $username = 'root';
-    $password = '';
-    $dbname = 'ljps';
-
-    $conn = new mysqli($servername, $username, $password, $dbname);
-
-    if ($conn->connect_error) {
-        die("Connection failed: " . $conn->connect_error);
-    }
-
-    $job_id = $_SESSION['job_id'];
-    $username = $_SESSION['username'];
-    $namename = $_SESSION['namename'];
-    $role = $_SESSION['role'];
-    $sql = "SELECT job_name, skill_id FROM job_skill WHERE job_id = $job_id";
-    $result = $conn->query($sql);
+      $skillDAO = new SkillDAO();
+      $skills = $skillDAO->loadAll();
     ?>
 
-
 <?php 
-    create_header();
-    create_navbar($role,$namename)
-?>
+  require_once "../backend/createElements.php";
+  $username = $_SESSION['namename'];
+  $role = $_SESSION['role'];
+  create_header();
+  create_navbar($role,$username);
+
+  $job_id = $_POST["job_id"];
+  $queriesDAO = new Queries();
+  $results_array = $queriesDAO->getSkillsByJobId($job_id);
+
+  ?>
 
     <div class="container mt-5">
-        <h1>Skills</h1>
-    </div>
+      <H1>Skills</H1>
+      <?php 
+      ?>
+      <!-- <input class="form-control" id="RoleInput" type="text" placeholder="Search.."> -->
+      <table class="table table-bordered">
+        <thead>
+          <th>Job ID</th>
+          <th>Job Name</th>
+          <th>Skill Required</th>
+        </thead>
 
-    <div class="table-responsive">
-        <table class="table table-bordered">
-            <thead>
-                <th>job_role_id</th>
-                <th>skill_id</th>
-                <th>Search for courses that give this skill</th>
-            </thead>
+        <tbody>
+          <?php
+            foreach($results_array as $res){
+              $job_id = $res['job_id'];
+              $job_name = $res['job_name'];
+              $skill_id = $res['skill_id'];
+              echo "<tr>
+                <td>$job_id</td>
+                <td>$job_name</td>
+                <td>$skill_id</td>
+                <td>
+                    <form action='./LJCourse.php' method='POST' class='d-inline'>
+                        <button type='submit' name='chooseSkill' value=${skill_id} class='btn btn-primary btn-sm'>Choose</button>
+                    </form>
+                </td>
+              </tr>";
+            }
+          ?>
+        </tbody>
+      </table>
+  </div>
+    
+  
+  <!-- <script>
+      $(document).ready(function(){
+        $("#RoleInput").on("keyup", function() {
+          var value = $(this).val().toLowerCase();
+          $("#RoleTable tr").filter(function() {
+            $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+          });
+        });
+      });
+  </script> -->
+  <?php create_footer(); ?>
 
-            <tbody>
-                <?php
-                $len = $result->num_rows;
-                if ($len > 0) {
-                    while ($row = $result->fetch_assoc()) {
-                        echo "<tr>" .
-                            "<td>" . $row['job_name'] . "</td>" .
-                            "<td>" . $row['skill_id'] . "</td>" .
-                            "<td>" .
-                            "<form action='Courses.php' method='post'>" .
-                            "<input type='hidden' id='course_skill' name='course_skill' value=" . $row['skill_id'] . ">" .
-                            "<button type='submit'>Search</button>" .
-                            "</form>" .
-                            "</td>" .
-                            "</tr>";
-                    };
-                };
-                ?>
-            </tbody>
-
-        </table>
-    </div>
-
-    <?php create_footer(); ?>
 </body>
-
 </html>

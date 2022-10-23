@@ -64,13 +64,16 @@ create table course_skill(
 
 
 create table learningjourney(
-    learningjourney_id integer auto_increment primary key,
+    learningjourney_id integer auto_increment,
     learningjourney_name varchar(20) not null,
     learningjourney_description varchar(255),
-    staff_id integer,
-    course_id varchar(20),
-    constraint learningjourney_fk1 foreign key(staff_id) references staff(staff_id),
-    constraint learningjourney_fk2 foreign key(course_id) references course(course_id)
+    staff_id integer not null,
+    course_id varchar(20) not null,
+    skill_id integer not null,
+    primary key (learningjourney_id, staff_id, course_id, skill_id),
+    constraint learningjourney_fk1 foreign key(skill_id) references skill(skill_id),
+    constraint learningjourney_fk2 foreign key(staff_id) references staff(staff_id),
+    constraint learningjourney_fk3 foreign key (course_id) references course(course_id)
 );
 
 create table user_lj(
@@ -121,10 +124,6 @@ insert into job_skill values
 insert into course_skill values
     ("COR002", 60000),
     ("COR002", 60001);
-
-insert into learningjourney values
-    (420, "Road to 420", "lorem ipsum", 130001, "COR001");
-
 
 insert into user_lj values
     (130001, 800);
