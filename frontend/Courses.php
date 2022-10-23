@@ -1,4 +1,7 @@
-<?php session_start(); ?>
+<?php 
+session_start(); 
+require_once "../backend/createElements.php";
+?>
 <!-- Accepts user type, role, courses input from homepage, filters by default the courses that user can train in -->
 <!-- add search filtering, copy from depreciated html base -->
 <!-- selecting course should add course to learning journey, have success pop-up-->
@@ -28,7 +31,6 @@
     }
 
     // get session variables 
-    var_dump($_POST);
     $username = $_SESSION['username'];
     $namename = $_SESSION['namename'];
     $role = $_SESSION['role'];
@@ -39,38 +41,15 @@
     while ($row = $result->fetch_assoc()) {
         array_push($ids,$row['course_id']);
     }
-    echo $ids;
-    $in = (implode(',',$ids));
-    echo $in;
-
-    // $sql = "SELECT course_id, course_name, course_desc, course_status, course_type, course_category FROM course WHERE course_id IN (". implode(',', $ids) .")";
     $sql = "SELECT course_id, course_name, course_desc, course_status, course_type, course_category FROM course WHERE course_id IN ('". implode(',', $ids) ."')";
     $result = $conn->query($sql);
     ?>
 
 
-    <div class="p-5 bg-primary text-white text-center">
-        <h1>Learning Journey System</h1>
-    </div>
-
-    <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
-        <div class="container-fluid">
-            <ul class="navbar-nav">
-                <li class="nav-item">
-                    <a class="nav-link active" href="homepage.html">My Learning Journey</a>
-                </li>
-                <li class="nav-item">
-                    <?php echo "<a class='nav-link' href='$role.html'>$role</a> " ?>
-                </li>
-            </ul>
-            <span class="navbar-text">
-                <?php echo "<a class='nav-link'>$namename</a> " ?>
-            </span>
-            <span class="navbar-text">
-                <a class="nav-link" href="index.html">Logout</a>
-            </span>
-        </div>
-    </nav>
+<?php 
+    create_header();
+    create_navbar($role,$namename)
+?>
 
     <div class="container mt-5">
         <h1>COURSES</h1>
@@ -99,7 +78,12 @@
                         "<td>" . $row['course_status'] . "</td>" .
                         "<td>" . $row['course_type'] . "</td>" .
                         "<td>" . $row['course_category'] . "</td>" .
-                        "<td>" . "<input type='submit' onclick='addtoLJ()'>" . "</td>" .
+                        "<td>"  .
+                        "<form action='addCourseToLJ.php' method='post'>" .
+                        "<input type='hidden' id='course_id' name='course_id' value=" . $row['course_id'] . ">" .
+                        "<button type='submit'>Add</button>" .
+                        "</form>" .
+                        "</td>" . 
                         "</tr>";
                 }
                 ?>
@@ -108,15 +92,8 @@
         </table>
     </div>
 
-    <div class="mt-5 p-4 bg-dark text-white text-center">
-        <p>Footer</p>
-    </div>
 
-    <script>
-        function addtoLJ() {
-            // add course into LJ with associated skill and LJ 
-            // create popup 
-        }
-    </script>
+    <?php create_footer(); ?>
+
 </body>
 </html>

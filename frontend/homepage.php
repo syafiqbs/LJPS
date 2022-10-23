@@ -1,4 +1,7 @@
-<?php session_start(); ?>
+<?php 
+session_start(); 
+require_once "../backend/createElements.php";
+?>
 <!-- TO BE CONVERTED TO PHP -->
 <!-- Displays user name whatever in header -->
 <!-- Shows Learning Journey if exists for user -->
@@ -28,8 +31,12 @@
   if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
   }
-
-  $username = $_POST['username'];
+  if (isset($_SESSION['username'])){
+    $username = $_SESSION['username'];
+  }
+  else{
+    $username = $_POST['username'];
+  }    
 
   $sql = "SELECT * FROM staff WHERE email = '$username'";
   $result = $conn->query($sql);
@@ -38,110 +45,64 @@
     while ($row = $result->fetch_assoc()) {
       $_SESSION['username'] = $username;
       $_SESSION['namename'] = $row['staff_name'];
+      $_SESSION['staff_id'] = $row['staff_id'];
+
       $namename = $row['staff_name'];
       $role = $row['role'];
-      if ($role = '1'){
-        $role = 'HR';
+      if ($role == '1') {
+        $role = 'Admin';
       }
-      if ($role = '2'){
-        $role = 'HR';
+      if ($role == '2') {
+        $role = 'User';
       }
-      if ($role = '3'){
-        $role = 'HR';
+      if ($role == '3') {
+        $role = 'Manager';
       }
-      if ($role = '4'){
-        $role = 'HR';
+      if ($role == '4') {
+        $role = 'Trainer';
       }
       $_SESSION['role'] = $role;
+      $staff_id = $row['staff_id'];
     }
+  } else {
+    // super simple validation, if user doesnt exist will redirect to index
+    header('Location: ./index.html');
   }
   ?>
 
-  <div class="p-5 bg-primary text-white text-center">
-    <h1>Learning Journey System</h1>
-  </div>
-
-  <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
-    <div class="container-fluid">
-      <ul class="navbar-nav">
-        <li class="nav-item">
-          <a class="nav-link active" href="homepage.html">My Learning Journey</a>
-        </li>
-        <li class="nav-item">
-          <?php echo "<a class='nav-link' href='$role.html'>$role</a> " ?>
-        </li>
-      </ul>
-      <span class="navbar-text">
-          <?php echo "<a class='nav-link'>$namename</a> " ?>
-      </span>
-      <span class="navbar-text">
-        <a class="nav-link" href="index.html">Logout</a>
-      </span>
-    </div>
-  </nav>
+  <?php 
+  create_header();
+  create_navbar($role,$namename)
+  ?>
 
   <div class="container mt-5">
-    <h1>Change Table to soft-coded</h1>
-    <h1>Might need additional table to map between staff and LJs</h1>
     <div class="row">
       <div class="col-sm-6">
-        <h2>My Learning Journey</h2>
-        <h5>Current Goal: Coding Manager</h5>
-        <div class="row">
-          <div class="col-4">
-            <h5>Progress: 36%</h5>
-          </div>
-          <div class="col-6">
-            <a href="Skills.php" class="btn btn-primary" role="button">Continue</a>
-          </div>
-        </div>
-        <table class="table table-striped">
-          <thead>
-            <tr>
-              <th scope="col">#</th>
-              <th scope="col">Courses</th>
-              <th scope="col">Skills</th>
-              <th scope="col">Completed?</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <th scope="row">1</th>
-              <td>IS111 - Intro to Programming</td>
-              <td>Python</td>
-              <td>Yes</td>
-            </tr>
-            <tr>
-              <th scope="row">2</th>
-              <td>IS216 - Web App</td>
-              <td>HTML, Javascript, CSS</td>
-              <td>Yes</td>
-            </tr>
-            <tr>
-              <th scope="row">3</th>
-              <td>IS1702 - Computational Thinking</td>
-              <td>Computational Thinking</td>
-              <td>No</td>
-            </tr>
-            <tr>
-              <th scope="row">4</th>
-              <td>IS217 - Analytics Foundation</td>
-              <td>Tableu, Python - Pandas, Python - Seaborn, Python - Numpy</td>
-              <td>No</td>
-            </tr>
-            <tr>
-              <th scope="row">5</th>
-              <td>COR1305 - Spreadsheet Modelling and Analytics</td>
-              <td>Excel</td>
-              <td>No</td>
-            </tr>
-            <tr>
-              <th scope="row">6</th>
-              <td>COR3301 - Ethics and Social Responsibility</td>
-              <td>Ethics</td>
-              <td>No</td>
-            </tr>
-          </tbody>
+        <?php
+            $sql = "SELECT * FROM user_lj WHERE staff_id = '$staff_id'";
+            $result = $conn->query($sql);
+            $len = $result->num_rows;
+            if ($len > 0) {
+              $row = $result->fetch_assoc();
+              $job_id = $row['job_id'];
+              echo '<h2>My Learning Journey</h2>
+              <h5>Current Job Goal: '.$job_id.'</h5>
+              <table class="table table-striped">
+              <thead>
+                <tr>
+                  <th scope="col">#</th>
+                  <th scope="col">Courses</th>
+                  <th scope="col">Skills</th>
+                  <th scope="col">Completed?</th>
+                </tr>
+              </thead>
+              <tbody>';
+            }
+            else{
+              echo '<h2>You do not have a Learning Journey yet</h2>';
+            }
+        ?>
+        </tbody>
         </table>
 
         <hr class="d-sm-none">
@@ -149,9 +110,7 @@
       <div class="col-sm-6">
         <h2>Start New Learning Journey</h2>
         <h5>Click to Start a New Learning Journey</h5>
-        <form action="homepage.html" method="post">
-          <a href="Roles.php" class="btn btn-primary" role="button" method="post">START</a>
-        </form>
+        <a href="Roles.php" class="btn btn-primary" role="button" method="post">START</a>
         <br></br>
         <br></br>
         <br></br>
@@ -162,10 +121,7 @@
     </div>
   </div>
 
-  <div class="mt-5 p-4 bg-dark text-white text-center">
-    <p>Footer</p>
-  </div>
-
+  <?php create_footer(); ?>
 </body>
 
 </html>

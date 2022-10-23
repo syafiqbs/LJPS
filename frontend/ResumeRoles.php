@@ -34,9 +34,10 @@ require_once "../backend/createElements.php";
     $namename = $_SESSION['namename'];
     $role = $_SESSION['role'];
 
-    $sql = "SELECT * FROM job";
+    $sql = "SELECT job_role_id, job_name, skill_id FROM job_skill GROUP BY job_name";
     $result = $conn->query($sql);
     ?>
+
 
     <?php
     create_header();
@@ -52,26 +53,23 @@ require_once "../backend/createElements.php";
             <thead>
                 <th>Job Role Id</th>
                 <th>Job Name</th>
-                <th>Job Description</th>
                 <th>Start Role</th>
             </thead>
+
             <tbody>
                 <?php
-                $len = $result->num_rows;
-                if ($len > 0) {
-                    while ($row = $result->fetch_assoc()) {
-                        echo "<tr>" .
-                            "<td>" . $row['job_id'] . "</td>" .
-                            "<td>" . $row['job_name'] . "</td>" .
-                            "<td>" . $row['job_description'] . "</td>" .
-                            "<td>" .
-                            "<form action='addJobToLJ.php' method='post'>" .
-                            "<input type='hidden' id='job_id' name='job_id' value=" . $row['job_id'] . ">" .
-                            "<button type='submit'>Start</button>" .
-                            "</form>" .
-                            "</td>" .
-                            "</tr>";
-                    };
+                while ($row = $result->fetch_assoc()) {
+                    echo "<tr>" .
+                        "<td>" . $row['job_role_id'] . "</td>" .
+                        "<td>" . $row['job_name'] . "</td>" .
+                        // POST or SESSION to skills page
+                        "<td>" .
+                        "<form action='Skills.php' method='post'>" .
+                        "<input type='hidden' id='learning_journey_role' name='learning_journey_role' value=" . $row['job_role_id'] . ">" .
+                        "<button type='submit'>Start</button>" .
+                        "</form>" .
+                        "</td>" .
+                        "</tr>";
                 }
                 ?>
             </tbody>
@@ -79,6 +77,7 @@ require_once "../backend/createElements.php";
     </div>
 
     <?php create_footer(); ?>
+
 </body>
 
 </html>

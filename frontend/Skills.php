@@ -1,4 +1,7 @@
-<?php session_start(); ?>
+<?php 
+session_start(); 
+require_once "../backend/createElements.php";
+?>
 <!-- Accepts user type and role input from homepage, filters by default the skills that user can train in -->
 <!-- add search filtering, copy from depreciated html base -->
 <!-- selecting skill should add skills to learning journey? + post to courses page -->
@@ -26,39 +29,20 @@
     if ($conn->connect_error) {
         die("Connection failed: " . $conn->connect_error);
     }
-    var_dump($_POST);
-    $LJ_role = $_POST['learning_journey_role'];
+
+    $job_id = $_SESSION['job_id'];
     $username = $_SESSION['username'];
     $namename = $_SESSION['namename'];
     $role = $_SESSION['role'];
-
-    $sql = "SELECT job_role_id, skill_id FROM job_skill WHERE job_role_id = $LJ_role";
+    $sql = "SELECT job_name, skill_id FROM job_skill WHERE job_id = $job_id";
     $result = $conn->query($sql);
     ?>
 
 
-    <div class="p-5 bg-primary text-white text-center">
-        <h1>Learning Journey System</h1>
-    </div>
-
-    <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
-        <div class="container-fluid">
-            <ul class="navbar-nav">
-                <li class="nav-item">
-                    <a class="nav-link active" href="homepage.html">My Learning Journey</a>
-                </li>
-                <li class="nav-item">
-                    <?php echo "<a class='nav-link' href='$role.html'>$role</a> " ?>
-                </li>
-            </ul>
-            <span class="navbar-text">
-                <?php echo "<a class='nav-link'>$namename</a> " ?>
-            </span>
-            <span class="navbar-text">
-                <a class="nav-link" href="index.html">Logout</a>
-            </span>
-        </div>
-    </nav>
+<?php 
+    create_header();
+    create_navbar($role,$namename)
+?>
 
     <div class="container mt-5">
         <h1>Skills</h1>
@@ -74,17 +58,20 @@
 
             <tbody>
                 <?php
-                while ($row = $result->fetch_assoc()) {
-                    echo "<tr>" .
-                        "<td>" . $row['job_role_id'] . "</td>" .
-                        "<td>" . $row['skill_id'] . "</td>" .
-                        "<td>" .
-                        "<form action='Courses.php' method='post'>" .
-                        "<input type='hidden' id='course_skill' name='course_skill' value=" . $row['skill_id'] . ">" .
-                        "<button type='submit'>Start</button>" .
-                        "</form>" .
-                        "</td>" .
-                        "</tr>";
+                $len = $result->num_rows;
+                if ($len > 0) {
+                    while ($row = $result->fetch_assoc()) {
+                        echo "<tr>" .
+                            "<td>" . $row['job_name'] . "</td>" .
+                            "<td>" . $row['skill_id'] . "</td>" .
+                            "<td>" .
+                            "<form action='Courses.php' method='post'>" .
+                            "<input type='hidden' id='course_skill' name='course_skill' value=" . $row['skill_id'] . ">" .
+                            "<button type='submit'>Search</button>" .
+                            "</form>" .
+                            "</td>" .
+                            "</tr>";
+                    };
                 };
                 ?>
             </tbody>
@@ -92,10 +79,7 @@
         </table>
     </div>
 
-    <div class="mt-5 p-4 bg-dark text-white text-center">
-        <p>Footer</p>
-    </div>
-
+    <?php create_footer(); ?>
 </body>
 
 </html>
