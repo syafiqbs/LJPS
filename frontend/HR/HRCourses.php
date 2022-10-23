@@ -34,14 +34,14 @@
       <div class="container-fluid">
         <ul class="navbar-nav">
           <li class="nav-item">
-            <a class="nav-link active" href="homepage.html">My Learning Journey</a>
+            <a class="nav-link" href="../homepage.php">My Learning Journey</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="HR.html">HR</a>
+            <a class="nav-link active" href="HR.html">HR</a>
           </li>
         </ul>
         <span class="navbar-text">
-          HR 
+          <a class="nav-link" href="../index.html">Logout</a>
         </span>
       </div>
     </nav>

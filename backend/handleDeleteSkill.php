@@ -1,8 +1,8 @@
 <?php
 
-require_once "../backend/common.php";
-require_once "../backend/ConnectionManager.php";
-require_once "../backend/SkillDAO.php";
+require_once "common.php";
+require_once "ConnectionManager.php";
+require_once "SkillDAO.php";
 
 $result = [];
 $errors = [];
@@ -22,28 +22,26 @@ $errors = [];
 
         if (count($errors) > 0){
           $_SESSION['errors'] = $errors;
-          $_SESSION["createskill_skillid"] = $skill_id;
-          $_SESSION['createskill_skillname'] = $skill_name;
-          header("Location: CreateSkill.php");
+          $_SESSION["deleteskill_skillid"] = $skill_id;
+          $_SESSION['deleteskill_skillname'] = $skill_name;
+          header("Location: ../frontend/HR/DeleteSkill.php");
         }
-
-        /* var_dump($skillid,$skillname); */
         
         $new_skill = new Skill($skill_id, $skill_name);
         $dao = new SkillDAO();
-        $status = $dao->create($new_skill);
+        $status = $dao->delete($new_skill);
 
         if ($status) {
           $_SESSION['addSuccess'] = "Add operation success";
-          header("Location: HRSkills.php");
+          header("Location: ../frontend/HR/HRSkills.php");
           exit();
         }
         else {
-          $_SESSION['createskill_skillid'] = $skill_id;
-          $_SESSION['createskill_skillname'] = $skill_name;
+          $_SESSION['deleteskill_skillid'] = $skill_id;
+          $_SESSION['deleteskill_skillname'] = $skill_name;
           $errors[] = "Error in adding new skill";
           $_SESSION['errors'] = $errors;
-          header("Location: CreateSkill.php");
+          header("Location: ../frontend/HR/DeleteSkill.php");
           return;
         }
 

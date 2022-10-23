@@ -1,8 +1,8 @@
 <?php
 
-require_once "../backend/common.php";
-require_once "../backend/ConnectionManager.php";
-require_once "../backend/SkillDAO.php";
+require_once "common.php";
+require_once "ConnectionManager.php";
+require_once "SkillDAO.php";
 
 $result = [];
 $errors = [];
@@ -29,17 +29,17 @@ $errors = [];
           $_SESSION["createjob_jobid"] = $job_id;
           $_SESSION['createjob_jobname'] = $job_name;
           $_SESSION['createjob_jobdescription'] = $job_description;
-          header("Location: CreateRole.php");
+          header("Location: ../frontend/HR/CreateJob.php");
         }
         
 
-        $new_job = new Role($job_id, $job_name, $job_description);
-        $dao = new RoleDAO();
+        $new_job = new Job($job_id, $job_name, $job_description);
+        $dao = new JobDAO();
         $status = $dao->create($new_job);
 
         if ($status) {
           $_SESSION['addSuccess'] = "Add operation success";
-          header("Location: HRRoles.php");
+          header("Location: ../frontend/HR/HRJobs.php");
           exit();
         }
         else {
@@ -48,7 +48,7 @@ $errors = [];
           $_SESSION['createjob_jobdescription'] = $job_description;
           $errors[] = "Error in adding new skill";
           $_SESSION['errors'] = $errors;
-          header("Location: CreateRole.php");
+          header("Location: ../frontend/HR/CreateJob.php");
           return;
         }
 

@@ -12,15 +12,22 @@
 <body>
 
 <?php
-      require_once "../backend/common.php";
-      $tmp_skillid = '';
-      $tmp_skillname = '';
+      require_once "../../backend/common.php";
+      $tmp_jobid = '';
+      $tmp_jobname = '';
+      $temp_oldjobname = '';
+      $tmp_jobdescription = '';
+      $temp_oldjobdescription = '';
       if (isset($_SESSION['errors'])){
-        $tmp_skillid = $_SESSION['deleteskill_skillid'];
-        $tmp_skillname = $_SESSION['deleteskill_skillname'];
-        unset($_SESSION['deleteskill_skillid']);
-        unset($_SESSION['deleteskill_skillname']);
+        $tmp_jobid = $_SESSION['updatejob_jobid'];
+        $tmp_jobname = $_SESSION['updatejob_jobname'];
+        $tmp_jobdescription = $_SESSION['updatejob_jobdescription'];
+        unset($_SESSION['updatejob_jobid']);
+        unset($_SESSION['updatejob_jobname']);
+        unset($_SESSION['updatejob_jobdescription']);
       }
+
+
 ?>
 
 <div class="p-5 bg-primary text-white text-center">
@@ -31,31 +38,33 @@
       <div class="container-fluid">
         <ul class="navbar-nav">
           <li class="nav-item">
-            <a class="nav-link" href="homepage.html">My Learning Journey</a>
+            <a class="nav-link" href="../homepage.php">My Learning Journey</a>
           </li>
           <li class="nav-item">
             <a class="nav-link active" href="HR.html">HR</a>
           </li>
         </ul>
         <span class="navbar-text">
-          HR 
+          <a class="nav-link" href="../index.html">Logout</a>
         </span>
       </div>
     </nav>
-
 
     <div class="container mt-5">    
         <div class="row">
             <div class="col-1"></div>
             <div class="col-6 offset-md-3">
-                <h1>Delete Existing Skill</h1><br>
+                <h1>Update Existing Job's Name</h1><br>
                 <?php printErrors(); /*defined in common.php*/ ?>
-                <form action="handleDeleteSkill.php" method="post">
-                    <label for="skillid">Skill ID:</label><br>
-                    <input type="number" id="skillid" name="skillid" value='<?= $tmp_skillid?>'>
+                <form action="../../backend/handleUpdateJob.php" method="post">
+                    <label for="jobid">Existing Job ID:</label><br>
+                    <input type="number" id="jobid" name="jobid" value='<?= $tmp_jobid?>'>
                     <br><br>
-                    <label for="skillname">Skill Name:</label><br>
-                    <input type="text" id="skillname" name="skillname" value='<?= $tmp_skillname?>'>
+                    <label for="jobname">New Job Name:</label><br>
+                    <input type="text" id="jobname" name="jobname" value='<?= $tmp_jobname?>'>
+                    <br><br>
+                    <label for="jobdescription">New Job Description:</label><br>
+                    <input type="text" id="jobdescription" name="jobdescription" value='<?= $tmp_jobdescription?>'>
                     <br><br>
                     <button class="btn btn-primary" type="submit">Submit</button>
                 </form>
@@ -66,6 +75,5 @@
     </div>
 
 
-
-
 </body>
+</html>

@@ -34,21 +34,21 @@
       <div class="container-fluid">
         <ul class="navbar-nav">
           <li class="nav-item">
-            <a class="nav-link active" href="homepage.html">My Learning Journey</a>
+            <a class="nav-link" href="../homepage.php">My Learning Journey</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="HR.html">HR</a>
+            <a class="nav-link active" href="HR.html">HR</a>
           </li>
         </ul>
         <span class="navbar-text">
-          HR 
+          <a class="nav-link" href="../index.html">Logout</a>
         </span>
       </div>
     </nav>
 
     <div class="container mt-5">
-      <H1>ROLES</H1>
-      <!-- <input class="form-control" id="RoleInput" type="text" placeholder="Search.."> -->
+      <H1>Jobs</H1>
+      <!-- <input class="form-control" id="JobInput" type="text" placeholder="Search.."> -->
       <table class="table table-bordered">
         <thead>
           <th>job id</th>
@@ -69,7 +69,7 @@
         </tbody>
         
       </table>  
-      <a class="btn btn-primary" href="CRUDroles.php" role="button">CRUD roles</a>
+      <a class="btn btn-primary" href="CRUDjobs.php" role="button">CRUD jobs</a>
   </div>
     
   <div class="mt-5 p-4 bg-dark text-white text-center">

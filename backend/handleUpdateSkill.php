@@ -1,8 +1,8 @@
 <?php
 
-require_once "../backend/common.php";
-require_once "../backend/ConnectionManager.php";
-require_once "../backend/SkillDAO.php";
+require_once "common.php";
+require_once "ConnectionManager.php";
+require_once "SkillDAO.php";
 
 $result = [];
 $errors = [];
@@ -32,7 +32,7 @@ $errors = [];
           $_SESSION["updateskill_skillid"] = $skill_id;
           $_SESSION['updateskill_oldskillname'] = $oldskill_name;
           $_SESSION['updateskill_newskillname'] = $newskill_name;
-          header("Location: UpdateSkill.php");
+          header("Location: ../frontend/HR/UpdateSkill.php");
         }
 
         var_dump($skillid,$oldskill_name,$newskill_name);
@@ -43,7 +43,7 @@ $errors = [];
 
         if ($status) {
           $_SESSION['addSuccess'] = "Update operation success";
-          header("Location: HRSkills.php");
+          header("Location: ../frontend/HR/HRSkills.php");
           exit();
         }
         else {
@@ -52,7 +52,7 @@ $errors = [];
           $_SESSION['updateskill_newskillname'] = $newskill_name;
           $errors[] = "Error in updating new skill";
           $_SESSION['errors'] = $errors;
-          header("Location: UpdateSkill.php");
+          header("Location: ../frontend/HR/UpdateSkill.php");
           return;
         }
 

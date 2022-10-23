@@ -12,21 +12,20 @@
 <body>
 
 <?php
-      require_once "../backend/common.php";
-      $tmp_skillid = '';
-      $tmp_oldskillname = '';
-      $tmp_newskillname = '';
+      require_once "../../backend/common.php";
+      $tmp_jobid = '';
+      $tmp_jobname = '';
+      $tmp_jobdescription = '';
       if (isset($_SESSION['errors'])){
-        $tmp_skillid = $_SESSION['updateskill_skillid'];
-        $tmp_oldskillname = $_SESSION['updateskill_oldskillname'];
-        $tmp_newskillname = $_SESSION['updateskill_newskillname'];
-        unset($_SESSION['updateskill_skillid']);
-        unset($_SESSION['updateskill_oldskillname']);
-        unset($_SESSION['updateskill_newskillname']);
+        $tmp_jobid = $_SESSION['createjob_jobid'];
+        $tmp_jobname = $_SESSION['createjob_jobname'];
+        $tmp_jobdescription = $_SESSION['createjob_jobdescription'];
+        unset($_SESSION['createjob_jobid']);
+        unset($_SESSION['createjob_jobname']);
+        unset($_SESSION['createjob_jobdescription']);
       }
-
-      var_dump($tmp_skillid,$tmp_oldskillname,$tmp_newskillname);
 ?>
+
 
 <div class="p-5 bg-primary text-white text-center">
         <h1>Learning Journey System</h1>
@@ -36,14 +35,14 @@
       <div class="container-fluid">
         <ul class="navbar-nav">
           <li class="nav-item">
-            <a class="nav-link" href="homepage.html">My Learning Journey</a>
+            <a class="nav-link" href="../homepage.php">My Learning Journey</a>
           </li>
           <li class="nav-item">
             <a class="nav-link active" href="HR.html">HR</a>
           </li>
         </ul>
         <span class="navbar-text">
-          HR 
+          <a class="nav-link" href="../index.html">Logout</a>
         </span>
       </div>
     </nav>
@@ -52,17 +51,17 @@
         <div class="row">
             <div class="col-1"></div>
             <div class="col-6 offset-md-3">
-                <h1>Update Existing Skill's Name</h1><br>
+                <h1>Create New Job</h1><br>
                 <?php printErrors(); /*defined in common.php*/ ?>
-                <form action="handleUpdateSkill.php" method="post">
-                    <label for="skillid">Existing Skill ID:</label><br>
-                    <input type="number" id="skillid" name="skillid" value='<?= $tmp_skillid?>'>
+                <form action="handleCreateJob.php" method="post">
+                    <label for="jobid">New Job ID:</label><br>
+                    <input type="number" id="jobid" name="jobid" value='<?= $tmp_jobid?>'>
                     <br><br>
-                    <label for="oldskillname">Old Skill Name:</label><br>
-                    <input type="text" id="oldskillname" name="oldskillname" value='<?= $tmp_oldskillname?>'>
+                    <label for="jobname">New Job Name:</label><br>
+                    <input type="text" id="jobname" name="jobname" value='<?= $tmp_jobname?>'>
                     <br><br>
-                    <label for="newskillname">New Skill Name:</label><br>
-                    <input type="text" id="newskillname" name="newskillname" value='<?= $tmp_newskillname?>'>
+                    <label for="jobdescription">New Job Description:</label><br>
+                    <input type="text" id="jobdescription" name="jobdescription" value='<?= $tmp_jobdescription?>'>
                     <br><br>
                     <button class="btn btn-primary" type="submit">Submit</button>
                 </form>
@@ -71,6 +70,7 @@
         </div>
 
     </div>
+
 
 
 </body>

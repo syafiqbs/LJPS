@@ -1,8 +1,8 @@
 <?php
 
-require_once "../backend/common.php";
-require_once "../backend/ConnectionManager.php";
-require_once "../backend/SkillDAO.php";
+require_once "common.php";
+require_once "ConnectionManager.php";
+require_once "SkillDAO.php";
 
 $result = [];
 $errors = [];
@@ -29,17 +29,17 @@ $errors = [];
           $_SESSION["deletejob_jobid"] = $job_id;
           $_SESSION['deletejob_jobname'] = $job_name;
           $_SESSION['deletejob_jobdescription'] = $job_description;
-          header("Location: DeleteRole.php");
+          header("Location: ../frontend/HR/DeleteJob.php");
         }
         
 
-        $new_job = new Role($job_id, $job_name, $job_description);
-        $dao = new RoleDAO();
+        $new_job = new Job($job_id, $job_name, $job_description);
+        $dao = new JobDAO();
         $status = $dao->delete($new_job);
 
         if ($status) {
           $_SESSION['addSuccess'] = "Add operation success";
-          header("Location: HRRoles.php");
+          header("Location: ../frontend/HR/HRJobs.php");
           exit();
         }
         else {
@@ -48,7 +48,7 @@ $errors = [];
           $_SESSION['deletejob_jobdescription'] = $job_description;
           $errors[] = "Error in adding new skill";
           $_SESSION['errors'] = $errors;
-          header("Location: DeleteRole.php");
+          header("Location: ../frontend/HR/DeleteJob.php");
           return;
         }
 

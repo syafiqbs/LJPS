@@ -12,17 +12,17 @@
 <body>
 
 <?php
-      require_once "../backend/common.php";
+      require_once "../../backend/common.php";
       $tmp_jobid = '';
       $tmp_jobname = '';
       $tmp_jobdescription = '';
       if (isset($_SESSION['errors'])){
-        $tmp_jobid = $_SESSION['createjob_jobid'];
-        $tmp_jobname = $_SESSION['createjob_jobname'];
-        $tmp_jobdescription = $_SESSION['createjob_jobdescription'];
-        unset($_SESSION['createjob_jobid']);
-        unset($_SESSION['createjob_jobname']);
-        unset($_SESSION['createjob_jobdescription']);
+        $tmp_jobid = $_SESSION['deletejob_jobid'];
+        $tmp_jobname = $_SESSION['deletejob_jobname'];
+        $tmp_jobdescription = $_SESSION['deletejob_jobdescription'];
+        unset($_SESSION['deletejob_jobid']);
+        unset($_SESSION['deletejob_jobname']);
+        unset($_SESSION['deletejob_jobdescription']);
       }
 ?>
 
@@ -35,14 +35,14 @@
       <div class="container-fluid">
         <ul class="navbar-nav">
           <li class="nav-item">
-            <a class="nav-link" href="homepage.html">My Learning Journey</a>
+            <a class="nav-link" href="../homepage.php">My Learning Journey</a>
           </li>
           <li class="nav-item">
             <a class="nav-link active" href="HR.html">HR</a>
           </li>
         </ul>
         <span class="navbar-text">
-          HR 
+          <a class="nav-link" href="../index.html">Logout</a>
         </span>
       </div>
     </nav>
@@ -51,16 +51,16 @@
         <div class="row">
             <div class="col-1"></div>
             <div class="col-6 offset-md-3">
-                <h1>Create New Job</h1><br>
+                <h1>Delete Existing Job</h1><br>
                 <?php printErrors(); /*defined in common.php*/ ?>
-                <form action="handleCreateRole.php" method="post">
-                    <label for="jobid">New Job ID:</label><br>
+                <form action="handleDeleteJob.php" method="post">
+                    <label for="jobid">Job ID:</label><br>
                     <input type="number" id="jobid" name="jobid" value='<?= $tmp_jobid?>'>
                     <br><br>
-                    <label for="jobname">New Job Name:</label><br>
+                    <label for="jobname">Job Name:</label><br>
                     <input type="text" id="jobname" name="jobname" value='<?= $tmp_jobname?>'>
                     <br><br>
-                    <label for="jobdescription">New Job Description:</label><br>
+                    <label for="jobdescription">Job Description:</label><br>
                     <input type="text" id="jobdescription" name="jobdescription" value='<?= $tmp_jobdescription?>'>
                     <br><br>
                     <button class="btn btn-primary" type="submit">Submit</button>

@@ -19,14 +19,14 @@
       <div class="container-fluid">
         <ul class="navbar-nav">
           <li class="nav-item">
-            <a class="nav-link" href="homepage.html">My Learning Journey</a>
+            <a class="nav-link" href="../homepage.php">My Learning Journey</a>
           </li>
           <li class="nav-item">
             <a class="nav-link active" href="HR.html">HR</a>
           </li>
         </ul>
         <span class="navbar-text">
-          HR 
+          <a class="nav-link" href="../index.html">Logout</a>
         </span>
       </div>
     </nav>
@@ -36,27 +36,27 @@
             <div class="col-md-4">
               <div class="card">
                 <div class="card-body">
-                  <h5 class="card-title">Create Role</h5>
-                  <p class="card-text">Create a new role</p>
-                  <a href="CreateRole.php" class="btn btn-primary">Go</a>
+                  <h5 class="card-title">Create Job</h5>
+                  <p class="card-text">Create a new Job</p>
+                  <a href="CreateJob.php" class="btn btn-primary">Go</a>
                 </div>  
               </div>
             </div>
             <div class="col-md-4">
               <div class="card">
                 <div class="card-body">
-                  <h5 class="card-title">Update Role</h5>
-                  <p class="card-text">Update an existing role</p>
-                  <a href="UpdateRole.php" class="btn btn-primary">Go</a>
+                  <h5 class="card-title">Update Job</h5>
+                  <p class="card-text">Update an existing Job</p>
+                  <a href="UpdateJob.php" class="btn btn-primary">Go</a>
                 </div>
               </div>
             </div>
             <div class="col-md-4">
                 <div class="card">
                   <div class="card-body">
-                    <h5 class="card-title">Delete Role</h5>
-                    <p class="card-text">Delete an existing role</p>
-                    <a href="DeleteRole.php" class="btn btn-primary">Go</a>
+                    <h5 class="card-title">Delete Job</h5>
+                    <p class="card-text">Delete an existing Job</p>
+                    <a href="DeleteJob.php" class="btn btn-primary">Go</a>
                   </div>
                 </div>
             </div>
