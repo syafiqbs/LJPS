@@ -1,3 +1,4 @@
+<?php session_start(); ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -26,25 +27,13 @@
       $result = $conn->query($sql);
     ?>
 
-    <div class="p-5 bg-primary text-white text-center">
-        <h1>Learning Journey System</h1>
-    </div>
-      
-    <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
-      <div class="container-fluid">
-        <ul class="navbar-nav">
-          <li class="nav-item">
-            <a class="nav-link" href="../homepage.php">My Learning Journey</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link active" href="HR.html">HR</a>
-          </li>
-        </ul>
-        <span class="navbar-text">
-          <a class="nav-link" href="../index.html">Logout</a>
-        </span>
-      </div>
-    </nav>
+<?php 
+  require_once "../../backend/createElements.php";
+  $username = $_SESSION['namename'];
+  $role = $_SESSION['role'];
+  create_header();
+  create_navbar($role,$username)
+  ?>
 
     <div class="container mt-5">
       <H1>Jobs</H1>
@@ -72,10 +61,6 @@
       <a class="btn btn-primary" href="CRUDjobs.php" role="button">CRUD jobs</a>
   </div>
     
-  <div class="mt-5 p-4 bg-dark text-white text-center">
-      <p>Footer</p>
-  </div>
-  
   <!-- <script>
       $(document).ready(function(){
         $("#RoleInput").on("keyup", function() {
@@ -86,5 +71,7 @@
         });
       });
   </script> -->
+  <?php create_footer(); ?>
+
 </body>
 </html>

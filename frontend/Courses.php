@@ -92,7 +92,6 @@ require_once "../backend/createElements.php";
         </table>
     </div>
 
-
     <?php create_footer(); ?>
 
 </body>

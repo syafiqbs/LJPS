@@ -2,9 +2,6 @@
 session_start();
 require_once "../backend/createElements.php";
 ?>
-<!-- Accepts user type input from homepage, filters by default the roles that user can train in -->
-<!-- add search filtering, copy from depreciated html base -->
-<!-- Start should add role to learning journey? + post to skills page -->
 <!DOCTYPE html>
 <html lang="en">
 

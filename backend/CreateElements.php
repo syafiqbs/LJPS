@@ -21,7 +21,7 @@
                 '<?php echo "<a class="nav-link">'. $username .'</a>' .
                 '</span>' .
                 '<span class="navbar-text">' .
-                '<a class="nav-link" href="logout.php">Logout</a>' .
+                '<a class="nav-link" href="index.html">Logout</a>' .
                 '</span>' .
             '</div>' .
             '</nav>';
