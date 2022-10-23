@@ -4,6 +4,7 @@
             '<h1>Learning Journey System</h1>' .
             '</div>';
     };
+
     function create_navbar($role,$username){
         echo '<nav class="navbar navbar-expand-sm bg-dark navbar-dark">' .
             '<div class="container-fluid">' . 
@@ -13,7 +14,7 @@
                 '</li>';
                 if ($role == 'Admin' || $role == 'Manager'){
                     echo '<li class="nav-item">' .
-                    "<a class='nav-link' href='HR.html'>HR</a> " .
+                    "<a class='nav-link' href='HR/HR.html'>HR</a> " .
                     '</li>';
                 }
                 echo '</ul>' .
@@ -26,6 +27,7 @@
             '</div>' .
             '</nav>';
     };
+
     function create_footer(){
         echo '<div class="mt-5 p-4 bg-dark text-white text-center">' .
             '<p>Footer</p>' .
