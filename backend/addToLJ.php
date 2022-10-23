@@ -7,8 +7,5 @@
     $staff_id = $_POST["staff_id"];
     $course_id = $_POST["course_id"];
 
-    $LJDAO = new LJDAO();
-    $result = $LJDAO->create($staff_id, $course_id, $skill_id);
-
 
 ?>
