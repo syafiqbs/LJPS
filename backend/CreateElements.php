@@ -10,7 +10,7 @@
             '<div class="container-fluid">' . 
                 '<ul class="navbar-nav">' . 
                 '<li class="nav-item">' . 
-                    '<a class="nav-link active" href="homepage.php">My Learning Journey</a>' . 
+                    '<a class="nav-link active" href="/Github/LJPS/frontend/homepage.php">My Learning Journey</a>' . 
                 '</li>';
                 if ($role == 'Admin' || $role == 'Manager'){
                     echo '<li class="nav-item">' .
@@ -22,7 +22,7 @@
                 '<?php echo "<a class="nav-link">'. $username .'</a>' .
                 '</span>' .
                 '<span class="navbar-text">' .
-                '<a class="nav-link" href="/backend/logout.php">Logout</a>' .
+                '<a class="nav-link" href="/Github/LJPS/backend/logout.php">Logout</a>' .
                 '</span>' .
             '</div>' .
             '</nav>';
