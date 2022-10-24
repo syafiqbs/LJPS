@@ -34,7 +34,8 @@ require_once "../backend/StaffDAO.php";
         $results_array = $queriesDAO->getCourseBySkillId($skill_id);
         
         $staff_id = $_SESSION["staff_id"];
-        
+        $job_id = $_POST["job_id"];
+        var_dump($job_id);
 
 
 
@@ -77,19 +78,20 @@ require_once "../backend/StaffDAO.php";
                     <td>$course_type</td>
                     <td>$course_category</td>
                     <td>
-                        <form action='../backend/addToLJ.php' method='POST' class='d-inline'>
+                        <form action='./addToLJ.php' method='POST' class='d-inline'>
                             <input type = 'hidden' id='skill_id' name='skill_id' value=${skill_id}>
                             <input type = 'hidden' id='course_id' name='course_id' value=${course_id}>
                             <input type = 'hidden' id='staff_id' name='staff_id' value=${staff_id}>
-                            <button type='submit' class='btn btn-primary btn-sm'>Choose</button>
-                        </form>
+                            <input type='checkbox' name='chosenCourse[]' value=${course_id}>
+                        
                     </td>
                 </tr>";
+                echo "<input type='hidden' id='job_id' name='job_id' value=${job_id}>";
                 }
             ?>
             </tbody>
-
         </table>
+        <button type='submit' class='btn btn-primary btn-sm'>Add to LJ</button></form>
     </div>
 
     <?php create_footer(); ?>

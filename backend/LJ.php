@@ -5,7 +5,7 @@
         private $learningjourney_name;
         private $learningjourney_description;
         private $staff_id;
-        private $course_id
+        private $course_id;
         private $skill_id;
 
         function __construct($learniningjourney_id, $learningjourney_name, $learningjourney_description, $staff_id, $course_id, $skill_id){

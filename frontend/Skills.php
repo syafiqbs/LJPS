@@ -57,6 +57,7 @@
                 <td>$skill_id</td>
                 <td>
                     <form action='./LJCourse.php' method='POST' class='d-inline'>
+                      <input type='hidden' id='job_id' name='job_id' value=${job_id}>
                         <button type='submit' name='chooseSkill' value=${skill_id} class='btn btn-primary btn-sm'>Choose</button>
                     </form>
                 </td>
