@@ -68,6 +68,7 @@ require_once "../backend/createElements.php";
     // super simple validation, if user doesnt exist will redirect to index
     header('Location: ./index.html');
   }
+
   ?>
 
   <?php 
@@ -79,27 +80,34 @@ require_once "../backend/createElements.php";
     <div class="row">
       <div class="col-sm-6">
         <?php
-            $sql = "SELECT * FROM user_lj WHERE staff_id = '$staff_id'";
+            $sql = "SELECT * FROM learningjourney WHERE staff_id = '$staff_id'";
             $result = $conn->query($sql);
             $len = $result->num_rows;
             if ($len > 0) {
-              $row = $result->fetch_assoc();
-              $job_id = $row['job_id'];
-              echo '<h2>My Learning Journey</h2>
-              <h5>Current Job Goal: '.$job_id.'</h5>
-              <table class="table table-striped">
-              <thead>
-                <tr>
-                  <th scope="col">#</th>
-                  <th scope="col">Courses</th>
-                  <th scope="col">Skills</th>
-                  <th scope="col">Completed?</th>
-                </tr>
-              </thead>
-              <tbody>';
+              $counter = 1;
+              while ($row = $result->fetch_assoc()) {
+              $learningjourney_name = $row['learningjourney_name'];
+              if ($counter == 1){
+                echo '<h2>My Learning Journey</h2>
+                <h5>Current Job Goal: '.$learningjourney_name.'</h5>
+                <table class="table table-striped">
+                <thead>
+                  <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Courses</th>
+                    <th scope="col">Completed?</th>
+                  </tr>
+                </thead>';
+              }
+                echo '<tr>
+                <td scope="col">'.$counter.'</td>
+                <td scope="col">'.$row['course_id'].'</td>
+                <td scope="col">no</td>
+              </tr>';
+              }
+              echo '<tbody>';
             }
-            else{
-              echo '<h2>You do not have a Learning Journey yet</h2>';
+            else{ echo '<h2>You do not have a Learning Journey yet</h2>';
             }
         ?>
         </tbody>
