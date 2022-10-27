@@ -41,6 +41,7 @@ require_once "../backend/createElements.php";
     create_navbar($job, $namename);
 
     $_SESSION['ongoingNewLJ'] = [];
+    $_SESSION['ongoingNewLJCourse'] = [];
     ?>
 
     <div class="container mt-5">

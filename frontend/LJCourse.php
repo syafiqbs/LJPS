@@ -110,8 +110,19 @@ require_once "../backend/Registration.php";
                 
             ?>
             </tbody>
-        </table>
-        <button type='submit' class='btn btn-primary btn-sm'>Add to LJ</button></form>
+        </table></form>
+        <?php 
+        if (!empty($_SESSION['ongoingNewLJCourse'])){
+            $skills = implode(",", $_SESSION['ongoingNewLJ']);
+            $courses = implode(",", $_SESSION['ongoingNewLJCourse']);
+            echo "<form action = './addToLJ.php' method = 'POST'>
+            <input type = 'hidden' id = 'skills' name = 'skills' value=${skills}>
+            <input type = 'hidden' id = 'courses' name = 'courses' value=${courses}>
+            <input type = 'hidden' id = 'job' name ='job' value =${job_id}>
+            <button type='submit' id = 'finaliseLJ' name='finaliseLJ' class='btn btn-primary btn-sm' value='true'>Finalise Learning Journey</button> 
+        </form>";
+        }
+      ?>
     </div>
 
     <?php create_footer(); ?>

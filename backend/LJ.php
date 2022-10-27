@@ -1,24 +1,28 @@
 <?php
 
     class LJ{
-        private $learniningjourney_id;
+        private $staff_id;
+        private $job_id;
         private $learningjourney_name;
         private $learningjourney_description;
-        private $staff_id;
-        private $course_id;
         private $skill_id;
+        private $course_id;
 
-        function __construct($learniningjourney_id, $learningjourney_name, $learningjourney_description, $staff_id, $course_id, $skill_id){
-            $this->learningjourney_id = $learniningjourney_id;
+        function __construct($staff_id, $job_id, $learningjourney_name, $learningjourney_description, $skill_id, $course_id){
+            $this->staff_id = $staff_id;
+            $this->job_id = $job_id;
             $this->learningjourney_name = $learningjourney_name;
             $this->learningjourney_description = $learningjourney_description;
-            $this->staff_id = $staff_id;
-            $this->course_id = $course_id;
             $this->skill_id = $skill_id;
+            $this->course_id = $course_id;
+
         }
 
-        function getLearningJourneyId(){
+        function getStaffId(){
             return $this->learningjourney_id;
+        }
+        function getJobId(){
+            return $this->job_id;
         }
         function getLearningJourneyName(){
             return $this->learningjourney_name;
@@ -26,18 +30,19 @@
         function getLearningJourneyDescription(){
             return $this->learningjourney_description;
         }
-        function getStaffId(){
-            return $this->staff_id;
+        function getSkillId(){
+            return $this->skill_id;
         }
         function getCourseId(){
             return $this->course_id;
         }
-        function getSkillId(){
-            return $this->skill_id;
-        }
 
-        function setLearningJourneyId(){
+
+        function setStaffId(){
             $this->learningjourney_id = $learniningjourney_id;
+        }
+        function setJobId(){
+            $this->job_id = $job_id;
         }
         function setLearningJourneyName(){
             $this->learningjourney_name = $learningjourney_name;
@@ -45,15 +50,13 @@
         function setLearningJourneyDescription(){
             $this->learningjourney_description = $learningjourney_description;
         }
-        function setStaffId(){
-            $this->staff_id = $staff_id;
+        function setSkillId(){
+            $this->skill_id = $skill_id;
         }
         function setCourseId(){
             $this->course_id = $course_id;
         }
-        function setSkillId(){
-            $this->skill_id = $skill_id;
-        }
+
 
     }
 

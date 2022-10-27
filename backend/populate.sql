@@ -64,16 +64,17 @@ create table course_skill(
 
 
 create table learningjourney(
-    learningjourney_id integer auto_increment,
+    staff_id integer not null, 
+    job_id integer not null,
     learningjourney_name varchar(20) not null,
     learningjourney_description varchar(255),
-    staff_id integer not null,
-    course_id varchar(20) not null,
     skill_id integer not null,
-    primary key (learningjourney_id, staff_id, course_id, skill_id),
+    course_id varchar(20) not null,
+    primary key (staff_id, job_id),
     constraint learningjourney_fk1 foreign key(skill_id) references skill(skill_id),
     constraint learningjourney_fk2 foreign key(staff_id) references staff(staff_id),
-    constraint learningjourney_fk3 foreign key (course_id) references course(course_id)
+    constraint learningjourney_fk3 foreign key (course_id) references course(course_id),
+    constraint learningjourney_fk4 foreign key (job_id) references job(job_id)
 );
 
 create table user_lj(
