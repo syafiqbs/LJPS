@@ -2,7 +2,7 @@
 
 require_once "SkillCourse.php";
 require_once "ConnectionManager.php";
-require_once "job.php";
+require_once "Job.php";
 
 class JobDAO{
     

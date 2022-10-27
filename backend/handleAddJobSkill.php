@@ -30,6 +30,8 @@ $job_name = $job_dao->getJobName($job_id);
 
 $dao = new JobSkillDAO();
 $status = $dao->create($job_id, $job_name, $skill_id);
+var_dump($job_id, $job_name, $skill_id);
+var_dump($status);
 
 if ($status){
     $_SESSION['addSuccess'] = "Add operation success";

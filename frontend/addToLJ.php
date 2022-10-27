@@ -10,7 +10,7 @@
 
     var_dump($skill_id);
     var_dump($staff_id);
-    var_dump($course_id);
+    var_dump($courses_id);
     var_dump($job_id);
 
     

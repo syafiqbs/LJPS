@@ -15,6 +15,7 @@ class JobSkillDAO{
         // prepare insert
         $sql = "INSERT INTO job_skill (job_id, job_name, skill_id) VALUES ( :job_id, :job_name, :skill_id)";
         $stmt = $conn->prepare($sql);
+        $stmt->bindParam(":job_id", $job_id, PDO::PARAM_STR);
         $stmt->bindParam(":job_name", $job_name, PDO::PARAM_STR);
         $stmt->bindParam(":skill_id", $skill_id, PDO::PARAM_STR);
         
@@ -77,6 +78,8 @@ class JobSkillDAO{
         
         return $result;
     }
+
+    
 
 
 

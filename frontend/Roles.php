@@ -36,11 +36,11 @@ require_once "../backend/createElements.php";
 
     $sql = "SELECT * FROM job";
     $result = $conn->query($sql);
-    ?>
 
-    <?php
     create_header();
-    create_navbar($job, $namename)
+    create_navbar($job, $namename);
+
+    $_SESSION['ongoingNewLJ'] = [];
     ?>
 
     <div class="container mt-5">

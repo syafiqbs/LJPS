@@ -5,6 +5,8 @@ require_once "../backend/SkillCourseDAO.php";
 require_once "../backend/common.php";
 require_once "../backend/queries.php";
 require_once "../backend/StaffDAO.php";
+require_once "../backend/RegistrationDAO.php";
+require_once "../backend/Registration.php";
 ?>
 <!-- Accepts user type, role, courses input from homepage, filters by default the courses that user can train in -->
 <!-- add search filtering, copy from depreciated html base -->
@@ -28,14 +30,27 @@ require_once "../backend/StaffDAO.php";
         $role = $_SESSION['role'];
         create_header();
         create_navbar($role,$namename);
+
         $skill_id = $_POST["chooseSkill"];
+        $staff_id = $_SESSION["staff_id"];
+        $job_id = $_POST["job_id"];
 
         $queriesDAO = new Queries();
         $results_array = $queriesDAO->getCourseBySkillId($skill_id);
+
+        $registrationDAO = new RegistrationDAO();
+        $check_registrations = $registrationDAO->getRegistrationByStaffId($staff_id);
+        $registered_courses = [];
+        foreach($check_registrations as $registration){
+            $reg_status = $registration->getRegStatus();
+            if ($reg_status == "Registered"){
+                $tempCourseId = $registration->getCourseId();
+                $registered_courses[] = $tempCourseId;
+            }
+        }
         
-        $staff_id = $_SESSION["staff_id"];
-        $job_id = $_POST["job_id"];
-        var_dump($job_id);
+
+        
 
 
 
@@ -43,6 +58,7 @@ require_once "../backend/StaffDAO.php";
 
     <div class="container mt-5">
         <h1>COURSES</h1>
+        <p>*Only active courses AND courses not registered (from registration table)*</p>
     </div>
 
     <div class="table-responsive">
@@ -62,32 +78,36 @@ require_once "../backend/StaffDAO.php";
             <tbody>
                 <?php
                 foreach($results_array as $arr){
-                $skill_id = $arr['skill_id'];
-                $course_id = $arr['course_id'];
-                $course_name = $arr['course_name'];
-                $course_desc = $arr['course_desc'];
-                $course_status = $arr['course_status'];
-                $course_type = $arr['course_type'];
-                $course_category = $arr['course_category'];
-                echo "<tr>
-                    <td>$skill_id</td>
-                    <td>$course_id</td>
-                    <td>$course_name</td>
-                    <td>$course_desc</td>
-                    <td>$course_status</td>
-                    <td>$course_type</td>
-                    <td>$course_category</td>
-                    <td>
-                        <form action='./addToLJ.php' method='POST' class='d-inline'>
-                            <input type = 'hidden' id='skill_id' name='skill_id' value=${skill_id}>
-                            <input type = 'hidden' id='course_id' name='course_id' value=${course_id}>
-                            <input type = 'hidden' id='staff_id' name='staff_id' value=${staff_id}>
-                            <input type='checkbox' name='chosenCourse[]' value=${course_id}>
-                        
-                    </td>
-                </tr>";
-                echo "<input type='hidden' id='job_id' name='job_id' value=${job_id}>";
+                    $skill_id = $arr['skill_id'];
+                    $course_id = $arr['course_id'];
+                    if (in_array($course_id, $registered_courses)){
+                        continue;
+                    }
+                    $course_name = $arr['course_name'];
+                    $course_desc = $arr['course_desc'];
+                    $course_status = $arr['course_status'];
+                    $course_type = $arr['course_type'];
+                    $course_category = $arr['course_category'];
+                    echo "<tr>
+                        <td>$skill_id</td>
+                        <td>$course_id</td>
+                        <td>$course_name</td>
+                        <td>$course_desc</td>
+                        <td>$course_status</td>
+                        <td>$course_type</td>
+                        <td>$course_category</td>
+                        <td>
+                            <form action='./Skills.php' method='POST' class='d-inline'>
+                                <input type = 'hidden' id='skill_id' name='skill_id' value=${skill_id}>
+                                <input type = 'hidden' id='course_id' name='course_id' value=${course_id}>
+                                <input type = 'hidden' id='staff_id' name='staff_id' value=${staff_id}>
+                                <button type='submit' name='inputCourseIdToLJ' value=${course_id} class='btn btn-primary btn-sm'>Add</button>
+                            
+                        </td>
+                    </tr>";
+                    echo "<input type='hidden' id='job_id' name='job_id' value=${job_id}>";
                 }
+                
             ?>
             </tbody>
         </table>
