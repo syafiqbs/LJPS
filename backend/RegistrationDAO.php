@@ -33,6 +33,34 @@
             return $result;
         }
 
+        function create($course_id, $staff_id){
+            $result = false;
+            $reg_id = null;
+            $reg_status = "Waitlist";
+            $completion_status = null;
+
+            // connect to database
+            $connMgr = new ConnectionManager();
+            $conn = $connMgr->connect();
+            
+            // prepare insert
+            $sql = "INSERT INTO registration VALUES (:reg_id, :course_id, :staff_id, :reg_status, :completion_status)";
+            $stmt = $conn->prepare($sql);
+            $stmt->bindParam(":reg_id", $reg_id, PDO::PARAM_STR);
+            $stmt->bindParam(":course_id", $course_id, PDO::PARAM_STR);
+            $stmt->bindParam(":staff_id", $staff_id, PDO::PARAM_STR);
+            $stmt->bindParam(":reg_status", $reg_status, PDO::PARAM_STR);
+            $stmt->bindParam(":completion_status", $completion_status, PDO::PARAM_STR);
+            
+            $result = $stmt->execute();
+                    
+            // close connections
+            $stmt = null;
+            $conn = null;        
+            
+            return $result;
+        }
+
     }
 
 ?>

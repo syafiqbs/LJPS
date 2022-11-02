@@ -52,6 +52,10 @@
         $temp = $_SESSION['ongoingNewLJCourses'];
         $temp[] = $_POST['inputCourseIdToLJ'];
         $_SESSION['ongoingNewLJCourses'] = $temp;
+
+        $fetchPastInputs2 = $_SESSION['ongoingNewLJCourse'];
+        $fetchPastInputs2[] = $_POST['course_id'];
+        $_SESSION['ongoingNewLJCourse'] = $fetchPastInputs2;
       }
     }
   }
@@ -62,12 +66,14 @@
       <H1>Skills</H1>
       <?php 
         if (!empty($_SESSION['ongoingNewLJ'])){
-          echo "Current learning journey skill outcome: \n <ul>";
-          foreach($_SESSION['ongoingNewLJ'] as $skill){
+          echo "Current learning journey: \n <ul>";
+          foreach(range(0,sizeof($_SESSION['ongoingNewLJ'])-1) as $i){
+            $skill = $_SESSION['ongoingNewLJ'][$i];
+            $course = $_SESSION['ongoingNewLJCourse'][$i];
             $index = array_search($skill, $_SESSION['ongoingNewLJ']);
             var_dump($_SESSION['ongoingNewLJCourses'][$index]);
             // echo "<li> $skill matched with course: " + $_SESSION['ongoingNewLJCourses'][$index] + "</li>";
-            echo "<li> $skill</li>";
+            echo "<li> $skill skill id from taking course $course</li>";
           }
           echo "</ul>";
         }
@@ -115,6 +121,20 @@
           ?>
         </tbody>
       </table>
+      <?php 
+      if (!empty($_SESSION['ongoingNewLJCourse'])){
+        $skills = implode(",", $_SESSION['ongoingNewLJ']);
+        $courses = implode(",", $_SESSION['ongoingNewLJCourse']);
+        echo "<form action = './addToLJ.php' method = 'POST'>
+        <input type = 'hidden' id = 'skills' name = 'skills' value=${skills}>
+        <input type = 'hidden' id = 'courses' name = 'courses' value=${courses}>
+        <input type = 'hidden' id = 'job' name ='job' value =${job_id}>
+        <button type='submit' id = 'finaliseLJ' name='finaliseLJ' class='btn btn-primary btn-sm' value='true'>Finalise Learning Journey</button> 
+      </form>";
+      }
+      ?>
+      
+      
   </div>
     
   
