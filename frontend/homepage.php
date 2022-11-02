@@ -83,6 +83,7 @@ require_once "../backend/createElements.php";
             $sql = "SELECT * FROM learningjourney WHERE staff_id = '$staff_id'";
             $result = $conn->query($sql);
             $len = $result->num_rows;
+            var_dump($len);
             if ($len > 0) {
               $counter = 1;
               while ($row = $result->fetch_assoc()) {

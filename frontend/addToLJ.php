@@ -3,17 +3,21 @@
     require_once "../backend/common.php";
     require_once "../backend/LJDAO.php";
 
-    $skill_id = $_POST["skill_id"];
-    $staff_id = $_POST["staff_id"];
-    $courses_id = $_POST["chosenCourse"];
-    $job_id = $_POST["job_id"];
+    // $skill_id = $_POST["skill_id"];
+    // $staff_id = $_POST["staff_id"];
+    // $courses_id = $_POST["chosenCourse"];
+    // $job_id = $_POST["job_id"];
 
-    var_dump($skill_id);
-    var_dump($staff_id);
-    var_dump($courses_id);
-    var_dump($job_id);
+    // var_dump($skill_id);
+    // var_dump($staff_id);
+    // var_dump($courses_id);
+    // var_dump($job_id);
 
-    
+    $list_of_skills = $_SESSION["ongoingNewLJ"];
+    $staff_id = $_SESSION["staff_id"];
+    $staff_id = $_SESSION["staff_id"];
+
+
 
 ?>
 

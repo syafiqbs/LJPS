@@ -66,6 +66,7 @@ create table course_skill(
 create table learningjourney(
     learningjourney_id integer auto_increment,
     learningjourney_name varchar(20) not null,
+    learningjourney_main varchar(20) not null,
     learningjourney_description varchar(255),
     staff_id integer not null,
     course_id varchar(20) not null,
@@ -123,7 +124,14 @@ insert into job_skill values
 
 insert into course_skill values
     ("COR002", 60000),
-    ("COR002", 60001);
+    ("COR002", 60001),
+    ("COR001", 60000),    
+    ("COR001", 60001);
+
+
 
 insert into user_lj values
     (130001, 800);
+
+insert into learningjourney values
+    (420, "Road to 420", 'yes', "Lorem Ipsum", 130001,"COR001",60000);
