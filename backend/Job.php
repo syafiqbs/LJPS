@@ -1,5 +1,5 @@
 <?php
-
+    
     class Job{
         private $job_id;
         private $job_name;
