@@ -96,14 +96,16 @@ require_once "../backend/createElements.php";
                   <tr>
                     <th scope="col">#</th>
                     <th scope="col">Courses</th>
-                    <th scope="col">Completed?</th>
+                    <th scope="col">Status?</th>
+                    <th scope="col">Remove from LJ</th>
                   </tr>
                 </thead>';
               }
                 echo '<tr>
                 <td scope="col">'.$counter.'</td>
                 <td scope="col">'.$row['course_id'].'</td>
-                <td scope="col">no</td>
+                <td scope="col">Incomplete</td>
+                <td scope="col"><button type="button" class="btn btn-danger">Delete</button></td>
               </tr>';
               }
               echo '<tbody>';

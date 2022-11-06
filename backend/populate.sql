@@ -217,3 +217,5 @@ insert into course_skill values
     ('FIN001', 10003),
     ('FIN002', 10006);
 
+insert into learningjourney values 
+    (130001, 0, "test_LJ", "yes", "lorem ipsum", 60001 , "COR001")
