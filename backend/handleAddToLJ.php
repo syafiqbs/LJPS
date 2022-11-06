@@ -36,9 +36,10 @@
     $staff_id = $_SESSION['staff_id'];
 
     $ljDAO = new LJDAO();
+    
     $results = [];
     foreach(range(0, sizeof($skills)-1) as $i){
-        $result = $ljDAO->create($staff_id, $job_id, $lj_name, $lj_desc, $skills[$i], $courses[$i]);
+        $result = $ljDAO->create($staff_id, $job_id, $lj_name, 'yes', $lj_desc, $skills[$i], $courses[$i]);
         $results[] = $result;
     }
     // add main status to line 41

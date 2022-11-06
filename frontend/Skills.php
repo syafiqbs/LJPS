@@ -28,6 +28,7 @@
   create_navbar($role,$username);
 
   $job_id = $_POST["job_id"];
+  $_SESSION["job_id"] = $job_id;
   $queriesDAO = new Queries();
   $results_array = $queriesDAO->getSkillsByJobId($job_id);
 
@@ -59,7 +60,7 @@
       }
     }
   }
-
+  var_dump($_SESSION);
   ?>
 
     <div class="container mt-5">
@@ -108,14 +109,14 @@
               </tr>";
               $num_lines += 1;
             }
-            if ($num_lines == 0){
-              echo "all skills have been selected, finalize learning journey here >> ";
-              echo "
-                <form action='./addToLJ.php' method='POST' class='d-inline'>
-                <input type='hidden' id='job_id' name='job_id' value=${job_id}>
-                <button type='submit' class='btn btn-primary btn-sm'>Finalize</button>
-            </form>";
-            };
+            // if ($num_lines == 0){
+            //   echo "all skills have been selected, finalize learning journey here >> ";
+            //   echo "
+            //     <form action='./addToLJ.php' method='POST' class='d-inline'>
+            //     <input type='hidden' id='job_id' name='job_id' value=${job_id}>
+            //     <button type='submit' class='btn btn-primary btn-sm'>Finalize</button>
+            // </form>";
+            // };
           ?>
         </tbody>
       </table>

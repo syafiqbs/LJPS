@@ -40,7 +40,8 @@
       $courses = $_SESSION['ongoingNewLJCourse'];
       $job_id = $_SESSION['job_id'];
     }
-    
+    var_dump($_SESSION['job_id']);
+
     
 
   ?>
