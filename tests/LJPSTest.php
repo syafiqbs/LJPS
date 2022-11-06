@@ -1,21 +1,127 @@
 <?php
     require_once "C:\wamp64\www\SPM\LJPS\backend\Job.php";
     require_once "C:\wamp64\www\SPM\LJPS\backend\JobDAO.php";
+    require_once "C:\wamp64\www\SPM\LJPS\backend\Skill.php";
+    require_once "C:\wamp64\www\SPM\LJPS\backend\SkillDAO.php";
+    require_once "C:\wamp64\www\SPM\LJPS\backend\Course.php";
+    require_once "C:\wamp64\www\SPM\LJPS\backend\CourseDAO.php";
 
     class LJPSTest extends \PHPUnit\Framework\TestCase {
         
+    	// jobs
+
+        public function testGetJobId(){
+            $job = new Job("999", "Swavek", "lorem");
+            $job->setJobId('900');
+            $this->assertEquals($job->getJobId(),'900');
+        }
+
         public function testGetJobName(){
             $job = new Job("999", "Swavek", "lorem");
             $job->setJobName('Eric');
             $this->assertEquals($job->getJobName(),'Eric');
         }
 
-        public function testCreateJob(){
+        public function testGetJobDescription(){
             $job = new Job("999", "Swavek", "lorem");
+            $job->setJobDescription('lorem lmao');
+            $this->assertEquals($job->GetJobDescription(),'lorem lmao');
+        }
+
+        public function testCreateJob(){
+            $job = new Job("993", "Swavek", "lorem");
             $dao = new JobDAO();
             $status = $dao->create($job);
             $this->assertEquals($status, true);
         }
+
+        public function testUpdateJob(){
+            $job = new Job("998", "Swavek", "lorem");
+            $dao = new JobDAO();
+            $status = $dao->edit($job, "Eric", "lorem");
+            $this->assertEquals($status, true);
+        }
+
+        public function testDeleteJob(){
+            $job = new Job("997", "Swavek", "lorem");
+            $dao = new JobDAO();
+            $status = $dao->delete($job);
+            $this->assertEquals($status, true);
+        }
+
+        // skills
+
+        public function testGetSkillId(){
+            $skill = new Skill("99999","testing");
+            $skill->setSkillId('99888');
+            $this->assertEquals($skill->getSkillId(),'99888');
+        }
+
+        public function testGetSkillName(){
+            $skill = new Skill("99999","testing");
+            $skill->setSkillName('Eric');
+            $this->assertEquals($skill->getSkillName(),'Eric');
+        }
+
+        public function testCreateSkill(){
+            $skill = new Skill("99993","testing");
+            $dao = new SkillDAO();
+            $status = $dao->create($skill);
+            $this->assertEquals($status, true);
+        }
+
+        public function testUpdateSkill(){
+            $skill = new Skill("99998","testing");
+            $dao = new SkillDAO();
+            $status = $dao->edit($skill, "testing2");
+            $this->assertEquals($status, true);
+        }
+
+        public function testDeleteSkill(){
+            $skill = new Skill("99997","testing");
+            $dao = new SkillDAO();
+            $status = $dao->delete($skill);
+            $this->assertEquals($status, true);
+        }
+
+
+       	// courses
+
+       	public function testGetCourseId(){
+       		$course = new Course("TEST001","testing","testing course functions","Active","Internal",'Core');
+       		$course->setCourseId("TEST002");
+       		$this->assertEquals($course->getCourseId(),'TEST002');
+       	}
+
+       	public function testGetCourseName(){
+       		$course = new Course("TEST001","testing","testing course functions","Active","Internal",'Core');
+       		$course->setCourseName("testing2");
+       		$this->assertEquals($course->getCourseName(),'testing2');
+       	}
+
+       	public function testGetCourseDesc(){
+       		$course = new Course("TEST001","testing","testing course functions","Active","Internal",'Core');
+       		$course->setCourseDesc("testing2 course functions");
+       		$this->assertEquals($course->getCourseDesc(),'testing2 course functions');
+       	}
+
+       	public function testGetCourseStatus(){
+       		$course = new Course("TEST001","testing","testing course functions","Active","Internal",'Core');
+       		$course->setCourseStatus("Active2");
+       		$this->assertEquals($course->getCourseStatus(),'Active2');
+       	}
+
+       	public function testGetCourseType(){
+       		$course = new Course("TEST001","testing","testing course functions","Active","Internal",'Core');
+       		$course->setCourseType("External");
+       		$this->assertEquals($course->getCourseType(),'External');
+       	}
+
+       	public function testGetCourseCategory(){
+       		$course = new Course("TEST001","testing","testing course functions","Active","Internal",'Core');
+       		$course->setCourseCategory("Elective");
+       		$this->assertEquals($course->getCourseCategory(),'Elective');
+       	}
 
         
     }
