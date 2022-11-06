@@ -80,7 +80,14 @@ require_once "../backend/createElements.php";
     <div class="row">
       <div class="col-sm-6">
         <?php
-            $sql = "SELECT * FROM learningjourney WHERE staff_id = '$staff_id'";
+            $sql = "SELECT learningjourney.course_id, learningjourney.learningjourney_name, registration.reg_status, registration.completion_status
+            FROM learningjourney 
+            INNER JOIN registration
+            WHERE learningjourney.staff_id = '$staff_id'  
+            AND learningjourney.learningjourney_main = 'yes'
+            AND registration.course_id = learningjourney.course_id
+            AND registration.staff_id = learningjourney.staff_id
+            ";
             $result = $conn->query($sql);
             $len = $result->num_rows;
             var_dump($len);
@@ -96,15 +103,17 @@ require_once "../backend/createElements.php";
                   <tr>
                     <th scope="col">#</th>
                     <th scope="col">Courses</th>
-                    <th scope="col">Status?</th>
-                    <th scope="col">Remove from LJ</th>
+                    <th scope="col">Registration?</th>
+                    <th scope="col">Completed?</th>
+                    <th scope="col">Remove</th>
                   </tr>
                 </thead>';
               }
                 echo '<tr>
                 <td scope="col">'.$counter.'</td>
                 <td scope="col">'.$row['course_id'].'</td>
-                <td scope="col">Incomplete</td>
+                <td scope="col">'.$row['reg_status'].'</td>
+                <td scope="col">'.$row['completion_status'].'</td>
                 <td scope="col"><button type="button" class="btn btn-danger">Delete</button></td>
               </tr>';
               }
