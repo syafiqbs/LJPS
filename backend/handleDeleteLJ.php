@@ -4,18 +4,15 @@ require_once "common.php";
 require_once "ConnectionManager.php";
 require_once "JobSkillDAO.php";
 
-// CODE HERE IS WRONG!!!
-$data = explode(":", $_POST["deleteJobSkill"]);
+$course_id = $_POST['course_id'];
+$job_id = $_POST['job_id'];
+$staff_id = $_SESSION['staff_id'];
+$skill_id = $_POST['skill_id'];
 
-$job_id = $data[0];
-$skill_id = $data[1];
+$dao = new LJDAO();
+$status = $dao->deleteLJ($staff_id, $job_id, $skill_id, $course_id);
 
-$dao = new JobSkillDAO();
-$status = $dao->delete($job_id, $skill_id);
-if ($status){
-    $_SESSION['deleteSuccess'] = "Delete operation success";
-    header("Location: ../frontend/HR/displayJobSkill.php");
-    exit();
-}
+header("Location: ../frontend/homepage.php");
+return;
 
 ?>

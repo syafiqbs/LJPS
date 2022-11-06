@@ -74,5 +74,34 @@ class LJDAO{
 
     }
 
+    function deleteLJ($staff_id, $job_id, $skill_id, $course_id){
+        $result = false;
+
+        // connect to database
+        $connMgr = new ConnectionManager();
+        $conn = $connMgr->connect();
+        
+        // prepare delete
+        $sql = "DELETE FROM learningjourney 
+        WHERE (staff_id = :staff_id)
+        AND (job_id = :job_id)
+        AND (skill_id = :skill_id)
+        AND (course_id = :course_id)
+        ";
+        $stmt = $conn->prepare($sql);
+        $stmt->bindParam(":staff_id", $staff_id, PDO::PARAM_STR);
+        $stmt->bindParam(":job_id", $job_id, PDO::PARAM_STR);
+        $stmt->bindParam(":skill_id", $skill_id, PDO::PARAM_STR);
+        $stmt->bindParam(":course_id", $course_id, PDO::PARAM_STR);
+
+        $result = $stmt->execute();
+
+        // close connections
+        $stmt = null;
+        $conn = null;        
+        
+        return $result;
+    }
+
 }
 ?>
