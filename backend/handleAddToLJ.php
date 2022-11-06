@@ -70,8 +70,7 @@
     
     if (in_array(false, $results)){
         $errors[] = "Error adding course(s) to learning journey.";
-        var_dump($errors);
-        // header("Location: ../frontend/addToLJ.php");
+        header("Location: ../frontend/addToLJ.php");
     }
     else{
         header("Location: ../frontend/HR/homepage.php");
