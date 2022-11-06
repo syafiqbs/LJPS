@@ -1,4 +1,3 @@
-@@ -0,0 +1,38 @@
 <?php
 
 require_once "Staff.php";

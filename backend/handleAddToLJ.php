@@ -53,6 +53,7 @@
 
     if (in_array(false, $results)){
         $errors[] = "Error adding course(s) to learning journey.";
+        $_SESSION['errors'] = $errors;
         header("Location: ../frontend/addToLJ.php");
     }
     else{
