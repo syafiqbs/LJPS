@@ -32,7 +32,6 @@
   $results_array = $queriesDAO->getSkillsByJobId($job_id);
 
   if (isset($_POST['inputCourseIdToLJ'])){
-    var_dump($_POST['inputCourseIdToLJ']);
     if (empty($_SESSION['ongoingNewLJ'])){
       $temp = [];
       $temp[] = $_POST['skill_id'];
@@ -43,6 +42,7 @@
       $temp[] = $_POST['inputCourseIdToLJ'];
       $_SESSION['ongoingNewLJCourses'] = $temp;
     }
+    
     else{
       if (!in_array($_POST['skill_id'], $_SESSION['ongoingNewLJ'])){
         $fetchPastInputs = $_SESSION['ongoingNewLJ'];
@@ -67,12 +67,10 @@
       <?php 
         if (!empty($_SESSION['ongoingNewLJ'])){
           echo "Current learning journey: \n <ul>";
+          $i = 0;
           foreach(range(0,sizeof($_SESSION['ongoingNewLJ'])-1) as $i){
             $skill = $_SESSION['ongoingNewLJ'][$i];
-            $index = array_search($skill, $_SESSION['ongoingNewLJ']);
-            $course = $_SESSION['ongoingNewLJCourse'][$index];
-            var_dump($course);
-            // echo "<li> $skill matched with course: " + $_SESSION['ongoingNewLJCourses'][$index] + "</li>";
+            $course = $_SESSION['ongoingNewLJCourses'][$i];
             echo "<li> $skill skill id from taking course $course</li>";
           }
           echo "</ul>";
