@@ -41,6 +41,8 @@
         $result = $ljDAO->create($staff_id, $job_id, $lj_name, $lj_desc, $skills[$i], $courses[$i]);
         $results[] = $result;
     }
+    // add main status to line 41
+    // perform search and set main status of old LJ to no
 
     $registrationDAO = new RegistrationDAO();
     foreach(range(0, sizeof($skills)-1) as $i){

@@ -30,8 +30,17 @@ require_once "../backend/createElements.php";
     $username = $_SESSION['username'];
     $namename = $_SESSION['namename'];
     $role = $_SESSION['role'];
+    $staff_id = $_SESSION['staff_id'];
 
-    $sql = "SELECT job_role_id, job_name, skill_id FROM job_skill GROUP BY job_name";
+    $sql = "SELECT learningjourney.course_id, learningjourney.learningjourney_name, registration.reg_status, registration.completion_status
+    FROM learningjourney 
+    INNER JOIN registration
+    WHERE learningjourney.staff_id = '$staff_id'  
+    AND learningjourney.learningjourney_main = 'no'
+    AND registration.course_id = learningjourney.course_id
+    AND registration.staff_id = learningjourney.staff_id
+    ";
+
     $result = $conn->query($sql);
     ?>
 
@@ -48,22 +57,19 @@ require_once "../backend/createElements.php";
     <div class="table-responsive">
         <table class="table table-bordered">
             <thead>
-                <th>Job Role Id</th>
-                <th>Job Name</th>
-                <th>Start Role</th>
+                <th>LJ Name</th>
+                <th>Continue Learning Journey</th>
             </thead>
 
             <tbody>
                 <?php
                 while ($row = $result->fetch_assoc()) {
                     echo "<tr>" .
-                        "<td>" . $row['job_role_id'] . "</td>" .
-                        "<td>" . $row['job_name'] . "</td>" .
+                        "<td>" . $row['learningjourney_name'] . "</td>" .
                         // POST or SESSION to skills page
                         "<td>" .
-                        "<form action='Skills.php' method='post'>" .
-                        "<input type='hidden' id='learning_journey_role' name='learning_journey_role' value=" . $row['job_role_id'] . ">" .
-                        "<button type='submit'>Start</button>" .
+                        "<form action='homepage.php' method='post'>" .
+                        "<button type='submit'>Continue</button>" .
                         "</form>" .
                         "</td>" .
                         "</tr>";

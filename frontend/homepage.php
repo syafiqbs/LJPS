@@ -90,7 +90,6 @@ require_once "../backend/createElements.php";
             ";
             $result = $conn->query($sql);
             $len = $result->num_rows;
-            var_dump($len);
             if ($len > 0) {
               $counter = 1;
               while ($row = $result->fetch_assoc()) {
@@ -136,7 +135,7 @@ require_once "../backend/createElements.php";
         <br></br>
         <h2>Resume Other Learning Journey</h2>
         <h5>Click to Resume another Learning Journey</h5>
-        <a href="Roles.php" class="btn btn-primary" role="button">RESUME</a>
+        <a href="ResumeRoles.php" class="btn btn-primary" role="button">RESUME</a>
       </div>
     </div>
   </div>
