@@ -41,7 +41,7 @@
             <div class="col-6 offset-md-3">
                 <h1>Create New Job</h1><br>
                 <?php printErrors(); /*defined in common.php*/ ?>
-                <form action="handleCreateJob.php" method="post">
+                <form action="../../backend/handleCreateJob.php" method="post">
                     <label for="jobid">New Job ID:</label><br>
                     <input type="number" id="jobid" name="jobid" value='<?= $tmp_jobid?>'>
                     <br><br>

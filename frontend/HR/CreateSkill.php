@@ -38,7 +38,7 @@
             <div class="col-6 offset-md-3">
                 <h1>Create New Skill</h1><br>
                 <?php printErrors(); /*defined in common.php*/ ?>
-                <form action="handleCreateSkill.php" method="post">
+                <form action="../../backend/handleCreateSkill.php" method="post">
                     <label for="skillid">New Skill ID:</label><br>
                     <input type="number" id="skillid" name="skillid" value='<?= $tmp_skillid?>'>
                     <br><br>
