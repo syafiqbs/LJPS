@@ -27,6 +27,18 @@ $errors = [];
           header("Location: ../frontend/HR/DeleteSkill.php");
         }
         
+        $servername = 'localhost';
+        $username = 'root';
+        $password = '';
+        $dbname = 'ljps';
+        $conn = new mysqli($servername, $username, $password, $dbname);
+        if ($conn->connect_error) {
+          die("Connection failed: " . $conn->connect_error);
+        }
+        $conn = new mysqli($servername, $username, $password, $dbname);
+        if ($conn->connect_error) {
+          die("Connection failed: " . $conn->connect_error);
+        }
 
         // deleting relevent jobskills
         $sql = "SELECT * 

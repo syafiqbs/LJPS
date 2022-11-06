@@ -32,12 +32,21 @@ $errors = [];
           header("Location: ../frontend/HR/DeleteJob.php");
         }
 
-        
+        $servername = 'localhost';
+        $username = 'root';
+        $password = '';
+        $dbname = 'ljps';
+        $conn = new mysqli($servername, $username, $password, $dbname);
+        if ($conn->connect_error) {
+          die("Connection failed: " . $conn->connect_error);
+        }
+
         // deleting related job skills
         $sql = "SELECT * 
         FROM job_skill
         WHERE job_id = '$job_id'
         ";
+
         $result = $conn->query($sql);
         $len = $result->num_rows;
         if ($len > 0) {
