@@ -14,7 +14,7 @@
     $job_id = $_POST['job_id'];
 
     $dao = new LJDAO();
-    $status = $dao->setToNo($staff_id, $job_id);
+    $status = $dao->switchLJ($staff_id, $job_id);
     var_dump($status);
 
 

@@ -80,7 +80,7 @@ require_once "../backend/createElements.php";
     <div class="row">
       <div class="col-sm-6">
         <?php
-            $sql = "SELECT 
+            $sql = "SELECT DISTINCT
               learningjourney.course_id, 
               learningjourney.learningjourney_name, 
               learningjourney.learningjourney_main, 
@@ -109,6 +109,7 @@ require_once "../backend/createElements.php";
                 <thead>
                   <tr>
                     <th scope="col">#</th>
+                    <th scope="col">Skills</th>
                     <th scope="col">Courses</th>
                     <th scope="col">Registration?</th>
                     <th scope="col">Completed?</th>
@@ -118,6 +119,7 @@ require_once "../backend/createElements.php";
               }
                 echo '<tr>
                 <td scope="col">'.$counter.'</td>
+                <td scope="col">'.$row['skill_id'].'</td>
                 <td scope="col">'.$row['course_id'].'</td>
                 <td scope="col">'.$row['reg_status'].'</td>
                 <td scope="col">'.$row['completion_status'].'</td>

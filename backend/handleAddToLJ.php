@@ -56,17 +56,17 @@
     // add main status to line 41
     // perform search and set main status of old LJ to no
 
-    // $registrationDAO = new RegistrationDAO();
-    // if (sizeof($courses) > 1){
-    //     foreach(range(0, sizeof($skills)-1) as $i){
-    //         $result = $registrationDAO->create($courses[$i], $staff_id);
-    //         $results[] = $result;
-    //     }
-    // }
-    // else{
-    //     $result = $registrationDAO->create($courses[0], $staff_id[0]);
-    //     $results[] = $result;
-    // }
+    $registrationDAO = new RegistrationDAO();
+    if (sizeof($courses) > 1){
+        foreach(range(0, sizeof($skills)-1) as $i){
+            $result = $registrationDAO->create($courses[$i], $staff_id);
+            $results[] = $result;
+        }
+    }
+    else{
+        $result = $registrationDAO->create($courses[0], $staff_id[0]);
+        $results[] = $result;
+    }
     
     if (in_array(false, $results)){
         $errors[] = "Error adding course(s) to learning journey.";
