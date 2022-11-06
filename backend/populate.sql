@@ -218,7 +218,7 @@ insert into course_skill values
     ('FIN002', 10006);
 
 insert into learningjourney values 
-    (130001, 0, "test_LJ", "yes", "lorem ipsum", 60001 , "COR001"),
-    (130001, 0, "test_LJ", "yes", "lorem ipsum", 60000 , "COR002"),
-    (130001, 1, "test_LJ_not_Main", "no", "lorem nopsum", 60002 , "COR003"),
-    (130001, 1, "test_LJ_not_Main", "no", "lorem nopsum", 60003 , "COR004");
+    (130001, 600, "test_LJ", "yes", "lorem ipsum", 60001 , "COR001"),
+    (130001, 600, "test_LJ", "yes", "lorem ipsum", 60000 , "COR002"),
+    (130001, 601, "test_LJ_not_Main", "no", "lorem nopsum", 60002 , "COR003"),
+    (130001, 601, "test_LJ_not_Main", "no", "lorem nopsum", 60003 , "COR004");
