@@ -27,19 +27,6 @@ $errors = [];
           header("Location: ../frontend/HR/DeleteSkill.php");
         }
         
-        // delete skill 
-        $new_skill = new Skill($skill_id, $skill_name);
-        $dao = new SkillDAO();
-        $status = $dao->delete($new_skill);
-
-        if (!$status) {
-          $_SESSION['deleteskill_skillid'] = $skill_id;
-          $_SESSION['deleteskill_skillname'] = $skill_name;
-          $errors[] = "Error in adding new skill";
-          $_SESSION['errors'] = $errors;
-          header("Location: ../frontend/HR/DeleteSkill.php");
-          return;
-        }
 
         // deleting relevent jobskills
         $sql = "SELECT * 
@@ -92,6 +79,23 @@ $errors = [];
               }
             }
           }
+
+
+        // delete skill 
+        $new_skill = new Skill($skill_id, $skill_name);
+        $dao = new SkillDAO();
+        $status = $dao->delete($new_skill);
+
+        if (!$status) {
+          $_SESSION['deleteskill_skillid'] = $skill_id;
+          $_SESSION['deleteskill_skillname'] = $skill_name;
+          $errors[] = "Error in adding new skill";
+          $_SESSION['errors'] = $errors;
+          header("Location: ../frontend/HR/DeleteSkill.php");
+          return;
+        }
+
+
           
         $_SESSION['addSuccess'] = "Add operation success";
         header("Location: ../frontend/HR/HRSkills.php");
