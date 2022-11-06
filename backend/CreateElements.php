@@ -12,7 +12,7 @@
                 '<li class="nav-item">' . 
                     '<a class="nav-link active" href="/Github/LJPS/frontend/homepage.php">My Learning Journey</a>' . 
                 '</li>';
-                if ($role == 'Admin' || $role == 'Manager'){
+                if ($role == 'Admin'){
                     echo '<li class="nav-item">' .
                     "<a class='nav-link' href='HR/HR.html'>HR</a> " .
                     '</li>';
