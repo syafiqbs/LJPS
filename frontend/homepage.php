@@ -121,7 +121,7 @@ require_once "../backend/createElements.php";
                 <td scope="col">'.$row['course_id'].'</td>
                 <td scope="col">'.$row['reg_status'].'</td>
                 <td scope="col">'.$row['completion_status'].'</td>
-                <form action ="../frontend/homepage.php" method="post">
+                <form action="../frontend/homepage.php" method="post">
                 <input type="hidden" id="staff_id" name="staff_id" value='. $staff_id .'>
                 <input type="hidden" id="job_id" name="job_id" value='. $row["job_id"] .'>
                 <input type="hidden" id="learningjourney_name" name="learningjourney_name" value='. $row["learningjourney_name"] .'>
