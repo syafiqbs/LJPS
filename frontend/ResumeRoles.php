@@ -32,7 +32,7 @@ require_once "../backend/createElements.php";
     $role = $_SESSION['role'];
     $staff_id = $_SESSION['staff_id'];
 
-    $sql = "SELECT learningjourney_name
+    $sql = "SELECT *
     FROM learningjourney 
     WHERE staff_id = '$staff_id'  
     AND learningjourney_main = 'no'
@@ -55,7 +55,9 @@ require_once "../backend/createElements.php";
     <div class="table-responsive">
         <table class="table table-bordered">
             <thead>
+                <th>Job ID</th>
                 <th>LJ Name</th>
+                <th>LJ Description</th>
                 <th>Continue Learning Journey</th>
             </thead>
 
@@ -63,10 +65,15 @@ require_once "../backend/createElements.php";
                 <?php
                 while ($row = $result->fetch_assoc()) {
                     echo "<tr>" .
-                        "<td>" . $row['learningjourney_name'] . "</td>" .
+                    "<td>" . $row['job_id'] . "</td>" .
+                    "<td>" . $row['learningjourney_name'] . "</td>" .
+                        "<td>" . $row['learningjourney_description'] . "</td>" .
                         // POST or SESSION to skills page
                         "<td>" .
-                        "<form action='homepage.php' method='post'>" .
+                        "<form action='../backend/handleUpdateLJ.php' method='post'>" .
+                        "<input type='hidden' id='job_id' name='job_id' value=". $row['job_id'] .">".
+                        "<input type='hidden' id='course_id' name='course_id' value=". $row['course_id'] .">".
+                        "<input type='hidden' id='learningjourney_name' name='learningjourney_name' value=". $row['learningjourney_name'] .">".
                         "<button type='submit'>Continue</button>" .
                         "</form>" .
                         "</td>" .
