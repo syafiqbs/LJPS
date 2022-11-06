@@ -71,7 +71,7 @@ create table learningjourney(
     learningjourney_description varchar(255),
     skill_id integer not null,
     course_id varchar(20) not null,
-    primary key (staff_id, job_id),
+    primary key (staff_id, job_id,course_id),
     constraint learningjourney_fk1 foreign key(skill_id) references skill(skill_id),
     constraint learningjourney_fk2 foreign key(staff_id) references staff(staff_id),
     constraint learningjourney_fk3 foreign key (course_id) references course(course_id),
@@ -218,4 +218,7 @@ insert into course_skill values
     ('FIN002', 10006);
 
 insert into learningjourney values 
-    (130001, 0, "test_LJ", "yes", "lorem ipsum", 60001 , "COR001");
+    (130001, 0, "test_LJ", "yes", "lorem ipsum", 60001 , "COR001"),
+    (130001, 0, "test_LJ", "yes", "lorem ipsum", 60000 , "COR002"),
+    (130001, 1, "test_LJ_not_Main", "no", "lorem nopsum", 60002 , "COR003"),
+    (130001, 1, "test_LJ_not_Main", "no", "lorem nopsum", 60003 , "COR004");

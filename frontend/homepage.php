@@ -115,6 +115,7 @@ require_once "../backend/createElements.php";
                 <td scope="col">'.$row['completion_status'].'</td>
                 <td scope="col"><button type="button" class="btn btn-danger">Delete</button></td>
               </tr>';
+              $counter += 1;
               }
               echo '<tbody>';
             }

@@ -32,13 +32,11 @@ require_once "../backend/createElements.php";
     $role = $_SESSION['role'];
     $staff_id = $_SESSION['staff_id'];
 
-    $sql = "SELECT learningjourney.course_id, learningjourney.learningjourney_name, registration.reg_status, registration.completion_status
+    $sql = "SELECT learningjourney_name
     FROM learningjourney 
-    INNER JOIN registration
-    WHERE learningjourney.staff_id = '$staff_id'  
-    AND learningjourney.learningjourney_main = 'no'
-    AND registration.course_id = learningjourney.course_id
-    AND registration.staff_id = learningjourney.staff_id
+    WHERE staff_id = '$staff_id'  
+    AND learningjourney_main = 'no'
+    GROUP BY learningjourney_name
     ";
 
     $result = $conn->query($sql);
