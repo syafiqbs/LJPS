@@ -18,7 +18,7 @@
     var_dump($status);
 
 
-    // header("Location: ../frontend/homepage.php");
+    header("Location: ../frontend/homepage.php");
     return;
 
 ?>

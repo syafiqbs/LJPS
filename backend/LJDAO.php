@@ -42,9 +42,10 @@ class LJDAO{
         $conn = $connMgr->connect();
         
         // prepare update
-        $sql1 = "UPDATE learningjourney SET learningourney_main = :no";
+        $sql1 = "UPDATE learningjourney SET learningjourney_main = :no WHERE staff_id = :staff_id";
         $stmt1 = $conn->prepare($sql1);
         $stmt1->bindParam(":no", $no, PDO::PARAM_STR);
+        $stmt1->bindParam(":staff_id", $staff_id, PDO::PARAM_STR);
         $result1 = $stmt1->execute();
         if (!$result1){
             $stmt1 = null;
@@ -52,9 +53,9 @@ class LJDAO{
             return "false1";
         }
 
-        $sql2 = "UPDATE learningjourney SET learningourney_main = :yes WHERE staff_id = :staff_id AND job_id = :job_id";
+        $sql2 = "UPDATE learningjourney SET learningjourney_main = :yes WHERE staff_id = :staff_id AND job_id = :job_id";
         $stmt2 = $conn->prepare($sql2);
-        $stmt2->bindParam(":no", $no, PDO::PARAM_STR);
+        $stmt2->bindParam(":yes", $yes, PDO::PARAM_STR);
         $stmt2->bindParam(":staff_id", $staff_id, PDO::PARAM_STR);
         $stmt2->bindParam(":job_id", $job_id, PDO::PARAM_STR);
         $result2 = $stmt2->execute();
@@ -70,6 +71,7 @@ class LJDAO{
         $conn = null;
 
         return true;
+
     }
 
 }
