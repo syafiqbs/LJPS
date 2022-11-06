@@ -73,7 +73,7 @@
         header("Location: ../frontend/addToLJ.php");
     }
     else{
-        header("Location: ../frontend/HR/homepage.php");
+        header("Location: ../frontend/homepage.php");
         exit();
     }
 
