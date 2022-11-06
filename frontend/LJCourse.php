@@ -4,7 +4,7 @@ require_once "../backend/CourseDAO.php";
 require_once "../backend/SkillCourseDAO.php";
 require_once "../backend/common.php";
 require_once "../backend/queries.php";
-// require_once "../backend/StaffDAO.php";
+require_once "../backend/StaffDAO.php";
 require_once "../backend/RegistrationDAO.php";
 require_once "../backend/Registration.php";
 ?>
