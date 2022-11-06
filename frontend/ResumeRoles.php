@@ -72,6 +72,7 @@ require_once "../backend/createElements.php";
                         "<td>" .
                         "<form action='../backend/handleUpdateLJ.php' method='post'>" .
                         "<input type='hidden' id='job_id' name='job_id' value=". $row['job_id'] .">".
+                        "<input type='hidden' id='skill_id' name='skill_id' value=". $row['skill_id'] .">".
                         "<input type='hidden' id='course_id' name='course_id' value=". $row['course_id'] .">".
                         "<input type='hidden' id='learningjourney_name' name='learningjourney_name' value=". $row['learningjourney_name'] .">".
                         "<button type='submit'>Continue</button>" .

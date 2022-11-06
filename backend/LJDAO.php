@@ -30,5 +30,6 @@ class LJDAO{
         
         return $result;
     }
+
 }
 ?>

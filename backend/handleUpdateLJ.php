@@ -7,8 +7,8 @@
     $result = [];
     $errors = [];
 
-    $course_id = $_POST['courseid'];
-    $skill_id = $_POST['skillid'];
+    $course_id = $_POST['course_id'];
+    $skill_id = $_POST['skill_id'];
     $staff_id = $_SESSION['staff_id'];
     $job_id = $_POST['job_id'];
 
@@ -23,37 +23,29 @@
     }
 
     // update selected LJ to resume
-    $sql = "SELECT * 
-    FROM learningjourney 
-    WHERE 
-        staff_id = '$staff_id'
-        AND job_id = '$job_id'
+    $sql = "UPDATE learningjourney 
+    SET learningjourney.learningjourney_main = 'yes'
+    WHERE learningjourney.staff_id = '$staff_id'
+    AND learningjourney.job_id = '$job_id'
     ";
+    $stmt = $conn->prepare($sql);
+    $result = $stmt->execute();
+    var_dump($result);
 
-    $result = $conn->query($sql);
-    $len = $result->num_rows;
-    if ($len > 0) {
-        while ($row = $result->fetch_assoc()) {
-            // set row main to "yes"
-        }
-    }
 
     // update the rest to not main
-    $sql = "SELECT * 
-    FROM learningjourney 
-    WHERE 
-        staff_id = '$staff_id'
-        AND job_id != '$job_id'
+    $sql = "UPDATE learningjourney 
+    SET learningjourney.learningjourney_main = 'no'
+    WHERE learningjourney.staff_id = '$staff_id'
+    AND learningjourney.job_id = '$job_id'
     ";
-    $result = $conn->query($sql);
-    $len = $result->num_rows;
-    if ($len > 0) {
-        while ($row = $result->fetch_assoc()) {
-            // set row main to "no"
-        }
-    }
 
-    header("Location: ../frontend/homepage.php");
+    $stmt = $conn->prepare($sql);
+    $result = $stmt->execute();
+    var_dump($result);
+
+
+    // header("Location: ../frontend/homepage.php");
     return;
 
 ?>
