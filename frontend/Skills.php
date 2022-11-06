@@ -2,6 +2,7 @@
   require_once "../backend/Skill.php";
   require_once "../backend/common.php";
   require_once "../backend/createElements.php";
+  // require_once "../backend/queries.php";
 ?>
 
 <!DOCTYPE html>

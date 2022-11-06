@@ -73,6 +73,9 @@
         header("Location: ../frontend/addToLJ.php");
     }
     else{
+        unset($_SESSION['ongoingNewLJ']);
+        unset($_SESSION['ongoingNewLJCourses']);
+        unset($_SESSION['inputCourseIdToLJ']);
         header("Location: ../frontend/homepage.php");
         exit();
     }
