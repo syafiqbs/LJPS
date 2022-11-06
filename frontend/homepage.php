@@ -80,7 +80,15 @@ require_once "../backend/createElements.php";
     <div class="row">
       <div class="col-sm-6">
         <?php
-            $sql = "SELECT learningjourney.course_id, learningjourney.learningjourney_name, registration.reg_status, registration.completion_status
+            $sql = "SELECT 
+              learningjourney.course_id, 
+              learningjourney.learningjourney_name, 
+              learningjourney.learningjourney_main, 
+              learningjourney.learningjourney_description, 
+              registration.reg_status, 
+              registration.completion_status, 
+              learningjourney.job_id,
+              learningjourney.skill_id
             FROM learningjourney 
             INNER JOIN registration
             WHERE learningjourney.staff_id = '$staff_id'  
@@ -113,8 +121,18 @@ require_once "../backend/createElements.php";
                 <td scope="col">'.$row['course_id'].'</td>
                 <td scope="col">'.$row['reg_status'].'</td>
                 <td scope="col">'.$row['completion_status'].'</td>
-                <td scope="col"><button type="button" class="btn btn-danger">Delete</button></td>
+                <form action ="../frontend/homepage.php" method="post">
+                <input type="hidden" id="staff_id" name="staff_id" value='. $staff_id .'>
+                <input type="hidden" id="job_id" name="job_id" value='. $row["job_id"] .'>
+                <input type="hidden" id="learningjourney_name" name="learningjourney_name" value='. $row["learningjourney_name"] .'>
+                <input type="hidden" id="learningjourney_main" name="learningjourney_main" value='. $row["learningjourney_main"] .'>
+                <input type="hidden" id="learningjourney_description" name="learningjourney_description" value='. $row["learningjourney_description"] .'>
+                <input type="hidden" id="skill_id" name="skill_id" value='. $row["skill_id"] .'>
+                <input type="hidden" id="course_id" name="course_id" value='. $row["course_id"] .'>
+                <td scope="col"><button type="submit" class="btn btn-danger">Delete</button></td>
+                </form>
               </tr>';
+              // ^ implement delete function for delete learning journey row 
               $counter += 1;
               }
               echo '<tbody>';
