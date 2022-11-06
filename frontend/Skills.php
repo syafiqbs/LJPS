@@ -69,9 +69,9 @@
           echo "Current learning journey: \n <ul>";
           foreach(range(0,sizeof($_SESSION['ongoingNewLJ'])-1) as $i){
             $skill = $_SESSION['ongoingNewLJ'][$i];
-            $course = $_SESSION['ongoingNewLJCourse'][$i];
             $index = array_search($skill, $_SESSION['ongoingNewLJ']);
-            var_dump($_SESSION['ongoingNewLJCourses'][$index]);
+            $course = $_SESSION['ongoingNewLJCourse'][$index];
+            var_dump($course);
             // echo "<li> $skill matched with course: " + $_SESSION['ongoingNewLJCourses'][$index] + "</li>";
             echo "<li> $skill skill id from taking course $course</li>";
           }

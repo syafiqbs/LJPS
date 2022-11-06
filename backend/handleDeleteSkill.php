@@ -27,6 +27,7 @@ $errors = [];
           header("Location: ../frontend/HR/DeleteSkill.php");
         }
         
+        // delete skill 
         $new_skill = new Skill($skill_id, $skill_name);
         $dao = new SkillDAO();
         $status = $dao->delete($new_skill);
