@@ -121,9 +121,9 @@
         </tbody>
       </table>
       <?php 
-      if (!empty($_SESSION['ongoingNewLJCourse'])){
+      if (!empty($_SESSION['ongoingNewLJCourses'])){
         $skills = implode(",", $_SESSION['ongoingNewLJ']);
-        $courses = implode(",", $_SESSION['ongoingNewLJCourse']);
+        $courses = implode(",", $_SESSION['ongoingNewLJCourses']);
         echo "<form action = './addToLJ.php' method = 'POST'>
         <input type = 'hidden' id = 'skills' name = 'skills' value=${skills}>
         <input type = 'hidden' id = 'courses' name = 'courses' value=${courses}>

@@ -33,14 +33,16 @@
     $role = $_SESSION['role'];
     create_header();
     create_navbar($role,$username);
+    
 
     if (isset($_POST['finaliseLJ']) || $_SESSION['finaliseLJCheck']){
       $_SESSION['finaliseLJCheck'] = true;
       $skills = $_SESSION['ongoingNewLJ'];
-      $courses = $_SESSION['ongoingNewLJCourse'];
+      $courses = $_SESSION['ongoingNewLJCourses'];
       $job_id = $_SESSION['job_id'];
     }
     var_dump($_SESSION['job_id']);
+    var_dump($_SESSION['ongoingNewLJCourses']);
 
     
 

@@ -23,7 +23,9 @@
     }
 
     $skills = $_SESSION['ongoingNewLJ'];
-    $courses = $_SESSION['ongoingNewLJCourse'];
+    $courses = $_SESSION['ongoingNewLJCourses'];
+    var_dump($skills);
+    var_dump($courses);
     $job_id = $_POST['inputJobId'];
     if (isset($_POST['inputLJDesc'])){
         $lj_desc = $_POST['inputLJDesc'];
@@ -36,24 +38,40 @@
     $staff_id = $_SESSION['staff_id'];
 
     $ljDAO = new LJDAO();
-    
+    // here set old lj to no.
+    $result = $ljDAO->setToNo();
     $results = [];
-    foreach(range(0, sizeof($skills)-1) as $i){
-        $result = $ljDAO->create($staff_id, $job_id, $lj_name, 'yes', $lj_desc, $skills[$i], $courses[$i]);
+
+    if (sizeof($skills) > 1){
+        foreach(range(0, sizeof($skills)-1) as $i){
+            $result = $ljDAO->create($staff_id, $job_id, $lj_name, 'yes', $lj_desc, $skills[$i], $courses[$i]);
+            $results[] = $result;
+        }
+    }
+    else{
+        $result = $ljDAO->create($staff_id, $job_id, $lj_name, 'yes', $lj_desc, $skills[0], $courses[0]);
         $results[] = $result;
     }
+    
     // add main status to line 41
     // perform search and set main status of old LJ to no
 
-    $registrationDAO = new RegistrationDAO();
-    foreach(range(0, sizeof($skills)-1) as $i){
-        $result = $registrationDAO->create($courses[$i], $staff_id);
-        $results[] = $result;
-    }
-
+    // $registrationDAO = new RegistrationDAO();
+    // if (sizeof($courses) > 1){
+    //     foreach(range(0, sizeof($skills)-1) as $i){
+    //         $result = $registrationDAO->create($courses[$i], $staff_id);
+    //         $results[] = $result;
+    //     }
+    // }
+    // else{
+    //     $result = $registrationDAO->create($courses[0], $staff_id[0]);
+    //     $results[] = $result;
+    // }
+    
     if (in_array(false, $results)){
         $errors[] = "Error adding course(s) to learning journey.";
-        header("Location: ../frontend/addToLJ.php");
+        var_dump($errors);
+        // header("Location: ../frontend/addToLJ.php");
     }
     else{
         header("Location: ../frontend/HR/homepage.php");

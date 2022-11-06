@@ -31,46 +31,26 @@ class LJDAO{
         return $result;
     }
 
-    function switchLJ($staff_id, $job_id){
-        $result1 = false;
-        $result2 = false;
-        $yes = "yes";
-        $no = "no";
+    function setToNo(){
+        $result = false;
+        $learningjourney_main = "no";
 
         // connect to database
         $connMgr = new ConnectionManager();
         $conn = $connMgr->connect();
         
-        // prepare update
-        $sql1 = "UPDATE learningjourney SET learningjourney_main = :no WHERE staff_id = :staff_id";
-        $stmt1 = $conn->prepare($sql1);
-        $stmt1->bindParam(":no", $no, PDO::PARAM_STR);
-        $stmt1->bindParam(":staff_id", $staff_id, PDO::PARAM_STR);
-        $result1 = $stmt1->execute();
-        if (!$result1){
-            $stmt1 = null;
-            $conn = null;
-            return "false1";
-        }
+        // prepare delete
+        $sql = "UPDATE learningjourney set learningjourney_main = :learningjourney_main";
+        $stmt = $conn->prepare($sql);
+        $stmt->bindParam(":learningjourney_main", $learningjourney_main, PDO::PARAM_STR);
 
-        $sql2 = "UPDATE learningjourney SET learningjourney_main = :yes WHERE staff_id = :staff_id AND job_id = :job_id";
-        $stmt2 = $conn->prepare($sql2);
-        $stmt2->bindParam(":yes", $yes, PDO::PARAM_STR);
-        $stmt2->bindParam(":staff_id", $staff_id, PDO::PARAM_STR);
-        $stmt2->bindParam(":job_id", $job_id, PDO::PARAM_STR);
-        $result2 = $stmt2->execute();
-        if (!$result2){
-            $stmt2 = null;
-            $conn = null;
-            return "false2";
-        }
+        $result = $stmt->execute();
 
         // close connections
-        $stmt1 = null;
-        $stmt2 = null;
-        $conn = null;
-
-        return true;
+        $stmt = null;
+        $conn = null;        
+        
+        return $result;
 
     }
 
