@@ -38,6 +38,7 @@ require_once "../backend/createElements.php";
     FROM job
     INNER JOIN job_skill
     WHERE job.job_id = job_skill.job_id
+    AND job.job_id NOT IN (SELECT job_id FROM learningjourney)
     GROUP BY job.job_id
     ";
     $result = $conn->query($sql);
