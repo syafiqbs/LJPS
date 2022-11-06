@@ -31,11 +31,11 @@ class LJDAO{
         return $result;
     }
 
-    function switchLJ($staff_id, $job_id, $course_id, $skill_id){
+    function switchLJ($staff_id, $job_id){
         $result1 = false;
         $result2 = false;
         $yes = "yes";
-        $no = "no"
+        $no = "no";
 
         // connect to database
         $connMgr = new ConnectionManager();
@@ -49,7 +49,7 @@ class LJDAO{
         if (!$result1){
             $stmt1 = null;
             $conn = null;
-            return
+            return "false1";
         }
 
         $sql2 = "UPDATE learningjourney SET learningourney_main = :yes WHERE staff_id = :staff_id AND job_id = :job_id";
@@ -61,7 +61,7 @@ class LJDAO{
         if (!$result2){
             $stmt2 = null;
             $conn = null;
-            return
+            return "false2";
         }
 
         // close connections
