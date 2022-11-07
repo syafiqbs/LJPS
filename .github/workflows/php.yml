@@ -21,5 +21,7 @@ jobs:
       - name: PHPUnit Tests
         uses: php-actions/phpunit@v9
         with:
+          bootstrap: vendor/autoload.php
           configuration: phpunit.xml
+          
           # args: --coverage-text
