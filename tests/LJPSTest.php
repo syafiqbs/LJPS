@@ -5,11 +5,14 @@
     require_once "C:\wamp64\www\SPM\LJPS\backend\SkillDAO.php";
     require_once "C:\wamp64\www\SPM\LJPS\backend\Course.php";
     require_once "C:\wamp64\www\SPM\LJPS\backend\CourseDAO.php";
+    require_once "C:\wamp64\www\SPM\LJPS\backend\JobSkill.php";
+    require_once "C:\wamp64\www\SPM\LJPS\backend\JobSkillDAO.php";
+    require_once "C:\wamp64\www\SPM\LJPS\backend\SkillCourse.php";
+    require_once "C:\wamp64\www\SPM\LJPS\backend\SkillCourseDAO.php";
 
     class LJPSTest extends \PHPUnit\Framework\TestCase {
         
     	// jobs
-
         public function testGetJobId(){
             $job = new Job("999", "Swavek", "lorem");
             $job->setJobId('900');
@@ -88,7 +91,7 @@
        	// courses
 
        	public function testGetCourseId(){
-       		$course = new Course("TEST001","testing","testing course functions","Active","Internal",'Core');
+       		$course = new Course("TEST001","123456","testing course functions","Active","Internal",'Core');
        		$course->setCourseId("TEST002");
        		$this->assertEquals($course->getCourseId(),'TEST002');
        	}
@@ -123,7 +126,66 @@
        		$this->assertEquals($course->getCourseCategory(),'Elective');
        	}
 
+        // job skill
+        public function testCreateJobSkill(){
+            $dao = new JobSkillDAO();
+            $status = $dao->create("105", "Swavek", "10007");
+            $this->assertEquals($status, true);
+        }
+
+        public function testDeleteJobSkill(){
+            $dao = new JobSkillDAO();
+            $status = $dao->delete("105", "10007");
+            $this->assertEquals($status, true);
+        }
+
+        public function testGetJobSkill_JobId(){
+            $jobskill = new JobSkill("999", "Swavek", "99999");
+            $jobskill->setJobId('99998');
+            $this->assertEquals($jobskill->getJobId(),'99998');
+        }
+
+        public function testGetJobSkill_Name(){
+            $jobskill = new JobSkill("999", "Swavek", "99999");
+            $jobskill->setJobName('Eric');
+            $this->assertEquals($jobskill->getJobName(),'Eric');
+        }
+
+        public function testGetJobSkill_SkillId(){
+            $jobskill = new JobSkill("999", "Swavek", "99999");
+            $jobskill->setSkillId('99888');
+            $this->assertEquals($jobskill->getSkillId(),'99888');
+        }
+
+        // skill course
+        public function testCreateSkillCourse(){
+            $skillCourse = new SkillCourse("FIN002","10004");
+            $dao = new SkillCourseDAO();
+            $status = $dao->create($skillCourse);
+            $this->assertEquals($status, true);
+        }
+
+        public function testDeleteSkillCourse(){
+            $skillCourse = new SkillCourse("FIN002","10004");
+            $dao = new SkillCourseDAO();
+            $status = $dao->delete($skillCourse);
+            $this->assertEquals($status, true);
+        }
+
+        public function testGetSkillCourse_CourseId(){
+            $skillCourse = new SkillCourse("TEST001","1234567");
+            $skillCourse->setCourseId("TEST002");
+            $this->assertEquals($skillCourse->getCourseId(),'TEST002');
+        }
+
+        public function testGetSkillCourse_SkillId(){
+            $skillCourse = new SkillCourse("TEST001","1234567");
+            $skillCourse->setSkillId("7654321");
+            $this->assertEquals($skillCourse->getSkillId(),'7654321');
+        }
+
         
+
     }
 
 ?>
