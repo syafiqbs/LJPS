@@ -20,5 +20,7 @@ jobs:
       - name: PHPUnit Tests
         uses: php-actions/phpunit@v9
         with:
-          php-version: '7.4'
+          bootstrap: vendor/autoload.php
           configuration: phpunit.xml
+          args: --coverage-text
+          php_version: "7.4"
