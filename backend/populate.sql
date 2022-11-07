@@ -30,13 +30,12 @@ create table registration(
     staff_id int,
     reg_status varchar(20) not null,
     completion_status varchar(20),
-    constraint registration_fk1 foreign key(course_id) references course(course_id),
     constraint registration_fk2 foreign key(staff_id) references staff(staff_id)
 );
 
 create table skill(
     skill_id integer auto_increment primary key,
-    skill_name varchar(20) not null
+    skill_name varchar(40) not null
 );
 
 create table job(

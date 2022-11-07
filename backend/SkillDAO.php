@@ -134,6 +134,34 @@ class SkillDAO{
         return $result;
     }
 
+    function getNameById($skill_id){
+        $connMgr = new ConnectionManager();
+        $conn = $connMgr->connect();
+
+        // SQL query
+        $sql = 'SELECT skill_name FROM skill WHERE skill_id = :skillid';
+        $stmt = $conn->prepare($sql);
+        $stmt->bindParam(":skillid", $skill_id, PDO::PARAM_STR);
+
+        // Execeute query
+        $stmt->execute();
+        $stmt->setFetchMode(PDO::FETCH_ASSOC);
+
+        // Display
+        $result = null;
+        if($stmt->execute()){
+
+            if($row=$stmt->fetch()){
+                $result = $row['skill_name'];
+            }
+        }
+
+        $stmt = null;
+        $conn = null;
+        
+        return $result;
+    }
+
 }
 
 

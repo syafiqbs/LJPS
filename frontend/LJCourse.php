@@ -7,6 +7,7 @@ require_once "../backend/queries.php";
 require_once "../backend/StaffDAO.php";
 require_once "../backend/RegistrationDAO.php";
 require_once "../backend/Registration.php";
+require_once "../backend/SkillDAO.php";
 ?>
 <!-- Accepts user type, role, courses input from homepage, filters by default the courses that user can train in -->
 <!-- add search filtering, copy from depreciated html base -->
@@ -64,12 +65,10 @@ require_once "../backend/Registration.php";
     <div class="table-responsive">
         <table class="table table-bordered">
             <thead>
-                <th>skill id</th>
+                <th>skill name</th>
                 <th>course id</th>
                 <th>course name</th>
                 <th>course description</th>
-                <th>course status</th>
-                <th>course type</th>
                 <th>course category</th>
                 <th>Add to LJ</th>
 
@@ -79,6 +78,8 @@ require_once "../backend/Registration.php";
                 <?php
                 foreach($results_array as $arr){
                     $skill_id = $arr['skill_id'];
+                    $skillDAO = new SkillDAO();
+                    $skill_name = $skillDAO->getNameById($skill_id);
                     $course_id = $arr['course_id'];
                     if (in_array($course_id, $registered_courses)){
                         continue;
@@ -89,12 +90,10 @@ require_once "../backend/Registration.php";
                     $course_type = $arr['course_type'];
                     $course_category = $arr['course_category'];
                     echo "<tr>
-                        <td>$skill_id</td>
+                        <td>$skill_name</td>
                         <td>$course_id</td>
                         <td>$course_name</td>
                         <td>$course_desc</td>
-                        <td>$course_status</td>
-                        <td>$course_type</td>
                         <td>$course_category</td>
                         <td>
                             <form action='./Skills.php' method='POST' class='d-inline'>
