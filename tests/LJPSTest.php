@@ -1,15 +1,16 @@
 <?php
-    require_once "C:\wamp64\www\SPM\LJPS\backend\Job.php";
-    require_once "C:\wamp64\www\SPM\LJPS\backend\JobDAO.php";
-    require_once "C:\wamp64\www\SPM\LJPS\backend\Skill.php";
-    require_once "C:\wamp64\www\SPM\LJPS\backend\SkillDAO.php";
-    require_once "C:\wamp64\www\SPM\LJPS\backend\Course.php";
-    require_once "C:\wamp64\www\SPM\LJPS\backend\CourseDAO.php";
-    require_once "C:\wamp64\www\SPM\LJPS\backend\JobSkill.php";
-    require_once "C:\wamp64\www\SPM\LJPS\backend\JobSkillDAO.php";
-    require_once "C:\wamp64\www\SPM\LJPS\backend\SkillCourse.php";
-    require_once "C:\wamp64\www\SPM\LJPS\backend\SkillCourseDAO.php";
-    require_once "C:\wamp64\www\SPM\LJPS\backend\LJDAO.php";
+    require_once (__DIR__ . '/../backend/Job.php');
+    require_once (__DIR__ . '/../backend/Job.php');
+    require_once (__DIR__ . '/../backend/JobDAO.php');
+    require_once (__DIR__ . '/../backend/Skill.php');
+    require_once (__DIR__ . '/../backend/SkillDAO.php');
+    require_once (__DIR__ . '/../backend/Course.php');
+    require_once (__DIR__ . '/../backend/CourseDAO.php');
+    require_once (__DIR__ . '/../backend/JobSkill.php');
+    require_once (__DIR__ . '/../backend/JobSkillDAO.php');
+    require_once (__DIR__ . '/../backend/SkillCourse.php');
+    require_once (__DIR__ . '/../backend/SkillCourseDAO.php');
+    require_once (__DIR__ . '/../backend/LJDAO.php');
 
     class LJPSTest extends \PHPUnit\Framework\TestCase {
         
