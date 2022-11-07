@@ -43,6 +43,8 @@
     $result = $ljDAO->setToNo($staff_id);
     $results = [];
 
+    var_dump($staff_id);
+
     if (sizeof($skills) > 1){
         foreach(range(0, sizeof($skills)-1) as $i){
             $result = $ljDAO->create($staff_id, $job_id, $lj_name, 'yes', $lj_desc, $skills[$i], $courses[$i]);
@@ -65,7 +67,7 @@
         }
     }
     else{
-        $result = $registrationDAO->create($courses[0], $staff_id[0]);
+        $result = $registrationDAO->create($courses[0], $staff_id);
         $results[] = $result;
     }
     
@@ -77,6 +79,7 @@
         unset($_SESSION['ongoingNewLJ']);
         unset($_SESSION['ongoingNewLJCourses']);
         unset($_SESSION['inputCourseIdToLJ']);
+        unset($_SESSION['job_id']);
         header("Location: ../frontend/homepage.php");
         exit();
     }
