@@ -34,7 +34,7 @@ $errors = [];
         $status = $dao->create($new_skill);
 
         if ($status) {
-          $_SESSION['addSuccess'] = "Add operation success";
+          // $_SESSION['addSuccess'] = "Add operation success";
           header("Location: ../frontend/HR/HRSkills.php");
           exit();
         }
