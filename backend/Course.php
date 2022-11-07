@@ -36,22 +36,22 @@
             return $this->course_category;
         }
 
-        function setCourseId(){
+        function setCourseId($course_id){
             $this->course_id = $course_id;
         }
-        function setCourseName(){
+        function setCourseName($course_name){
             $this->course_name = $course_name;
         }
-        function setCourseDesc(){
+        function setCourseDesc($course_desc){
             $this->course_desc = $course_desc;
         }
-        function setCourseStatus(){
+        function setCourseStatus($course_status){
             $this->course_status = $course_status;
         }
-        function setCourseType(){
+        function setCourseType($course_type){
             $this->course_type = $course_type;
         }
-        function setCourseCategory(){
+        function setCourseCategory($course_category){
             $this->course_category = $course_category;
         }
 

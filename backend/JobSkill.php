@@ -23,13 +23,13 @@
         }
         
 
-        function setJobId(){
+        function setJobId($jobId){
             $this->jobId = $jobId;
         }
-        function setJobName(){
+        function setJobName($jobName){
             $this->jobName = $jobName;
         }
-        function setSkillId(){
+        function setSkillId($skillId){
             $this->skillId = $skillId;
         }
     }
