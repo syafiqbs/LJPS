@@ -22,4 +22,4 @@ jobs:
         uses: php-actions/phpunit@v9
         with:
           configuration: phpunit.xml
-          args: --coverage-text
+          # args: --coverage-text
