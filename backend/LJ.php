@@ -42,25 +42,25 @@
         }
 
 
-        function setStaffId(){
-            $this->learningjourney_id = $learniningjourney_id;
+        function setStaffId($staff_id){
+            $this->staff_id = $staff_id;
         }
-        function setJobId(){
+        function setJobId($job_id){
             $this->job_id = $job_id;
         }
-        function setLearningJourneyName(){
+        function setLearningJourneyName($learningjourney_name){
             $this->learningjourney_name = $learningjourney_name;
         }
-        function setLearningJourneyMain(){
+        function setLearningJourneyMain($learningjourney_main){
             $this->learningjourney_main = $learningjourney_main;
         }
-        function setLearningJourneyDescription(){
+        function setLearningJourneyDescription($learningjourney_description){
             $this->learningjourney_description = $learningjourney_description;
         }
-        function setSkillId(){
+        function setSkillId($skill_id){
             $this->skill_id = $skill_id;
         }
-        function setCourseId(){
+        function setCourseId($course_id){
             $this->course_id = $course_id;
         }
 
