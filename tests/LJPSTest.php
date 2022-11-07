@@ -9,6 +9,7 @@
     require_once "C:\wamp64\www\SPM\LJPS\backend\JobSkillDAO.php";
     require_once "C:\wamp64\www\SPM\LJPS\backend\SkillCourse.php";
     require_once "C:\wamp64\www\SPM\LJPS\backend\SkillCourseDAO.php";
+    require_once "C:\wamp64\www\SPM\LJPS\backend\LJDAO.php";
 
     class LJPSTest extends \PHPUnit\Framework\TestCase {
         
@@ -39,18 +40,22 @@
         }
 
         public function testUpdateJob(){
-            $job = new Job("998", "Swavek", "lorem");
+            $job = new Job("993", "Swavek", "lorem");
             $dao = new JobDAO();
             $status = $dao->edit($job, "Eric", "lorem");
             $this->assertEquals($status, true);
         }
 
         public function testDeleteJob(){
-            $job = new Job("997", "Swavek", "lorem");
+            $job = new Job("993", "Eric", "lorem");
             $dao = new JobDAO();
             $status = $dao->delete($job);
             $this->assertEquals($status, true);
         }
+
+        
+
+
 
         // skills
 
@@ -74,14 +79,14 @@
         }
 
         public function testUpdateSkill(){
-            $skill = new Skill("99998","testing");
+            $skill = new Skill("99993","testing");
             $dao = new SkillDAO();
             $status = $dao->edit($skill, "testing2");
             $this->assertEquals($status, true);
         }
 
         public function testDeleteSkill(){
-            $skill = new Skill("99997","testing");
+            $skill = new Skill("99993","testing2");
             $dao = new SkillDAO();
             $status = $dao->delete($skill);
             $this->assertEquals($status, true);
@@ -184,8 +189,50 @@
             $this->assertEquals($skillCourse->getSkillId(),'7654321');
         }
 
-        
+        // Learning Journey
 
+        public function testGetLearningJourney(){
+            $dao = new LJDAO();
+            $status = $dao->create(130001, 105, '420', "yes", "lorem", 10006, "FIN002");
+            $this->assertEquals($status, true);
+        }
+
+        public function testDeleteLearningJourney(){
+            $dao = new LJDAO();
+            $status = $dao->deleteLJ(130001, 105, 10006, "FIN002");
+            $this->assertEquals($status, true);
+        }
+
+        public function testsetToNoLJ(){
+            $dao = new LJDAO();
+            $status = $dao->setToNo(130002);
+            $this->assertEquals($status, true);
+        }
+
+        public function testSwitchLJ(){
+            $dao = new LJDAO();
+            $status = $dao->switchLJ(130002,600);
+            $this->assertEquals($status, true);
+        }
+
+        public function testGetLJ_Name(){
+            $lj = new LJ(130001, 105, '420', "yes", "lorem", 10006, "FIN002");
+            $lj->setLearningJourneyName("421");
+            $this->assertEquals($lj->getLearningJourneyName(), "421");
+        }
+
+        public function testGetLJ_Main(){
+            $lj = new LJ(130001, 105, '420', "yes", "lorem", 10006, "FIN002");
+            $lj->setLearningJourneyMain("no");
+            $this->assertEquals($lj->getLearningJourneyMain(), "no");
+        }
+
+        public function testGetLJ_Desc(){
+            $lj = new LJ(130001, 105, '420', "yes", "lorem", 10006, "FIN002");
+            $lj->setLearningJourneyDescription("lorem ipsum");
+            $this->assertEquals($lj->getLearningJourneyDescription(), "lorem ipsum");
+        }
+        
     }
 
 ?>
