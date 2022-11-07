@@ -20,6 +20,7 @@
     if (!empty($errors)){
         $_SESSION['errors'] = $errors;
         header("Location: ../frontend/addToLJ.php");
+        exit();
     }
 
     $skills = $_SESSION['ongoingNewLJ'];
