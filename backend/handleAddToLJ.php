@@ -17,6 +17,10 @@
         $errors[] = "Name cannot be empty!";
     }
 
+    if (empty($_POST['inputLJDesc'])){
+        $errors[] = "Description cannot be empty!";
+    }
+
     if (!empty($errors)){
         $_SESSION['errors'] = $errors;
         header("Location: ../frontend/addToLJ.php");
