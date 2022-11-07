@@ -42,7 +42,7 @@
         <thead>
           <th>job id</th>
           <th>job name</th>
-          <th>job description<th>
+          <th>job description</th>
         </thead>
 
         <tbody>
