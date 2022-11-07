@@ -95,6 +95,7 @@ require_once "../backend/createElements.php";
             AND learningjourney.learningjourney_main = 'yes'
             AND registration.course_id = learningjourney.course_id
             AND registration.staff_id = learningjourney.staff_id
+            AND registration.reg_status = 'Waitlist'
             ";
             $result = $conn->query($sql);
             $len = $result->num_rows;
