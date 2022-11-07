@@ -23,5 +23,5 @@ jobs:
         env:
           TEST_NAME: PHPUnit Tests
         with:
-          configuration: tests/phpunit.xml
+          configuration: phpunit.xml
           args: --coverage-text
