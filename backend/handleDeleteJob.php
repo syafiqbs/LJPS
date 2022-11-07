@@ -31,18 +31,50 @@ $errors = [];
           $_SESSION['deletejob_jobdescription'] = $job_description;
           header("Location: ../frontend/HR/DeleteJob.php");
         }
-        
 
+        $servername = 'localhost';
+        $username = 'root';
+        $password = '';
+        $dbname = 'ljps';
+        $conn = new mysqli($servername, $username, $password, $dbname);
+        if ($conn->connect_error) {
+          die("Connection failed: " . $conn->connect_error);
+        }
+
+        // deleting related job skills
+        $sql = "SELECT * 
+        FROM job_skill
+        WHERE job_id = '$job_id'
+        ";
+
+        $result = $conn->query($sql);
+        $len = $result->num_rows;
+        if ($len > 0) {
+            while ($row = $result->fetch_assoc()) {
+              $job_id = $row['job_id'];
+              $job_name = $row['job_name'];
+              $skill_id = $row['skill_id'];
+              $new_job_skill = new JobSkill($job_id, $job_name, $skill_id);
+              $JS_dao = new JobSkillDAO();
+              $status = $JS_dao->delete($job_id,$skill_id);
+              if (!$status) {
+                $_SESSION['deletejob_jobid'] = $job_id;
+                $_SESSION['deletejob_jobname'] = $job_name;
+                $_SESSION['deletejob_jobdescription'] = $job_description;
+                $errors[] = "Error in adding new skill";
+                $_SESSION['errors'] = $errors;
+                header("Location: ../frontend/HR/DeleteJob.php");
+                return;
+              }
+            }
+          }
+
+        // deleting job 
         $new_job = new Job($job_id, $job_name, $job_description);
         $dao = new JobDAO();
         $status = $dao->delete($new_job);
 
-        if ($status) {
-          $_SESSION['addSuccess'] = "Add operation success";
-          header("Location: ../frontend/HR/HRJobs.php");
-          exit();
-        }
-        else {
+        if (!$status) {
           $_SESSION['deletejob_jobid'] = $job_id;
           $_SESSION['deletejob_jobname'] = $job_name;
           $_SESSION['deletejob_jobdescription'] = $job_description;
@@ -53,6 +85,10 @@ $errors = [];
         }
 
 
+
+        $_SESSION['addSuccess'] = "Add operation success";
+        header("Location: ../frontend/HR/HRJobs.php");
+        exit();
     ?>
 
 

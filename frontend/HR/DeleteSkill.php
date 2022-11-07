@@ -28,7 +28,7 @@
   $username = $_SESSION['namename'];
   $role = $_SESSION['role'];
   create_header();
-  create_navbar($role,$username)
+  create_navbar_HR($role,$username)
   ?>
 
 
@@ -38,7 +38,7 @@
             <div class="col-6 offset-md-3">
                 <h1>Delete Existing Skill</h1><br>
                 <?php printErrors(); /*defined in common.php*/ ?>
-                <form action="handleDeleteSkill.php" method="post">
+                <form action="../../backend/handleDeleteSkill.php" method="post">
                     <label for="skillid">Skill ID:</label><br>
                     <input type="number" id="skillid" name="skillid" value='<?= $tmp_skillid?>'>
                     <br><br>

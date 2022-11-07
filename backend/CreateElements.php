@@ -10,9 +10,9 @@
             '<div class="container-fluid">' . 
                 '<ul class="navbar-nav">' . 
                 '<li class="nav-item">' . 
-                    '<a class="nav-link active" href="/Github/LJPS/frontend/homepage.php">My Learning Journey</a>' . 
+                    '<a class="nav-link active" href="homepage.php">My Learning Journey</a>' . 
                 '</li>';
-                if ($role == 'Admin' || $role == 'Manager'){
+                if ($role == 'Admin'){
                     echo '<li class="nav-item">' .
                     "<a class='nav-link' href='HR/HR.html'>HR</a> " .
                     '</li>';
@@ -22,7 +22,30 @@
                 '<?php echo "<a class="nav-link">'. $username .'</a>' .
                 '</span>' .
                 '<span class="navbar-text">' .
-                '<a class="nav-link" href="/Github/LJPS/backend/logout.php">Logout</a>' .
+                '<a class="nav-link" href="../backend/logout.php">Logout</a>' .
+                '</span>' .
+            '</div>' .
+            '</nav>';
+    };
+
+    function create_navbar_HR($role,$username){
+        echo '<nav class="navbar navbar-expand-sm bg-dark navbar-dark">' .
+            '<div class="container-fluid">' . 
+                '<ul class="navbar-nav">' . 
+                '<li class="nav-item">' . 
+                    '<a class="nav-link active" href="../homepage.php">My Learning Journey</a>' . 
+                '</li>';
+                if ($role == 'Admin'){
+                    echo '<li class="nav-item">' .
+                    "<a class='nav-link' href='HR.html'>HR</a> " .
+                    '</li>';
+                }
+                echo '</ul>' .
+                '<span class="navbar-text">' .
+                '<?php echo "<a class="nav-link">'. $username .'</a>' .
+                '</span>' .
+                '<span class="navbar-text">' .
+                '<a class="nav-link" href="../../backend/logout.php">Logout</a>' .
                 '</span>' .
             '</div>' .
             '</nav>';

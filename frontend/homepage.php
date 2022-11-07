@@ -80,10 +80,25 @@ require_once "../backend/createElements.php";
     <div class="row">
       <div class="col-sm-6">
         <?php
-            $sql = "SELECT * FROM learningjourney WHERE staff_id = '$staff_id'";
+            $sql = "SELECT DISTINCT
+              learningjourney.course_id, 
+              learningjourney.learningjourney_name, 
+              learningjourney.learningjourney_main, 
+              learningjourney.learningjourney_description, 
+              registration.reg_status, 
+              registration.completion_status, 
+              learningjourney.job_id,
+              learningjourney.skill_id
+            FROM learningjourney 
+            INNER JOIN registration
+            WHERE learningjourney.staff_id = '$staff_id'  
+            AND learningjourney.learningjourney_main = 'yes'
+            AND registration.course_id = learningjourney.course_id
+            AND registration.staff_id = learningjourney.staff_id
+            AND registration.reg_status = 'Waitlist'
+            ";
             $result = $conn->query($sql);
             $len = $result->num_rows;
-            var_dump($len);
             if ($len > 0) {
               $counter = 1;
               while ($row = $result->fetch_assoc()) {
@@ -95,16 +110,33 @@ require_once "../backend/createElements.php";
                 <thead>
                   <tr>
                     <th scope="col">#</th>
+                    <th scope="col">Skills</th>
                     <th scope="col">Courses</th>
+                    <th scope="col">Registration?</th>
                     <th scope="col">Completed?</th>
+                    <th scope="col">Remove</th>
                   </tr>
                 </thead>';
               }
                 echo '<tr>
                 <td scope="col">'.$counter.'</td>
+                <td scope="col">'.$row['skill_id'].'</td>
                 <td scope="col">'.$row['course_id'].'</td>
-                <td scope="col">no</td>
+                <td scope="col">'.$row['reg_status'].'</td>
+                <td scope="col">'.$row['completion_status'].'</td>
+                <form action="../backend/handleDeleteLJ.php" method="post">
+                <input type="hidden" id="staff_id" name="staff_id" value='. $staff_id .'>
+                <input type="hidden" id="job_id" name="job_id" value='. $row["job_id"] .'>
+                <input type="hidden" id="learningjourney_name" name="learningjourney_name" value='. $row["learningjourney_name"] .'>
+                <input type="hidden" id="learningjourney_main" name="learningjourney_main" value='. $row["learningjourney_main"] .'>
+                <input type="hidden" id="learningjourney_description" name="learningjourney_description" value='. $row["learningjourney_description"] .'>
+                <input type="hidden" id="skill_id" name="skill_id" value='. $row["skill_id"] .'>
+                <input type="hidden" id="course_id" name="course_id" value='. $row["course_id"] .'>
+                <td scope="col"><button type="submit" class="btn btn-danger">Delete</button></td>
+                </form>
               </tr>';
+              // ^ implement delete function for delete learning journey row 
+              $counter += 1;
               }
               echo '<tbody>';
             }
@@ -125,7 +157,7 @@ require_once "../backend/createElements.php";
         <br></br>
         <h2>Resume Other Learning Journey</h2>
         <h5>Click to Resume another Learning Journey</h5>
-        <a href="Roles.php" class="btn btn-primary" role="button">RESUME</a>
+        <a href="ResumeRoles.php" class="btn btn-primary" role="button">RESUME</a>
       </div>
     </div>
   </div>

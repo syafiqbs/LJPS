@@ -27,7 +27,7 @@
   $username = $_SESSION['namename'];
   $role = $_SESSION['role'];
   create_header();
-  create_navbar($role,$username)
+  create_navbar_HR($role,$username)
   ?>
 
 

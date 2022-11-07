@@ -30,8 +30,15 @@ require_once "../backend/createElements.php";
     $username = $_SESSION['username'];
     $namename = $_SESSION['namename'];
     $role = $_SESSION['role'];
+    $staff_id = $_SESSION['staff_id'];
 
-    $sql = "SELECT job_role_id, job_name, skill_id FROM job_skill GROUP BY job_name";
+    $sql = "SELECT *
+    FROM learningjourney 
+    WHERE staff_id = '$staff_id'  
+    AND learningjourney_main = 'no'
+    GROUP BY learningjourney_name
+    ";
+
     $result = $conn->query($sql);
     ?>
 
@@ -48,22 +55,27 @@ require_once "../backend/createElements.php";
     <div class="table-responsive">
         <table class="table table-bordered">
             <thead>
-                <th>Job Role Id</th>
-                <th>Job Name</th>
-                <th>Start Role</th>
+                <th>Job ID</th>
+                <th>LJ Name</th>
+                <th>LJ Description</th>
+                <th>Continue Learning Journey</th>
             </thead>
 
             <tbody>
                 <?php
                 while ($row = $result->fetch_assoc()) {
                     echo "<tr>" .
-                        "<td>" . $row['job_role_id'] . "</td>" .
-                        "<td>" . $row['job_name'] . "</td>" .
+                    "<td>" . $row['job_id'] . "</td>" .
+                    "<td>" . $row['learningjourney_name'] . "</td>" .
+                        "<td>" . $row['learningjourney_description'] . "</td>" .
                         // POST or SESSION to skills page
                         "<td>" .
-                        "<form action='Skills.php' method='post'>" .
-                        "<input type='hidden' id='learning_journey_role' name='learning_journey_role' value=" . $row['job_role_id'] . ">" .
-                        "<button type='submit'>Start</button>" .
+                        "<form action='../backend/handleUpdateLJ.php' method='post'>" .
+                        "<input type='hidden' id='job_id' name='job_id' value=". $row['job_id'] .">".
+                        "<input type='hidden' id='skill_id' name='skill_id' value=". $row['skill_id'] .">".
+                        "<input type='hidden' id='course_id' name='course_id' value=". $row['course_id'] .">".
+                        "<input type='hidden' id='learningjourney_name' name='learningjourney_name' value=". $row['learningjourney_name'] .">".
+                        "<button type='submit'>Continue</button>" .
                         "</form>" .
                         "</td>" .
                         "</tr>";

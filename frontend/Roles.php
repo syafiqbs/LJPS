@@ -34,7 +34,13 @@ require_once "../backend/createElements.php";
     $namename = $_SESSION['namename'];
     $job = $_SESSION['role'];
 
-    $sql = "SELECT * FROM job";
+    $sql = "SELECT job.job_id, job.job_name, job.job_description
+    FROM job
+    INNER JOIN job_skill
+    WHERE job.job_id = job_skill.job_id
+    AND job.job_id NOT IN (SELECT job_id FROM learningjourney)
+    GROUP BY job.job_id
+    ";
     $result = $conn->query($sql);
 
     create_header();

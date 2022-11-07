@@ -32,7 +32,7 @@
   $username = $_SESSION['namename'];
   $role = $_SESSION['role'];
   create_header();
-  create_navbar($role,$username)
+  create_navbar_HR($role,$username)
   ?>
   
     <div class="container mt-5">    
@@ -41,7 +41,7 @@
             <div class="col-6 offset-md-3">
                 <h1>Delete Existing Job</h1><br>
                 <?php printErrors(); /*defined in common.php*/ ?>
-                <form action="handleDeleteJob.php" method="post">
+                <form action="../../backend/handleDeleteJob.php" method="post">
                     <label for="jobid">Job ID:</label><br>
                     <input type="number" id="jobid" name="jobid" value='<?= $tmp_jobid?>'>
                     <br><br>

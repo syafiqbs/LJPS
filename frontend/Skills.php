@@ -2,6 +2,7 @@
   require_once "../backend/Skill.php";
   require_once "../backend/common.php";
   require_once "../backend/createElements.php";
+  // require_once "../backend/queries.php";
 ?>
 
 <!DOCTYPE html>
@@ -28,11 +29,11 @@
   create_navbar($role,$username);
 
   $job_id = $_POST["job_id"];
+  $_SESSION["job_id"] = $job_id;
   $queriesDAO = new Queries();
   $results_array = $queriesDAO->getSkillsByJobId($job_id);
 
   if (isset($_POST['inputCourseIdToLJ'])){
-    var_dump($_POST['inputCourseIdToLJ']);
     if (empty($_SESSION['ongoingNewLJ'])){
       $temp = [];
       $temp[] = $_POST['skill_id'];
@@ -43,6 +44,7 @@
       $temp[] = $_POST['inputCourseIdToLJ'];
       $_SESSION['ongoingNewLJCourses'] = $temp;
     }
+    
     else{
       if (!in_array($_POST['skill_id'], $_SESSION['ongoingNewLJ'])){
         $fetchPastInputs = $_SESSION['ongoingNewLJ'];
@@ -59,7 +61,6 @@
       }
     }
   }
-
   ?>
 
     <div class="container mt-5">
@@ -67,12 +68,10 @@
       <?php 
         if (!empty($_SESSION['ongoingNewLJ'])){
           echo "Current learning journey: \n <ul>";
+          $i = 0;
           foreach(range(0,sizeof($_SESSION['ongoingNewLJ'])-1) as $i){
             $skill = $_SESSION['ongoingNewLJ'][$i];
-            $course = $_SESSION['ongoingNewLJCourse'][$i];
-            $index = array_search($skill, $_SESSION['ongoingNewLJ']);
-            var_dump($_SESSION['ongoingNewLJCourses'][$index]);
-            // echo "<li> $skill matched with course: " + $_SESSION['ongoingNewLJCourses'][$index] + "</li>";
+            $course = $_SESSION['ongoingNewLJCourses'][$i];
             echo "<li> $skill skill id from taking course $course</li>";
           }
           echo "</ul>";
@@ -110,21 +109,21 @@
               </tr>";
               $num_lines += 1;
             }
-            if ($num_lines == 0){
-              echo "all skills have been selected, finalize learning journey here >> ";
-              echo "
-                <form action='./addToLJ.php' method='POST' class='d-inline'>
-                <input type='hidden' id='job_id' name='job_id' value=${job_id}>
-                <button type='submit' class='btn btn-primary btn-sm'>Finalize</button>
-            </form>";
-            };
+            // if ($num_lines == 0){
+            //   echo "all skills have been selected, finalize learning journey here >> ";
+            //   echo "
+            //     <form action='./addToLJ.php' method='POST' class='d-inline'>
+            //     <input type='hidden' id='job_id' name='job_id' value=${job_id}>
+            //     <button type='submit' class='btn btn-primary btn-sm'>Finalize</button>
+            // </form>";
+            // };
           ?>
         </tbody>
       </table>
       <?php 
-      if (!empty($_SESSION['ongoingNewLJCourse'])){
+      if (!empty($_SESSION['ongoingNewLJCourses'])){
         $skills = implode(",", $_SESSION['ongoingNewLJ']);
-        $courses = implode(",", $_SESSION['ongoingNewLJCourse']);
+        $courses = implode(",", $_SESSION['ongoingNewLJCourses']);
         echo "<form action = './addToLJ.php' method = 'POST'>
         <input type = 'hidden' id = 'skills' name = 'skills' value=${skills}>
         <input type = 'hidden' id = 'courses' name = 'courses' value=${courses}>
