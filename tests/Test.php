@@ -18,6 +18,12 @@
         public function testGetJobId(){
             $job = new Job("999", "Swavek", "lorem");
             $job->setJobId('900');
+
+            self::assertStringContainsString(
+                "test",
+                "test"
+            );
+
             $this->assertEquals($job->getJobId(),'900');
         }
 
