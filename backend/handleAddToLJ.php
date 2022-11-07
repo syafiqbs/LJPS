@@ -40,7 +40,7 @@
 
     $ljDAO = new LJDAO();
     // here set old lj to no.
-    $result = $ljDAO->setToNo();
+    $result = $ljDAO->setToNo($staff_id);
     $results = [];
 
     if (sizeof($skills) > 1){
