@@ -16,6 +16,9 @@ $errors = [];
         if (strlen($job_name) > 20){
           $errors[] = "Max job name length is 20";
         }
+        if (strlen($job_description) > 255){
+          $errors[] = "Max job desc length is 255";
+        }
         if (empty($job_name)){
             $errors[] = "job name cannot be empty";
         }
