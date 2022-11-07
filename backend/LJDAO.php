@@ -31,18 +31,23 @@ class LJDAO{
         return $result;
     }
 
-    function setToNo(){
+    function setToNo($staff_id){
         $result = false;
         $learningjourney_main = "no";
 
         // connect to database
         $connMgr = new ConnectionManager();
         $conn = $connMgr->connect();
-        
+
         // prepare delete
-        $sql = "UPDATE learningjourney set learningjourney_main = :learningjourney_main";
+        $sql = "UPDATE learningjourney 
+        set learningjourney_main = :learningjourney_main
+        WHERE staff_id = :staff_id
+        ";
+
         $stmt = $conn->prepare($sql);
         $stmt->bindParam(":learningjourney_main", $learningjourney_main, PDO::PARAM_STR);
+        $stmt->bindParam(":staff_id", $staff_id, PDO::PARAM_STR);
 
         $result = $stmt->execute();
 
