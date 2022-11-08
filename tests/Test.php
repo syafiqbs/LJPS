@@ -190,13 +190,12 @@
             $this->assertEquals($skillCourse->getSkillId(),'7654321');
         }
 
-        // Learning Journey
-
-        // public function testGetLearningJourney(){
-        //     $dao = new LJDAO();
-        //     $status = $dao->create(130001, 105, '420', "yes", "lorem", 10006, "FIN002");
-        //     $this->assertEquals($status, true);
-        // }
+        //Learning Journey
+        public function testGetLearningJourney(){
+            $lj = new LJ(130001, 105, '420', "yes", "lorem", 10006, "FIN002");
+            $lj->getLearningJourneyName("421");
+            $this->assertEquals($lj->getLearningJourneyName(), "421");
+        }
 
         // public function testDeleteLearningJourney(){
         //     $dao = new LJDAO();
