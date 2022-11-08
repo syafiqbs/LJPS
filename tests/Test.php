@@ -33,26 +33,26 @@
             $this->assertEquals($job->GetJobDescription(),'lorem lmao');
         }
 
-        // public function testCreateJob(){
-        //     $job = new Job("993", "Swavek", "lorem");
-        //     $dao = new JobDAO();
-        //     $status = $dao->create($job);
-        //     $this->assertEquals($status, true);
-        // }
+        public function testCreateJob(){
+            $job = new Job("993", "Swavek", "lorem");
+            $dao = new JobDAO();
+            $status = $dao->create($job);
+            $this->assertEquals($status, true);
+        }
 
-        // public function testUpdateJob(){
-        //     $job = new Job("993", "Swavek", "lorem");
-        //     $dao = new JobDAO();
-        //     $status = $dao->edit($job, "Eric", "lorem");
-        //     $this->assertEquals($status, true);
-        // }
+        public function testUpdateJob(){
+            $job = new Job("993", "Swavek", "lorem");
+            $dao = new JobDAO();
+            $status = $dao->edit($job, "Eric", "lorem");
+            $this->assertEquals($status, true);
+        }
 
-        // public function testDeleteJob(){
-        //     $job = new Job("993", "Eric", "lorem");
-        //     $dao = new JobDAO();
-        //     $status = $dao->delete($job);
-        //     $this->assertEquals($status, true);
-        // }
+        public function testDeleteJob(){
+            $job = new Job("993", "Eric", "lorem");
+            $dao = new JobDAO();
+            $status = $dao->delete($job);
+            $this->assertEquals($status, true);
+        }
 
         
 
@@ -72,26 +72,26 @@
             $this->assertEquals($skill->getSkillName(),'Eric');
         }
 
-        // public function testCreateSkill(){
-        //     $skill = new Skill("99993","testing");
-        //     $dao = new SkillDAO();
-        //     $status = $dao->create($skill);
-        //     $this->assertEquals($status, true);
-        // }
+        public function testCreateSkill(){
+            $skill = new Skill("99993","testing");
+            $dao = new SkillDAO();
+            $status = $dao->create($skill);
+            $this->assertEquals($status, true);
+        }
 
-        // public function testUpdateSkill(){
-        //     $skill = new Skill("99993","testing");
-        //     $dao = new SkillDAO();
-        //     $status = $dao->edit($skill, "testing2");
-        //     $this->assertEquals($status, true);
-        // }
+        public function testUpdateSkill(){
+            $skill = new Skill("99993","testing");
+            $dao = new SkillDAO();
+            $status = $dao->edit($skill, "testing2");
+            $this->assertEquals($status, true);
+        }
 
-        // public function testDeleteSkill(){
-        //     $skill = new Skill("99993","testing2");
-        //     $dao = new SkillDAO();
-        //     $status = $dao->delete($skill);
-        //     $this->assertEquals($status, true);
-        // }
+        public function testDeleteSkill(){
+            $skill = new Skill("99993","testing2");
+            $dao = new SkillDAO();
+            $status = $dao->delete($skill);
+            $this->assertEquals($status, true);
+        }
 
 
        	// courses
@@ -132,18 +132,18 @@
        		$this->assertEquals($course->getCourseCategory(),'Elective');
        	}
 
-        // // job skill
-        // public function testCreateJobSkill(){
-        //     $dao = new JobSkillDAO();
-        //     $status = $dao->create("105", "Swavek", "10007");
-        //     $this->assertEquals($status, true);
-        // }
+        // job skill
+        public function testCreateJobSkill(){
+            $dao = new JobSkillDAO();
+            $status = $dao->create("105", "Swavek", "10007");
+            $this->assertEquals($status, true);
+        }
 
-        // public function testDeleteJobSkill(){
-        //     $dao = new JobSkillDAO();
-        //     $status = $dao->delete("105", "10007");
-        //     $this->assertEquals($status, true);
-        // }
+        public function testDeleteJobSkill(){
+            $dao = new JobSkillDAO();
+            $status = $dao->delete("105", "10007");
+            $this->assertEquals($status, true);
+        }
 
         public function testGetJobSkill_JobId(){
             $jobskill = new JobSkill("999", "Swavek", "99999");
@@ -163,20 +163,20 @@
             $this->assertEquals($jobskill->getSkillId(),'99888');
         }
 
-        // // skill course
-        // public function testCreateSkillCourse(){
-        //     $skillCourse = new SkillCourse("FIN002","10004");
-        //     $dao = new SkillCourseDAO();
-        //     $status = $dao->create($skillCourse);
-        //     $this->assertEquals($status, true);
-        // }
+        // skill course
+        public function testCreateSkillCourse(){
+            $skillCourse = new SkillCourse("FIN002","10004");
+            $dao = new SkillCourseDAO();
+            $status = $dao->create($skillCourse);
+            $this->assertEquals($status, true);
+        }
 
-        // public function testDeleteSkillCourse(){
-        //     $skillCourse = new SkillCourse("FIN002","10004");
-        //     $dao = new SkillCourseDAO();
-        //     $status = $dao->delete($skillCourse);
-        //     $this->assertEquals($status, true);
-        // }
+        public function testDeleteSkillCourse(){
+            $skillCourse = new SkillCourse("FIN002","10004");
+            $dao = new SkillCourseDAO();
+            $status = $dao->delete($skillCourse);
+            $this->assertEquals($status, true);
+        }
 
         public function testGetSkillCourse_CourseId(){
             $skillCourse = new SkillCourse("TEST001","1234567");
@@ -190,30 +190,31 @@
             $this->assertEquals($skillCourse->getSkillId(),'7654321');
         }
 
-        //Learning Journey
+        // Learning Journey
+
         public function testGetLearningJourney(){
-            $lj = new LJ(130001, 105, '420', "yes", "lorem", 10006, "FIN002");
-            $lj->setLearningJourneyName("421");
-            $this->assertEquals($lj->getLearningJourneyName(), "421");
+            $dao = new LJDAO();
+            $status = $dao->create(130001, 105, '420', "yes", "lorem", 10006, "FIN002");
+            $this->assertEquals($status, true);
         }
 
-        // public function testDeleteLearningJourney(){
-        //     $dao = new LJDAO();
-        //     $status = $dao->deleteLJ(130001, 105, 10006, "FIN002");
-        //     $this->assertEquals($status, true);
-        // }
+        public function testDeleteLearningJourney(){
+            $dao = new LJDAO();
+            $status = $dao->deleteLJ(130001, 105, 10006, "FIN002");
+            $this->assertEquals($status, true);
+        }
 
-        // public function testsetToNoLJ(){
-        //     $dao = new LJDAO();
-        //     $status = $dao->setToNo(130002);
-        //     $this->assertEquals($status, true);
-        // }
+        public function testsetToNoLJ(){
+            $dao = new LJDAO();
+            $status = $dao->setToNo(130002);
+            $this->assertEquals($status, true);
+        }
 
-        // public function testSwitchLJ(){
-        //     $dao = new LJDAO();
-        //     $status = $dao->switchLJ(130002,600);
-        //     $this->assertEquals($status, true);
-        // }
+        public function testSwitchLJ(){
+            $dao = new LJDAO();
+            $status = $dao->switchLJ(130002,600);
+            $this->assertEquals($status, true);
+        }
 
         public function testGetLJ_Name(){
             $lj = new LJ(130001, 105, '420', "yes", "lorem", 10006, "FIN002");
