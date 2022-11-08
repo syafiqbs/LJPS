@@ -193,7 +193,7 @@
         //Learning Journey
         public function testGetLearningJourney(){
             $lj = new LJ(130001, 105, '420', "yes", "lorem", 10006, "FIN002");
-            $lj->getLearningJourneyName("421");
+            $lj->setLearningJourneyName("421");
             $this->assertEquals($lj->getLearningJourneyName(), "421");
         }
 
