@@ -7,5 +7,9 @@
     },
     "require": {
         "phpunit/phpunit": "9"
-    }
+    },
+    "scripts": {
+        "test": "./vendor/bin/phpunit --bootstrap vendor/autoload.php tests/",
+        "testdox": "./vendor/bin/phpunit --bootstrap vendor/autoload.php --testdox --colors=always tests/"
+      }
 }
