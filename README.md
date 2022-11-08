@@ -15,8 +15,8 @@ Code is separated into the Frontend, Backend, and Tests folders.
 
 To run the app, simply clone this repository into your localhost folder. Import the populate.sql, which can be found in the backend folder, and go to localhost/LJPS/frontend/index.html
 To log in, simply select any of the users emails in the LJPS staff database, examples include:
-- 'john.sim@allinone.come.sg' for an admin role that has the HR function
-- 'Michael.Ng@allinone.com.sg' for a normal staff that has basic features
+- john.sim<span>@</span>allinone.come.sg for an admin role that has the HR function
+- Michael.Ng<span>@</span>allinone.com.sg for a normal staff that has basic features
 
 # Unit Testing
 As the website uses PHP, we will be using the PHPUnit Library for testing
