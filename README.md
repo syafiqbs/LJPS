@@ -5,6 +5,7 @@ The LJPS: Learning Journey Progress System, is used for users to track courses t
 # Language
 
 The first iteration of the LJPS is built using HTML and PHP. 
+</br>
 
 
 # Folders
@@ -15,7 +16,13 @@ Code is separated into the Frontend, Backend, and Tests folders.
 
 To run the app, simply clone this repository into your localhost folder. 
 </br>
-Import the populate.sql, which can be found in the backend folder, and go to localhost/LJPS/frontend/index.html.
+Import the populate.sql, which can be found in the backend folder, and 
+</br>
+For Windows users, no more steps are needed, and the webapp can be accessed straight away
+</br>
+For Apple users, open the backend > ConnectionManager.php, and change line 8 from blank to 'Root'.
+</br>
+To view the page, go to localhost/LJPS/frontend/index.html.
 </br>
 To log in, simply select any of the users emails in the LJPS staff database, examples include:
 - john.sim<span>@</span>allinone.come.sg for an admin role that has the HR function
