@@ -46,8 +46,7 @@ jobs:
     name: PHPUnit
     runs-on: ubuntu-latest
     strategy:
-      matrix:
-        php: '7.4'
+      php: '7.4'
     services:
       mysql:
         image: mysql:5.7
