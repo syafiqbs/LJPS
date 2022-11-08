@@ -34,15 +34,15 @@ permissions:
 #       - uses: php-actions/composer@v2
 
 #       - name: PHPUnit Tests
-#         uses: php-actions/phpunit@v9
-#         env:
-#           DB_PORT: 3306
-#           DB_USERNAME: root
-#           DB_PASSWORD: password
-#           DB_DATABASE: testing
-#           DB_HOST: mysql
-#         with:
-#           configuration: tests/phpunit.xml
+        # uses: php-actions/phpunit@v9
+        # with:
+        #   configuration: tests/phpunit.xml
+        # env:
+        #   DB_PORT: 3306
+        #   DB_USERNAME: root
+        #   DB_PASSWORD: password
+        #   DB_DATABASE: testing
+        #   DB_HOST: mysql
 
 jobs:
   test:
@@ -60,7 +60,9 @@ jobs:
 
     steps:
       - name: Execute tests
-        run: ../vendor/bin/phpunit
+        uses: php-actions/phpunit@v9
+        with:
+          configuration: tests/phpunit.xml
         env:
           DB_PORT: 3306
           DB_USERNAME: root
