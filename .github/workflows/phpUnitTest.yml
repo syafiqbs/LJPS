@@ -9,34 +9,67 @@ on:
 permissions:
   contents: read
 
-jobs:
-  build-test:
-    runs-on: ubuntu-latest
+# jobs:
+#   build-test:
+#     runs-on: ubuntu-latest
 
+#     services:
+#       mysql:
+#         image: mysql:8.0
+#         ports:
+#           - 3306:3306
+#         env:
+#           MYSQL_ROOT_PASSWORD:
+#           MYSQL_ALLOW_EMPTY_PASSWORD: yes
+#           MYSQL_USER: user
+#           MYSQL_PASSWORD: user
+#           MYSQL_DATABASE: dbname
+
+#     steps:
+#       - uses: actions/checkout@v2
+
+#       - name: Cache Composer dependencies
+#         uses: actions/cache@v2
+#         with:
+#           path: /tmp/composer-cache
+#           key: ${{ runner.os }}-${{ hashFiles('**/composer.lock') }}
+
+#       - uses: php-actions/composer@v2
+
+#       - name: PHPUnit Tests
+#         uses: php-actions/phpunit@v9
+#         with:
+#           configuration: tests/phpunit.xml
+
+jobs:
+  phpunit:
+    name: PHPUnit
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        php: ['7.0', '7.1', '7.2', '7.3', '7.4']
     services:
       mysql:
-        image: mysql:8.0
-        ports:
-          - 3306:3306
+        image: mysql:5.7
         env:
-          MYSQL_ROOT_PASSWORD:
-          MYSQL_ALLOW_EMPTY_PASSWORD: yes
-          MYSQL_USER: user
-          MYSQL_PASSWORD: user
-          MYSQL_DATABASE: dbname
-
+          MYSQL_ROOT_PASSWORD: root
+          MYSQL_DATABASE: wordpress_test
+        ports:
+          - 3306
+        options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=3
     steps:
-      - uses: actions/checkout@v2
+    - name: Checkout
+      uses: actions/checkout@v2
+    - name: Install Composer dependencies
+      run: composer install -o --no-progress
+    - name: Setup PHP
+      uses: shivammathur/setup-php@v1
+      with:
+        php-version: ${{ matrix.php }}
+        extensions: dom, curl, libxml, mbstring, zip, pcntl, pdo, sqlite, pdo_sqlite, mysql, mysqli, pdo_mysql, bcmath, soap, intl, gd, exif, iconv, imagick
+        coverage: none
 
-      - name: Cache Composer dependencies
-        uses: actions/cache@v2
-        with:
-          path: /tmp/composer-cache
-          key: ${{ runner.os }}-${{ hashFiles('**/composer.lock') }}
-
-      - uses: php-actions/composer@v2
-
-      - name: PHPUnit Tests
-        uses: php-actions/phpunit@v9
-        with:
-          configuration: tests/phpunit.xml
+    - name: PHPUnit Tests
+      uses: php-actions/phpunit@v9
+      with:
+        configuration: tests/phpunit.xml
