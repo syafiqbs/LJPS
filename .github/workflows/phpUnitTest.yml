@@ -70,6 +70,6 @@ jobs:
         coverage: none
 
     - name: PHPUnit Tests
-      run: |
-        wordpress_test root root 127.0.0.1:${{ job.services.mysql.ports['3306'] }} latest true
-        vendor/bin/phpunit
+      uses: php-actions/phpunit@v9
+      with:
+        configuration: tests/phpunit.xml
