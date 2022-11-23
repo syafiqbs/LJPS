@@ -36,4 +36,4 @@ Simply follow the steps below to perform the Unit Tests
 1.  Install composer on your local device 
 2.  In VSC or your preferred CLI, path to the main project folder
 3.  Run the command "composer require phpunit/phpunit ^9"
-4.  After the vendor folder is installed/updated, run the command "./vendor/bin/phpunit" to run the unit tests
+4.  After the vendor folder is installed/updated, run the command "./vendor/bin/phpunit" to run the unit tests 
